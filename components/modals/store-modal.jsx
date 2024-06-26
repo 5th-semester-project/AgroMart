@@ -66,7 +66,7 @@ const StoreModal = () => {
     //TODO :Create store
     try {
       setLoading(true);
-      const response = await axios.post("/api/stores", values);
+      const response = await axios.post("/api/store", values);
 
       // THIS IS USED BECAUSE THIS ONE ENSURE PAGE RELOAD 100%
       window.location.assign(`/${response.data.id}`)
