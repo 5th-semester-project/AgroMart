@@ -51,10 +51,7 @@ export async function POST(req) {
         }
     })
 
-    console.log("store",store);
-    console.log("seller",seller);
-
-    return NextResponse.json(store,seller);
+    return NextResponse.json(store);
 
   } catch (error) {
     console.log("error in the POST request", error);

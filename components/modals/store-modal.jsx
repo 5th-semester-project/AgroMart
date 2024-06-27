@@ -66,9 +66,13 @@ const StoreModal = () => {
     //TODO :Create store
     try {
       setLoading(true);
-      const response = await axios.post("/api/store", values);
 
-      // THIS IS USED BECAUSE THIS ONE ENSURE PAGE RELOAD 100%
+      const response = await axios.post("/api/store", values);
+      toast.success("Store created successfully");
+
+      console.log("response",response);
+
+      // THIS IS USED BECAUSE, THIS ONE ENSURE PAGE RELOAD 100%
       window.location.assign(`/${response.data.id}`)
     } catch (error) {
        toast.error("Failed to create store");

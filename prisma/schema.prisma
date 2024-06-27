@@ -38,6 +38,9 @@ model Seller {
   storeId   String
   email     String
   phoneNum  String
+  facebook  String?
+  instagram String?
+  youtube   String?
   conversationIds String[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
