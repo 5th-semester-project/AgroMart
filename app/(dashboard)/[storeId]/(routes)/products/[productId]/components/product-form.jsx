@@ -35,7 +35,7 @@ import { useStoreImages } from "@/hooks/useStoreModal";
 
 const formSchema = z.object({
   name: z.string().min(1),
-  imageUrls: z.array(z.object({ url: z.string().min(1)})),
+  imageUrls: z.array(z.object({ url: z.string().min(1) })),
   price: z.coerce.number().min(1),
   categoryId: z.string().min(1, "Category is required"),
   discount: z.coerce.number().min(0).max(100).optional(),
@@ -55,7 +55,7 @@ const ProductBoardForm = ({categories, initialData }) => {
 
   useEffect(() => {
     if (initialData?.imageUrls) {
-      storeImages.setImages(initialData.imageUrls);
+      storeImages.setImages(initialData.imageUrls.map(image => image.url));
     }
   }, [initialData]);
 
@@ -93,18 +93,26 @@ const ProductBoardForm = ({categories, initialData }) => {
     try {
       setLoading(true);
 
+      //adding images from the store
+      const formData = {
+        ...values,
+        imageUrls: storeImages.images.map(url => ({ url })),
+        
+      };
+
       if (initialData) {
         await axios.patch(
           `/api/${params.storeId}/products/${params.productId}`,
-          values
+          formData
         );
       } else {
-        await axios.post(`/api/${params.storeId}/products`, values);
+        await axios.post(`/api/${params.storeId}/products`, formData);
       }
 
       router.refresh();
       router.push(`/${params.storeId}/products`);
       toast.success(toastMessage);
+      storeImages.clearImages()
     } catch (error) {
       console.error("error inside the store PATCH", error);
       toast.error("Something went wrong");
@@ -112,7 +120,6 @@ const ProductBoardForm = ({categories, initialData }) => {
       setLoading(false);
     }
   };
-
 
 
   const onDelete = async () => {
@@ -147,6 +154,7 @@ const ProductBoardForm = ({categories, initialData }) => {
         onClose={() => setOpen(false)}
         onConfirm={() => onDelete()}
         loading={loading}
+        description="Are you sure you want to delete this product? This action cannot be undone."
       />
       <div className="flex items-center justify-between">
         <Heading title={title} description={description} />
@@ -176,15 +184,25 @@ const ProductBoardForm = ({categories, initialData }) => {
               <FormItem>
                 <FormControl>
                   <ImageUpload
-                    value={field.value.map((image) => image.url)}
-                    onChange={(url) =>
-                      field.onChange([...field.value, { url }])
-                    }
-                    onRemove={(url) =>
-                      field.onChange([
-                        ...field.value.filter((current) => current.url !== url),
-                      ])
-                    }
+                    value={field.value.map(image => image.url)} // Use the value from field
+                    onChange={(url) => {
+                      const newImage = { url };
+                      const newValue = [...field.value, newImage];
+
+                      // Avoid adding duplicate images
+                      if (!field.value.some(image => image.url === url)) {
+                        field.onChange(newValue);
+                        // storeImages.addImage(url);
+                      }
+                    }}
+                    onRemove={(url) => {
+                      const newValue = field.value.filter((current) => current.url !== url);
+                      field.onChange(newValue);
+                      const index = storeImages.images.indexOf(url);
+                      if (index > -1) {
+                        storeImages.removeImage(index); // Remove from store
+                      }
+                    }}
                     disabled={loading}
                   />
                 </FormControl>
@@ -222,6 +240,24 @@ const ProductBoardForm = ({categories, initialData }) => {
                     <Input
                       {...field}
                       placeholder="9.99"
+                      disabled={loading}
+                      type="number"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="availableCount"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Available Count</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder="1"
                       disabled={loading}
                       type="number"
                     />

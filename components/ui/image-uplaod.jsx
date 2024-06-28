@@ -8,11 +8,8 @@ import { CldUploadWidget } from "next-cloudinary";
 import { useStoreImages } from "@/hooks/useStoreModal";
 
 const ImageUpload = ({ disabled, onChange, onRemove, value }) => {
-
   const storeImages = useStoreImages();
-  const images =storeImages.images;
-
-  console.log("images",images)
+  const images = storeImages.images || value ;
 
   const [isMounted, setIsMounted] = useState(false);
 
@@ -23,18 +20,16 @@ const ImageUpload = ({ disabled, onChange, onRemove, value }) => {
   const onUpload = (result) => {
     const imageUrl = result.info.secure_url;
     onChange(imageUrl);
-    storeImages.addImage(imageUrl); 
+    storeImages.addImage(imageUrl);
   };
-
 
   const handleRemove = (url) => {
     onRemove(url);
     const index = storeImages.images.indexOf(url);
     if (index > -1) {
-      storeImages.removeImage(index); 
+      storeImages.removeImage(index);
     }
   };
-
 
   if (!isMounted) {
     return null;
@@ -62,7 +57,6 @@ const ImageUpload = ({ disabled, onChange, onRemove, value }) => {
           </div>
         ))}
         <CldUploadWidget onSuccess={onUpload} uploadPreset="o8jakbfq">
-
           {({ open }) => {
             const onClick = () => {
               open();

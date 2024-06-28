@@ -27,7 +27,7 @@ const ProductPage = async({params}) => {
         isDisplay:product.isDisplay,
         price:formatter.format(product.price.toString()),
         discount:product.discount,
-        CreatedAt:format(product.createdAt,"MMMM do,yyyy")
+        createdAt:format(product.createdAt,"MMMM do,yyyy")
     }))
 
     

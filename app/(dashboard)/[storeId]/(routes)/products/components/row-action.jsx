@@ -50,6 +50,7 @@ const CellAction = ({
             onClose={() => setOpen(false)}
             onConfirm={onDelete}
             loading={loading}
+            description="Are you sure you want to delete this product? This action cannot be undone."
         />
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
