@@ -5,8 +5,14 @@ import { Button } from "./button";
 import { ImagePlus, Trash } from "lucide-react";
 import Image from "next/image";
 import { CldUploadWidget } from "next-cloudinary";
+import { useStoreImages } from "@/hooks/useStoreModal";
 
 const ImageUpload = ({ disabled, onChange, onRemove, value }) => {
+
+  const storeImages = useStoreImages();
+  const images =storeImages.images;
+
+  console.log("images",images)
 
   const [isMounted, setIsMounted] = useState(false);
 
@@ -15,16 +21,29 @@ const ImageUpload = ({ disabled, onChange, onRemove, value }) => {
   }, []);
 
   const onUpload = (result) => {
-    onChange(result.info.secure_url);
+    const imageUrl = result.info.secure_url;
+    onChange(imageUrl);
+    storeImages.addImage(imageUrl); 
   };
+
+
+  const handleRemove = (url) => {
+    onRemove(url);
+    const index = storeImages.images.indexOf(url);
+    if (index > -1) {
+      storeImages.removeImage(index); 
+    }
+  };
+
 
   if (!isMounted) {
     return null;
   }
+
   return (
     <div>
-      <div className="mb-4 flex-row items-center gap-4">
-        {value.map((url) => (
+      <div className="mb-4 grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2">
+        {images.map((url) => (
           <div
             key={url}
             className="relative w-[200px] h-[200px] rounded-md overflow-hidden"
@@ -32,7 +51,7 @@ const ImageUpload = ({ disabled, onChange, onRemove, value }) => {
             <div className="z-10 absolute top-2 right-2">
               <Button
                 type="button"
-                onClick={() => onRemove(url)}
+                onClick={() => handleRemove(url)}
                 variant="destructive"
                 size="icon"
               >
@@ -43,6 +62,7 @@ const ImageUpload = ({ disabled, onChange, onRemove, value }) => {
           </div>
         ))}
         <CldUploadWidget onSuccess={onUpload} uploadPreset="o8jakbfq">
+
           {({ open }) => {
             const onClick = () => {
               open();

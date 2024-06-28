@@ -6,7 +6,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useUser } from "@clerk/clerk-react";
 
-import useStoreModal from "@/hooks/useStoreModal";
+import {useStoreModal} from "@/hooks/useStoreModal";
 import Modal from "../ui/modal";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
