@@ -22,7 +22,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import AlertModal from "@/components/modals/alert-modal";
-import ImageUpload from "@/components/ui/image-uplaod";
+import ImageUpload from "@/components/ui/image-uplaod-products";
 import {
   Select,
   SelectContent,
@@ -35,7 +35,7 @@ import { useStoreImages } from "@/hooks/useStoreModal";
 
 const formSchema = z.object({
   name: z.string().min(1),
-  imageUrls: z.array(z.object({ url: z.string().min(1) })),
+  imageUrls: z.array(z.object({ url: z.string().min(1) })).min(1, "Images are required"),
   price: z.coerce.number().min(1),
   categoryId: z.string().min(1, "Category is required"),
   discount: z.coerce.number().min(0).max(100).optional(),

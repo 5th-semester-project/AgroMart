@@ -41,7 +41,7 @@ export async function POST(req) {
 
 
     // Create a new seller
-    const seller = await prismadb.Seller.create({
+    await prismadb.Seller.create({
         data:{
             id    : userId,
             name  : UserFullName,   
