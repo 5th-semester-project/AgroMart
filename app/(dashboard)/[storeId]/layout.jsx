@@ -20,7 +20,7 @@ const DashBoardLayout= async({children,params}) =>{
     });
 
     if(!store){
-        redirect("/")
+        redirect("/seller")
     }
 
     return (

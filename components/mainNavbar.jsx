@@ -23,7 +23,7 @@ const MainNavbar = ({className,...props}) => {
         },
         {
             href:`/${params.storeId}/categories`,
-            label:" ",
+            label:"Categories ",
             active: pathname === `/${params.storeId}/categories`,
             icon: <Folders />
         },
