@@ -5,12 +5,14 @@ const CustomButton = ({
     onClick,
     className,
     icon,
-    name
+    name,
+    variant
 }) => {
     return ( 
         <Button
             onClick={onClick}
-            className={cn("flex gap-3 rounded-lg bg-gray-900",className)}
+            className={cn("flex gap-3 rounded-lg",className)}
+            variant={variant}
         >
             {icon}
             {name}

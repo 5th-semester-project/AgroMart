@@ -1,62 +1,36 @@
 'use client'
 
-import {
-    AlertDialog,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogHeader,
-    AlertDialogTitle,
-  } from "@/components/ui/alert-dialog"
-import StarRatings from 'react-star-ratings';
-
-
-import usePreviewModal from "@/hooks/usePreviewModal";
-import IconButton from "../ui/icon-button";
-import { X } from "lucide-react";
-import Gallery from "./gallery";
-import CustomButton from "../ui/custom-button";
+import { ShoppingCart, CreditCard, MessageCirclePlus } from "lucide-react";
 import { formatter } from "@/lib/utils";
-import { ShoppingCart, Bookmark, CreditCard } from "lucide-react";
-import { Separator } from "../ui/separator";
+import { Separator } from "@/components/ui/separator";
+import CustomButton from "@/components/ui/custom-button";
+import Gallery from "@/components/buyer-components/gallery";
 import useCart from "@/hooks/addtocardStore";
+import StarRatings from "react-star-ratings";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
-
-  export function ProductPreview() {
-
-    const {isOpen,close} = usePreviewModal();
+const Info = ({product}) => {
+    
     const cart = useCart();
-    const product = usePreviewModal((state) => state.product);
-
-    if (!product) {
-      return null;
-    }
-
-    //add product to cart
+    
     const onAddToCard =(event)=>{
-      event.stopPropagation();
+        event.stopPropagation();
+  
+        cart.addItem(product);
+      }
 
-      cart.addItem(product);
-    }
-
-
-
-    //calculate the discount price
-    const discountPrice = product.price - (product.price * product.discount / 100);
-
-    return (
-      <AlertDialog open={isOpen} onOpenChange={close} >
-        <AlertDialogContent className ="max-w-4xl">
-         <IconButton icon={<X size={15}/>} onClick={close}  className="absolute right-3 top-3"/>
-          <AlertDialogHeader>
-            
-            <div className="flex flex-row gap-5">
-                    <div className="w-1/2">
+    const discountPrice = product.price - (product.price * (product.discount / 100));
+    
+    return ( 
+        <div className="py-6 w-full">
+            <div className="flex flex-row justify-evenly">
+                    <div className="w-2/5">
                         <Gallery images={product.imageUrls} />
                     </div>
-                    <div className="w-1/2">
-                        <AlertDialogDescription>
-                              <AlertDialogTitle className=" text-gray-800 text-xl">{product.name}</AlertDialogTitle>
+                    <div className="w-2/5 pt-4">
+                        <div>
+                              <div className=" text-gray-800 text-2xl font-bold">{product.name}</div>
                               <h1 className="font-medium text-gray-800 text-semibold">{product.mainCategory} | {product?.category?.name}</h1>
                               <div className="flex gap-4 my-1">
                                   {/* have to update after creating the rating schema */}
@@ -88,18 +62,30 @@ import { cn } from "@/lib/utils";
                                     icon={<CreditCard size={20} className="text-gray-600"/>}
                                     name="Buy now"
                                 />
+                                <CustomButton
+                                    onClick={()=>{}}
+                                    icon={<MessageCirclePlus size={20} className="text-gray-600"/>}
+                                    name="Contact seller"
+                                    variant="outline"
+                                    className="bg-gray-50 hover:bg-gray-100"
+                                />
                               </div>
-                              <div className="mt-3">
-                                <h2 className="text-md font-semibold text-gray-800">Description</h2>
-                                <p>{product.description}</p>
+                              <div className="pt-4">
+                                <h2 className="text-md font-semibold text-gray-800 pb-3">Description</h2>
+                                <p className="text-sm">{product.description}</p>
                               </div>
+                              <Link
+                                href="/products"
+                              >
+                                <h2 className="text-blue-600 font-semibold text-lg py-6">Explore More Products...</h2>
+                              </Link>
                               
-                        </AlertDialogDescription>
+                        </div>
                     </div>
                 </div>
-          </AlertDialogHeader>
-        </AlertDialogContent>
-      </AlertDialog>
-    )
-  }
-  
+
+        </div>
+     );
+}
+ 
+export default Info;

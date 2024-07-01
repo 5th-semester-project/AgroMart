@@ -8,6 +8,7 @@ import { Expand, ShoppingCart,Bookmark } from "lucide-react";
 import useCart from "@/hooks/addtocardStore";
 import watchCart from "@/hooks/watchlistStore";
 import usePreviewModal from "@/hooks/usePreviewModal";
+import { useRouter } from "next/navigation";
 
 import {
   Card,
@@ -19,8 +20,11 @@ import {
 export function ProductCard({product}) {
 
     const [isMounted, setIsMounted] = useState(false);
+    const router = useRouter();
+
     const cart = useCart();
     const watchlist  = watchCart();
+
     const previewModal = usePreviewModal();
 
     useEffect(() => {
@@ -57,8 +61,14 @@ export function ProductCard({product}) {
 
     console.log("product", product);
 
+
+    const productRouting = () =>{
+      router.push(`/product/${product.id}`);
+      
+    }
+
   return (
-    <Card className="w-[270px] hover:scale-105 transition hover:shadow-md cursor-pointer">
+    <Card className="w-[270px] hover:scale-105 transition hover:shadow-md cursor-pointer" onClick={productRouting}>
         <CardHeader className="relative">
             <div className="absolute inset-y-4 ">
                 <p className="bg-green-600 text-white text-xl font-semibold p-3 rounded-full italic">{product.discount}% </p>

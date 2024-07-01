@@ -13,7 +13,7 @@ const HomePage = async() => {
   return ( 
     <div >
       <div className="bg-cover bg-center h-[50vh] sm:h-[60vh] md:h-[80vh] w-full" style={{ backgroundImage: "url(/bg-images/brownField.jpg)" }}>
-        <div className="px-4 flex justify-between items-center">
+      <div className="px-4 flex justify-between items-center">
           <h1>Logo</h1>
           <NavigationMenuDemo/>
         </div>
