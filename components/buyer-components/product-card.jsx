@@ -6,6 +6,7 @@ import StarRatings from 'react-star-ratings';
 import IconButton from "@/components/ui/icon-button";
 import { Expand, ShoppingCart,Bookmark } from "lucide-react";
 import useCart from "@/hooks/addtocardStore";
+import usePreviewModal from "@/hooks/usePreviewModal";
 
 import {
   Card,
@@ -18,22 +19,34 @@ export function ProductCard({product}) {
 
     const [isMounted, setIsMounted] = useState(false);
     const cart = useCart();
+    const previewModal = usePreviewModal();
 
     useEffect(() => {
         setIsMounted(true);
     },[])
 
+    //calculate the discount price
     const discountPrice = product.price - (product.price * product.discount / 100);
 
 
-
+    //add product to cart
     const onAddToCard =(event)=>{
       event.stopPropagation();
 
       cart.addItem(product);
     }
 
+
+    const preview =(event)=>{
+      event.stopPropagation();
+
+      previewModal.open(product);
+
+  }
+
     if(!isMounted) return null;
+
+    console.log("product", product);
 
   return (
     <Card className="w-[270px] hover:scale-105 transition hover:shadow-md cursor-pointer">
@@ -49,7 +62,7 @@ export function ProductCard({product}) {
             <div className="opacity-40  hover:opacity-100 transition absolute w-full bottom-5 ">
                   <div className="flex gap-x-5 justify-center items-center">
                       <IconButton
-                          onClick={()=>{}}
+                          onClick={preview}
                           icon={<Expand size={20} className="text-gray-600"/>}
                       
                       />

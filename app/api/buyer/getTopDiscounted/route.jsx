@@ -9,6 +9,9 @@ export async function GET(){
           gt: 0,
         },
       },
+      include:{
+        category:true
+      },
       orderBy: {
         discount: 'desc', 
       },
