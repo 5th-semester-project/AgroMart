@@ -18,6 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
@@ -41,6 +42,7 @@ const formSchema = z.object({
   discount: z.coerce.number().min(0).max(100).optional(),
   availableCount: z.coerce.number().min(0),
   isDisplay: z.boolean().default(false).optional(),
+  description: z.string().min(1),
  
 });
 
@@ -71,6 +73,7 @@ const ProductBoardForm = ({categories, initialData }) => {
           discount: parseFloat(String(initialData?.discount)) || 0,
           isDisplay: initialData?.isDisplay || false,
           availableCount: parseInt(String(initialData?.availableCount)) || 0,
+          description: initialData?.description || "",
         },
   });
 
@@ -339,6 +342,26 @@ const ProductBoardForm = ({categories, initialData }) => {
                         This product will appear in the store.
                       </FormDescription>
                     </div>
+                </FormItem>
+              )}
+            />
+             <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                
+                <FormItem>
+                    <FormLabel>Description</FormLabel>
+                    <FormControl>
+                    <Textarea
+                      placeholder="Write here..."
+                      disabled={loading}
+                      {...field}  
+                    />
+                    </FormControl>
+                      <FormDescription>
+                        Add a detailed product description.
+                      </FormDescription>
                 </FormItem>
               )}
             />

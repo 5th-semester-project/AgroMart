@@ -5,6 +5,7 @@ import { cn, formatter } from "@/lib/utils";
 import StarRatings from 'react-star-ratings';
 import IconButton from "@/components/ui/icon-button";
 import { Expand, ShoppingCart,Bookmark } from "lucide-react";
+import useCart from "@/hooks/addtocardStore";
 
 import {
   Card,
@@ -16,12 +17,21 @@ import {
 export function ProductCard({product}) {
 
     const [isMounted, setIsMounted] = useState(false);
+    const cart = useCart();
 
     useEffect(() => {
         setIsMounted(true);
     },[])
 
     const discountPrice = product.price - (product.price * product.discount / 100);
+
+
+
+    const onAddToCard =(event)=>{
+      event.stopPropagation();
+
+      cart.addItem(product);
+    }
 
     if(!isMounted) return null;
 
@@ -44,7 +54,7 @@ export function ProductCard({product}) {
                       
                       />
                       <IconButton
-                          onClick={()=>{}}
+                          onClick={onAddToCard}
                           icon={<ShoppingCart size={20} className="text-gray-600"/>}
                       />
                       <IconButton
