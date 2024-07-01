@@ -56,6 +56,7 @@ model Product {
   discount  Float?
   categoryId  String
   category  Category @relation("CategoryToProduct",fields: [categoryId], references: [id])
+  mainCategory String?
   imageUrls    Json
   clickCount  Int @default(0)
   isDisplay  Boolean @default(false)

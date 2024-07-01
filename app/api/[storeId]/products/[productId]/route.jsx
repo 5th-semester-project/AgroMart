@@ -58,6 +58,7 @@ export async function PATCH(req, { params }) {
         isDisplay,
         availableCount,
         description,
+        mainCategory
       } = body;
   
       if (!userId) {
@@ -112,6 +113,7 @@ export async function PATCH(req, { params }) {
             isDisplay,
             availableCount,
             description,
+            mainCategory
           }
         
       });

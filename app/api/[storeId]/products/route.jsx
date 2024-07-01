@@ -69,6 +69,7 @@ export async function POST(req,{params}) {
         isDisplay,
         availableCount,
         description,
+        mainCategory
     } = body;
 
     if (!userId) {
@@ -117,6 +118,7 @@ export async function POST(req,{params}) {
         availableCount,
         storeId:params.storeId,
         description,
+        mainCategory
       },
 
     });

@@ -6,6 +6,7 @@ import StarRatings from 'react-star-ratings';
 import IconButton from "@/components/ui/icon-button";
 import { Expand, ShoppingCart,Bookmark } from "lucide-react";
 import useCart from "@/hooks/addtocardStore";
+import watchCart from "@/hooks/watchlistStore";
 import usePreviewModal from "@/hooks/usePreviewModal";
 
 import {
@@ -19,6 +20,7 @@ export function ProductCard({product}) {
 
     const [isMounted, setIsMounted] = useState(false);
     const cart = useCart();
+    const watchlist  = watchCart();
     const previewModal = usePreviewModal();
 
     useEffect(() => {
@@ -34,6 +36,13 @@ export function ProductCard({product}) {
       event.stopPropagation();
 
       cart.addItem(product);
+    }
+
+    //add product to watchlist
+    const onAddToWatchlist =(event)=>{
+      event.stopPropagation();
+
+      watchlist.addItem(product);
     }
 
 
@@ -71,7 +80,7 @@ export function ProductCard({product}) {
                           icon={<ShoppingCart size={20} className="text-gray-600"/>}
                       />
                       <IconButton
-                          onClick={()=>{}}
+                          onClick={onAddToWatchlist}
                           icon={<Bookmark size={20} className="text-gray-600"/>}
                       />
                   </div>

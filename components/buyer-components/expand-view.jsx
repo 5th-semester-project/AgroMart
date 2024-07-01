@@ -55,7 +55,7 @@ import { cn } from "@/lib/utils";
                     <div className="w-1/2">
                         <AlertDialogDescription>
                               <AlertDialogTitle className=" text-gray-800 text-xl">{product.name}</AlertDialogTitle>
-                              <h1 className="font-medium text-gray-800 text-semibold">{product?.category?.name}</h1>
+                              <h1 className="font-medium text-gray-800 text-semibold">{product.mainCategory} | {product?.category?.name}</h1>
                               <div className="flex gap-4 my-1">
                                   {/* have to update after creating the rating schema */}
                                   <StarRatings
