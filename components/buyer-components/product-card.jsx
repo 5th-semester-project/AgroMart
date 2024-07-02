@@ -70,9 +70,9 @@ export function ProductCard({product}) {
   return (
     <Card className="w-[270px] hover:scale-105 transition hover:shadow-md cursor-pointer" onClick={productRouting}>
         <CardHeader className="relative">
-            <div className="absolute inset-y-4 ">
+          { (product.discount > 0) && <div className="absolute inset-y-4 ">
                 <p className="bg-green-600 text-white text-xl font-semibold p-3 rounded-full italic">{product.discount}% </p>
-            </div>
+            </div>}
             <img 
                 src={product.imageUrls[0].url}
                 alt="product" 

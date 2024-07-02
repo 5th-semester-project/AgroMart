@@ -77,7 +77,7 @@ const Info = ({product}) => {
                                 <p className="text-sm">{product.description}</p>
                               </div>
                               <Link
-                                href="/products"
+                                href={`/store/${product.storeId}`}
                               >
                                 <h2 className="text-blue-600 font-semibold text-lg py-6">Explore More Products...</h2>
                               </Link>

@@ -35,7 +35,7 @@ model Seller {
   id        String   @unique
   name      String
   imgUrl    String?
-  storeId   String
+  storeId   String @unique
   email     String
   phoneNum  String
   facebook  String?

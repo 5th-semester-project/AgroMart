@@ -9,7 +9,7 @@ import getProduct from "@/actions/get-product";
 import Info from "./component/info";
 import CustomerReviews from "./component/reviewTab";
 import getSubCatProducts from "@/actions/get-subCatProducts";
-import SubCatProducts from "./component/subCatList";
+import SubCatProducts from "@/components/buyer-components/subCatList";
 import getMainCatProduct from "@/actions/get-mainCatProducts";
 
 
@@ -33,16 +33,16 @@ const ProductPage = async({params}) => {
           <Info product={data} />
           <CustomerReviews />
           <Tabs defaultValue="products" className="w-full mt-6">
-          <TabsList>
-            <TabsTrigger value="products">RelatedProducts</TabsTrigger>
-            <TabsTrigger value="reviews">Reviews(500)</TabsTrigger>
-          </TabsList>
-            <TabsContent value="products" >
-               <SubCatProducts plist={combinedProducts} />
-            </TabsContent>
-            <TabsContent value="reviews">
-            </TabsContent>
-        </Tabs>
+            <TabsList>
+              <TabsTrigger value="products">RelatedProducts</TabsTrigger>
+              <TabsTrigger value="reviews">Reviews(500)</TabsTrigger>
+            </TabsList>
+              <TabsContent value="products" >
+                <SubCatProducts plist={combinedProducts} />
+              </TabsContent>
+              <TabsContent value="reviews">
+              </TabsContent>
+          </Tabs>
         </div>
      );
 }
