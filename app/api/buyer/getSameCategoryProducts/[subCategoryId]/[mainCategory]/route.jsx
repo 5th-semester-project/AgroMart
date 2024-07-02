@@ -9,10 +9,10 @@ export async function GET(req,{params}){
 
         const products = await prismadb.product.findMany({
             where:{
-                mainCategory
-            },
-            NOT:{
-                categoryId:subCategoryId
+                mainCategory,
+                NOT:{
+                    categoryId:subCategoryId
+                },
             }
         });
         return NextResponse.json(products);
