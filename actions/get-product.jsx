@@ -1,13 +1,12 @@
 
 
-const getProduct = async(id) => {
+const getProduct = async(productId) => {
     
-    const URL = process.env.DOMAIN_URL;
-
-    
-    const product = await fetch(`${URL}/api/buyer/getProduct/${id}`)
-    
+    console.log("productId ",productId);
+    const url = process.env.DOMAIN_URL
+    const product = await fetch(`${url}/api/buyer/getProduct/${productId}`);
     return product.json();
+
 }
  
 export default getProduct;

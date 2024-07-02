@@ -20,6 +20,8 @@ const Info = ({product}) => {
         cart.addItem(product);
       }
 
+    if(!product) return null;
+
     const discountPrice = product.price - (product.price * (product.discount / 100));
     
     return ( 
