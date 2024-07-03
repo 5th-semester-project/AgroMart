@@ -17,17 +17,18 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import SmallCard from "./buyer-components/small-card"
 import watchCart from "@/hooks/watchlistStore"
 import useCart from "@/hooks/addtocardStore"
+import { UserButton } from "@clerk/nextjs"
 
 const components= [
   {
     title: "Create Seller Account",
-    href: "/docs/primitives/alert-dialog",
+    href: "/seller",
     description:
       "A modal dialog that interrupts the user with important content and expects a response.",
   },
   {
     title: "Create Buyer Account",
-    href: "/docs/primitives/hover-card",
+    href: "/buyer",
     description:
       "For sighted users to preview content available behind a link.",
   },
@@ -87,12 +88,9 @@ export function NavigationMenubar() {
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
+
         <NavigationMenuItem>
-          <Link href="/docs" legacyBehavior passHref>
-            <NavigationMenuLink className={cn("bg-transparent",)}>
-              Docs
-            </NavigationMenuLink>
-          </Link>
+              <UserButton afterSignOutUrl="/" />
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>

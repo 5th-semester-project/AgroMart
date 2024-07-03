@@ -22,6 +22,10 @@ model Store {
   name        String?
   disLabel     String?
   imageUrl    String?
+  address     String?
+  province  String?
+  district  String?
+  area      String?
   categoryIds   String[]
   productIds    String[]
   orderIds    String[]
@@ -74,6 +78,23 @@ model Category {
   productIds String[]
   products Product[] @relation("CategoryToProduct")
   searchCount Int @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Buyer {
+  id        String   @id @default(cuid())
+  userId    String @unique
+  name      String
+  imageUrl  String?
+  email     String
+  address   String
+  phoneNum  String
+  province  String
+  district  String
+  area      String
+  orderIds  String[]
+  conversationIds String[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
