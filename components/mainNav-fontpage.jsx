@@ -13,6 +13,10 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import SmallCard from "./buyer-components/small-card"
+import watchCart from "@/hooks/watchlistStore"
+import useCart from "@/hooks/addtocardStore"
 
 const components= [
   {
@@ -30,78 +34,37 @@ const components= [
   
 ]
 
-export function NavigationMenuDemo() {
+export function NavigationMenubar() {
+
+  const wishlist = watchCart((state)=>state.items)
+  const cartlist = useCart((state)=>state.items)
+
+
   return (
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger className="bg-transparent">Watch List</NavigationMenuTrigger>
           <NavigationMenuContent >
-            <ul className="flx flex-col space-y-2 w-[300px]">
-              <li className="row-span-3">
-                <NavigationMenuLink asChild>
-                  <a
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                    href="/"
-                  >
-                    
-                    <div className="mb-2 mt-4 text-lg font-medium">
-                      shadcn/ui
-                    </div>
-                    <p className="text-sm leading-tight text-muted-foreground">
-                      Beautifully designed components that you can copy and
-                      paste into your apps. Accessible. Customizable. Open
-                      Source.
-                    </p>
-                  </a>
-                </NavigationMenuLink>
-              </li>
-              <ListItem href="/docs" title="Introduction">
-                Re-usable components built using Radix UI and Tailwind CSS.
-              </ListItem>
-              <ListItem href="/docs/installation" title="Installation">
-                How to install dependencies and structure your app.
-              </ListItem>
-              <ListItem href="/docs/primitives/typography" title="Typography">
-                Styles for headings, paragraphs, lists...etc
-              </ListItem>
-            </ul>
+            <ScrollArea className="h-72 w-[300px] rounded-md">
+              {wishlist.map((item) => (
+                <SmallCard key={item.id} product={item} type="watchlist"/>
+              ))}
+
+            </ScrollArea>
           </NavigationMenuContent>
         </NavigationMenuItem>
 
 
         <NavigationMenuItem>
           <NavigationMenuTrigger className="bg-transparent">Cart</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="flx flex-col space-y-2 w-[300px]">
-              <li className="row-span-3">
-                <NavigationMenuLink asChild>
-                  <a
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                    href="/"
-                  >
-                    
-                    <div className="mb-2 mt-4 text-lg font-medium">
-                      shadcn/ui
-                    </div>
-                    <p className="text-sm leading-tight text-muted-foreground">
-                      Beautifully designed components that you can copy and
-                      paste into your apps. Accessible. Customizable. Open
-                      Source.
-                    </p>
-                  </a>
-                </NavigationMenuLink>
-              </li>
-              <ListItem href="/docs" title="Introduction">
-                Re-usable components built using Radix UI and Tailwind CSS.
-              </ListItem>
-              <ListItem href="/docs/installation" title="Installation">
-                How to install dependencies and structure your app.
-              </ListItem>
-              <ListItem href="/docs/primitives/typography" title="Typography">
-                Styles for headings, paragraphs, lists...etc
-              </ListItem>
-            </ul>
+          <NavigationMenuContent >
+            <ScrollArea className="h-72 w-[300px] rounded-md ">
+              {cartlist.map((item) => (
+                <SmallCard key={item.id} product={item} type ="cart"/>
+              ))}
+
+            </ScrollArea>
           </NavigationMenuContent>
         </NavigationMenuItem>
 

@@ -17,11 +17,11 @@ const watchCart = create(
             toast.success("Item added to the watchlist")
 
         },
-        removeItem:(id)=>{
+        removeItemWatch:(id)=>{
             set({items:[...get().items.filter((item)=>item.id !== id)]})
             toast.success("Item removed from the watchlist")
         },
-        removeAll:()=>{
+        removeAllWatch:()=>{
             set({items:[]})
            
         }

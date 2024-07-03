@@ -1,4 +1,4 @@
-import { NavigationMenuDemo } from "@/components/mainNav-fontpage";
+import { NavigationMenubar } from "@/components/mainNav-fontpage";
 
 
 const ProductLayout = ({children}) => {
@@ -6,7 +6,7 @@ const ProductLayout = ({children}) => {
         <>
         <div className="px-4 flex justify-between items-center">
             <h1>Logo</h1>
-            <NavigationMenuDemo/>
+            <NavigationMenubar/>
         </div>
         {children}
         </>

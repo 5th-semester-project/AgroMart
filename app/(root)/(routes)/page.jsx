@@ -2,7 +2,7 @@
 
 import getTopDiscountedProducts from "@/actions/get-topDisProducts";
 import Footer from "@/components/footer";
-import { NavigationMenuDemo } from "@/components/mainNav-fontpage";
+import { NavigationMenubar } from "@/components/mainNav-fontpage";
 import HighestDesProductList from "@/components/buyer-components/highest-descounted-products";
 import Heading from "@/components/ui/heading";
 
@@ -15,7 +15,7 @@ const HomePage = async() => {
       <div className="bg-cover bg-center h-[50vh] sm:h-[60vh] md:h-[80vh] w-full" style={{ backgroundImage: "url(/bg-images/brownField.jpg)" }}>
       <div className="px-4 flex justify-between items-center">
           <h1>Logo</h1>
-          <NavigationMenuDemo/>
+          <NavigationMenubar/>
         </div>
       </div>
 
