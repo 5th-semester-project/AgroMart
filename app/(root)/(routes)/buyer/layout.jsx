@@ -3,6 +3,7 @@ import prismadb from '@/lib/prismadb';
 import { redirect } from 'next/navigation';
 import React from 'react'
 import ToastCall from "@/components/toastCall"
+import toast from 'react-hot-toast';
 
 
 export default async function BuyerPageLayout({children}) {
@@ -13,7 +14,8 @@ export default async function BuyerPageLayout({children}) {
         redirect("/sign-in")
     }
 
-    const buyerExist = await prismadb.buyer.findUnique({
+    console.log("before buyerExist");
+    const buyerExist = await prismadb.buyer.findFirst({
         where:{
             userId
         }
@@ -24,17 +26,22 @@ export default async function BuyerPageLayout({children}) {
         redirect("/")
     }
 
-    const sellerExist = await prismadb.seller.findUnique({
+    console.log("before sellerExist");
+    const sellerExist = await prismadb.seller.findFirst({
         where:{
-            id:userId
+            sellerid:userId
         }
     });
 
+
+    console.log("before toastcall");
     if(sellerExist){
-        <ToastCall
-            message ="You are not allowed to create buyer account.because you have already seller account."
-        />
-        redirect("/")
+            <ToastCall
+                message ="You are not allowed to create buyer account.because you have already seller account."
+            />
+        
+            console.log("before rediration");
+            redirect("/")
     }
 
 

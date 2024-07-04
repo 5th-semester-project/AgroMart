@@ -14,7 +14,7 @@ export default async function SetupPageLayout({children}) {
         redirect("/sign-in")
     }
 
-    const buyerExist = await prismadb.buyer.findUnique({
+    const buyerExist = await prismadb.buyer.findFirst({
       where:{
           userId
       }

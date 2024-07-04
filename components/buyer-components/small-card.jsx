@@ -5,11 +5,13 @@ import { formatter } from "@/lib/utils";
 import watchCart from "@/hooks/watchlistStore";
 import useCart from "@/hooks/addtocardStore";
 import { useRouter } from "next/navigation";
+import { useAuth } from '@clerk/clerk-react';
 
 
 
 const SmallCard = ({product,type}) => {
 
+    const {userId} = useAuth()
     const {removeItemWatch} = watchCart();
     const {removeItem} = useCart()
 
@@ -31,7 +33,7 @@ const SmallCard = ({product,type}) => {
         }
 
         if(type === "cart"){
-            router.push(`/product/${id}`)
+            router.push(`/cart/${userId}`)
         }
        
     }

@@ -10,14 +10,13 @@ generator client {
 
 
 datasource db {
-  provider  = "postgresql"
+  provider  = "mongodb"
   url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
 }
         
 
 model Store {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("_id")
   ownerId    String  
   name        String?
   disLabel     String?
@@ -36,7 +35,8 @@ model Store {
 }
 
 model Seller {
-  id        String   @unique
+  id        String   @id @default(cuid())  @map("_id")
+  sellerid  String   @unique
   name      String
   imgUrl    String?
   storeId   String @unique
@@ -52,7 +52,7 @@ model Seller {
 
 
 model Product {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("_id")
   storeId   String
   name      String
   description String?
@@ -72,7 +72,7 @@ model Product {
 
 
 model Category {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid())  @map("_id")
   name      String
   storeId  String?
   productIds String[]
@@ -83,7 +83,7 @@ model Category {
 }
 
 model Buyer {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid())  @map("_id")
   userId    String @unique
   name      String
   imageUrl  String?

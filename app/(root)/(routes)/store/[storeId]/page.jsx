@@ -21,6 +21,7 @@ const StorePage = async({params}) => {
     const store = await getStore(params.storeId)
     const categories = await getCategories(params.storeId)
     const seller = await getSeller(params.storeId)
+
     
     return ( 
         <div className="px-4">
@@ -36,7 +37,7 @@ const StorePage = async({params}) => {
                 <TabsList>
                     {categories.map((category) => (
                         <TabsTrigger value={category.name} key={category.id}>
-                            {category.name}
+                            {category.name} ({category.products.length})
                         </TabsTrigger>
                     ))}
                 </TabsList>
