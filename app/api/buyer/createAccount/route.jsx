@@ -50,3 +50,6 @@ export async function POST(req) {
         return new NextResponse("Failed to create an account. Please try again.",{status:500})
    }
 }
+
+
+
