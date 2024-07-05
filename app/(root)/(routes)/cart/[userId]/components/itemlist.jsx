@@ -35,6 +35,7 @@ const ItemList = () => {
                     />
                 </div>
             ))}
+            {cart.items.length === 0 && <p className="text-neutral-500 text-center">No Items added to cart</p>}
         </div>
      );
 }
