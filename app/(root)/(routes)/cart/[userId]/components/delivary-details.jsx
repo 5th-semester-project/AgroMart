@@ -18,7 +18,7 @@ const DelivaryDetails = ({buyer}) => {
     }
 
     return ( 
-        <div className="relative p-2">
+        <div className="relative p-2 px-4">
             <h1 className="font-bold text-xl">Delivary Info</h1>
             <div className="border p-3">
                 <h2 className="text-sm">{buyer.name},{buyer.phoneNum},</h2>

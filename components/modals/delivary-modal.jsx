@@ -103,13 +103,13 @@ const BuyerRegModal = ({initialdata}) => {
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            UserEmail: initialdata.email || "",
-            UserFullName: initialdata.name ||  "",
-            UserPhoneNum: initialdata.phoneNum ||  "",
-            province: initialdata.province ||  "",
-            district: initialdata.district ||  "",
-            area: initialdata.area ||  "",
-            address: initialdata.address ||  "",
+            UserEmail: initialdata?.email || "",
+            UserFullName: initialdata?.name ||  "",
+            UserPhoneNum: initialdata?.phoneNum ||  "",
+            province: initialdata?.province ||  "",
+            district: initialdata?.district ||  "",
+            area: initialdata?.area ||  "",
+            address: initialdata?.address ||  "",
         },
       });
     
@@ -118,13 +118,13 @@ const BuyerRegModal = ({initialdata}) => {
         if (isLoaded && user) {
           setDataLoading(false);
           form.reset({
-            UserEmail: initialdata.email ||  user.primaryEmailAddress?.emailAddress,
-            UserFullName:initialdata.name  || user.fullName,
-            UserPhoneNum: user.primaryPhoneNumber?.number || initialdata.phoneNum,
-            province: initialdata.province ||  "",
-            district: initialdata.district ||  "",
-            area: initialdata.area ||  "",
-            address: initialdata.address ||  "",
+            UserEmail: initialdata?.email ||  user.primaryEmailAddress?.emailAddress,
+            UserFullName:initialdata?.name  || user.fullName,
+            UserPhoneNum: user.primaryPhoneNumber?.number || initialdata?.phoneNum,
+            province: initialdata?.province ||  "",
+            district: initialdata?.district ||  "",
+            area: initialdata?.area ||  "",
+            address: initialdata?.address ||  "",
           });
         }
       }, [isLoaded, user, form]);
