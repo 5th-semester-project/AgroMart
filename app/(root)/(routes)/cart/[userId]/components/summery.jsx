@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import useCart from "@/hooks/addtocardStore";
 import { formatter } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
-import toast from "react-hot-toast";
 import axios from "axios";
 
 
