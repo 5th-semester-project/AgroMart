@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import { ClerkProvider } from '@clerk/nextjs'
 import { ThemeProvider } from "@/providers/theme-provider"
 
+
 import "./globals.css";
 
 
@@ -18,6 +19,13 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en">
+      <head>
+          <script
+            type="text/javascript"
+            src="https://www.payhere.lk/lib/payhere.js"
+            async
+          ></script>
+        </head>
         <body className={inter.className}>
           <ThemeProvider
               attribute="class"

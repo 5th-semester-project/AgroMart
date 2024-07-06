@@ -60,6 +60,8 @@ model Product {
   discount  Float?
   categoryId  String
   category  Category @relation("CategoryToProduct",fields: [categoryId], references: [id])
+  orderIds  String[]
+  orders    Order[] @relation("OrderToProduct" ,fields: [orderIds], references: [id])
   mainCategory String?
   imageUrls    Json
   clickCount  Int @default(0)
@@ -95,6 +97,19 @@ model Buyer {
   area      String
   orderIds  String[]
   conversationIds String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Order {
+  id        String   @id @default(cuid())  @map("_id")
+  payId     String @unique
+  storeIds   String[]
+  buyerId   String
+  productIds String[]
+  products  Product[] @relation("OrderToProduct",fields: [productIds], references: [id])
+  price     Float
+  status    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

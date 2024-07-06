@@ -1,24 +1,30 @@
 'use client'
 
+import { useEffect,useState} from "react";
 import { Button } from "@/components/ui/button";
 import useCart from "@/hooks/addtocardStore";
 import { formatter } from "@/lib/utils";
+import { useSearchParams } from "next/navigation";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 
 
-const Summery = () => {
+const Summery = ({buyer}) => {
+    
+    const [isLoading, setIsLoading] = useState(false);
 
     const cart = useCart();
-
-
+    const items = useCart((state)=>state.items)
+    const searchParams = useSearchParams();
 
     //subtotal 
-    const basePriceTotal = cart.items.reduce((acc, item) => {
+    const basePriceTotal = items.reduce((acc, item) => {
         return acc + item.price;
     },0)
 
     //discount
-    const discountTotal = cart.items.reduce((acc, item) => {
+    const discountTotal = items.reduce((acc, item) => {
 
         const discount_value  = (item.price * (item.discount / 100));
 
@@ -31,6 +37,45 @@ const Summery = () => {
 
     //subtotal
     const subTotal = basePriceTotal - discountTotal + deliveryCharge;
+
+    const data ={
+        
+        first_name:buyer?.name,
+        last_name : "",
+        email :buyer?.email,
+        phone :buyer?.phoneNum,
+        address :buyer?.address,
+        city :buyer?.area,
+        country :"Sri Lanka",
+        productIds : items.map(item => item.id),
+        items:items.map(item => item.name).join(','),
+        currency : "USD",
+        amount : parseFloat(subTotal).toFixed(2),
+        storeIds : items.map((item)=>item.storeId)
+    }
+
+   
+   
+    const handlePayment = async () => {
+      setIsLoading(true);
+      try {
+          const res = await axios.post('/api/checkout/createPayment', data);
+
+          console.log("Payment data:", res.data);
+
+          if (typeof window.payhere !== 'undefined') {
+              window.payhere.startPayment(res.data);
+          } else {
+              console.error("PayHere SDK not loaded.");
+          }
+      } catch (error) {
+          console.error("Error initiating payment:", error);
+      } finally {
+          setIsLoading(false);
+      }
+  };
+
+
 
     return ( 
         <div className="rounded-lg bg-gray-100 px-10 py-5  md:mt-8">
@@ -63,8 +108,12 @@ const Summery = () => {
                     <p className="font-bold">{formatter.format(subTotal)}</p>
                 </div>
             </div>
-            <Button disabled={cart.items.length === 0} className="w-full mt-6" onClick={()=>{}}>
-                Checkout
+            <Button
+                disabled={items.length === 0 || isLoading}
+                className="w-full mt-6 bg-green-600 hover:bg-green-700 text-white"
+                onClick={handlePayment}
+            >
+                {isLoading ? "Processing..." : "Checkout and Pay by PayHere"}
             </Button>
         </div>
      );

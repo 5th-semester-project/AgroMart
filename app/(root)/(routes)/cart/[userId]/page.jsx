@@ -7,6 +7,7 @@ import ItemList from "./components/itemlist";
 import Summery from "./components/summery";
 
 
+
 export const revalidate =0;
 
 const CartPage = async({params}) => {
@@ -24,7 +25,7 @@ const CartPage = async({params}) => {
                 <ItemList/>
             </div>
             <div className="w-full md:w-2/5">
-                <Summery/>
+                <Summery buyer={buyer}/>
             </div>
 
         </div>
