@@ -1,43 +1,70 @@
 import prismadb from "@/lib/prismadb";
-import axios from "axios";
 import { NextResponse } from "next/server";
-import { createHash } from 'node:crypto';
+import md5 from 'crypto-js/md5';
+import qs from 'querystring';
 
-
-export async function POST(req){
+export async function POST(req) {
     try {
+        const body = await req.text();
+        const params = qs.parse(body);
 
-        const { 
-            merchant_id, 
-            order_id, 
-            payhere_amount, 
-            payhere_currency, 
-            status_code, 
-            md5sig 
-        } = req.body;
+        const {
+            merchant_id,
+            order_id,
+            payhere_amount,
+            payhere_currency,
+            status_code,
+            md5sig
+        } = params;
 
-        const local_md5sig = createHash('md5').update(
-            merchant_id + order_id + payhere_amount + payhere_currency + status_code + crypto.createHash('md5').update(process.env.MERCHANT_SECRET).digest('hex')
-          ).digest('hex').toUpperCase();
+        const merchantSecret = process.env.MERCHANT_SECRET;
 
-          if (local_md5sig === md5sig && status_code == 2){
+        // Format the amount correctly
+        const amountFormatted = parseFloat(payhere_amount).toFixed(2).replace(/,/g, '');
+        
 
-              await prismadb.order.update({
-                where:{
-                    payId :order_id
-                },
-                  data:{
-                      status:"SUCCESS"
-                  }
-              })
+        // Calculate the hash value
+        const hashedSecret = md5(merchantSecret).toString().toUpperCase();
+        const hashString = `${merchant_id}${order_id}${amountFormatted}${payhere_currency}${status_code}${hashedSecret}`;
+        const hashVal = md5(hashString).toString().toUpperCase();
 
-              console.log("Payment status updated in notify api")
-              return NextResponse.json({ message: 'Payment status updated' })
-          }else {
-            return new NextResponse("error inside the notify api",{status:400})
-          }
+        if (hashVal !== md5sig) {
+            return new NextResponse("Invalid MD5 signature", { status: 400 });
+        }
+
+        let newStatus;
+        switch (parseInt(status_code, 10)) {
+            case 2:
+                newStatus = "SUCCESS";
+                break;
+            case 0:
+                newStatus = "PENDING";
+                break;
+            case -1:
+                newStatus = "CANCELED";
+                break;
+            case -2:
+                newStatus = "FAILED";
+                break;
+            case -3:
+                newStatus = "CHARGEDBACK";
+                break;
+            default:
+                return new NextResponse("Invalid status code", { status: 400 });
+        }
+
+        // Update the order status in the database
+        await prismadb.order.update({
+            where: { payId: order_id },
+            data: {
+                status: newStatus
+            }
+        });
+
+        return new NextResponse("Payment status updated", { status: 200 });
+
     } catch (error) {
-        console.log("error inside the notify",error)
-        return new NextResponse("error in the post notify payment",{status:500})
+        console.error("Error inside the notify:", error);
+        return new NextResponse("Error processing payment notification", { status: 500 });
     }
 }

@@ -110,10 +110,10 @@ const Summery = ({buyer}) => {
             </div>
             <Button
                 disabled={items.length === 0 || isLoading}
-                className="w-full mt-6 bg-green-600 hover:bg-green-700 text-white"
+                className="w-full mt-6"
                 onClick={handlePayment}
             >
-                {isLoading ? "Processing..." : "Checkout and Pay by PayHere"}
+                {isLoading ? "Processing..." : "Checkout"}
             </Button>
         </div>
      );

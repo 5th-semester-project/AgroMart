@@ -42,6 +42,7 @@ export async function POST(req){
         const merchantSecret = process.env.MERCHANT_SECRET;
         const merchantId = process.env.MERCHANT_ID;
         const domainUrl = process.env.DOMAIN_URL;
+        const notify = process.env.NOTIFY_URL;
 
         let hashedSecret = md5(merchantSecret).toString().toUpperCase();
         let amountFormatted = parseFloat(amount).toLocaleString('en-US', { minimumFractionDigits: 2 }).replaceAll(',', '');
@@ -52,7 +53,7 @@ export async function POST(req){
             merchant_id: process.env.MERCHANT_ID,
             return_url: `${domainUrl}/cart/${userId}`,
             cancel_url: `${domainUrl}/cart/${userId}`,
-            notify_url: `${domainUrl}/api/checkout/notifyPayment`,
+            notify_url: `${notify}/api/checkout/notifyPayment`,
             order_id: orderId,
             items:items,
             amount:amount,
@@ -66,18 +67,6 @@ export async function POST(req){
             country,
             hash:hashVal
         }
-
-        // console.log("Payment payload:", payment);
-
-
-        // const response = await axios.post("https://sandbox.payhere.lk/pay/checkout", payment, {
-        //     headers: {
-        //         'Content-Type': 'application/x-www-form-urlencoded'
-        //     },
-        //     responseType: 'text' 
-        // });
-
-        // console.log("Payment response:", response.data);
 
         await prismadb.order.create({
             data:{
