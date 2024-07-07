@@ -8,7 +8,8 @@ const cartLayout = async({children}) => {
 
     const {userId} = auth();
 
- console.log("userId in the layout: ", userId)
+   console.log("userId in the layout: ", userId)
+   
     if(!userId){
         redirect("/sign-in")
     }

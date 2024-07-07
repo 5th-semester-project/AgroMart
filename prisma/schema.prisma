@@ -96,6 +96,7 @@ model Buyer {
   district  String
   area      String
   orderIds  String[]
+  orders   Order[] @relation("OrderToBuyer")
   conversationIds String[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -106,6 +107,7 @@ model Order {
   payId     String @unique
   storeIds   String[]
   buyerId   String
+  buyer     Buyer? @relation("OrderToBuyer",fields: [buyerId], references: [userId])
   productIds String[]
   products  Product[] @relation("OrderToProduct",fields: [productIds], references: [id])
   price     Float
