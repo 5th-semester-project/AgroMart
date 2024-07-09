@@ -17,7 +17,7 @@ export async function POST(req){
         if(!userId){
             return new NextResponse("unauthorized",{ status: 401 })
         }
-        console.log("body" ,body);
+       
 
         const {
 

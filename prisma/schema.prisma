@@ -115,3 +115,25 @@ model Order {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Conversation {
+  id        String   @id @default(cuid())  @map("_id")
+  buyerId   String
+  sellerId  String
+  messageIds  String[]
+  messages  Message[] @relation("MessageToConversation")
+  startedAt DateTime @default(now())
+  lastMessageAt DateTime @updatedAt
+}
+
+
+model Message {
+  id        String   @id @default(cuid())  @map("_id")
+  conversationId String
+  conversation  Conversation @relation("MessageToConversation",fields: [conversationId], references: [id])
+  senderId  String
+  receiverId String
+  body   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

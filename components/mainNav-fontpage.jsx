@@ -36,6 +36,10 @@ export function NavigationMenubar() {
     router.push(`/cart/${user.id}`)
   }
 
+  const routeConversation = () => {
+    router.push(`/conversation/${user.id}`)
+  }
+
   const wishlist = watchCart((state)=>state.items)
   const cartlist = useCart((state)=>state.items)
 
@@ -58,7 +62,7 @@ export function NavigationMenubar() {
       <NavigationMenuList>
 
     {user &&  <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent">Messages</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="bg-transparent" onClick={routeConversation} >Messages</NavigationMenuTrigger>
           <NavigationMenuContent >
             <ScrollArea className="h-72 w-[300px] rounded-md">
               
