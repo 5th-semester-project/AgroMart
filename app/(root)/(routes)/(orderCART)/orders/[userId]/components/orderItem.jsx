@@ -18,6 +18,8 @@ import {
   import { Star } from "lucide-react";
   import { Textarea } from "@/components/ui/textarea"
   import {Label} from "@/components/ui/label"
+  import { formatter } from "@/lib/utils";
+import { Separator } from "@/components/ui/separator";
 
   const labels = {
     0.5: 'Useless',
@@ -38,7 +40,7 @@ import {
 
 
   
- function OrderItem() {
+ function OrderItem({data}) {
 
     const [value, setValue] = useState(0);
     const [hover, setHover] = useState(-1);
@@ -53,45 +55,51 @@ import {
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="item-1">
           <AccordionTrigger>
-            <div className="flex justify-between w-full px-10">
-                <div>
-                    image
+            <div className="flex w-full justify-between px-10">
+                <div className="flex gap-20">
+                    <div>
+                        <img src={data.image} alt="product" className="w-20 h-20 rounded-md" />
+                    </div>
+                    <div className="flex font-semibold gap-3">
+                        <p>{data.name}</p>
+                        <Separator orientation="vertical" className="h-[20px]"/>
+                        <p className="font-light"> {data.category}</p>
+                    </div>
                 </div>
-                <div className="sm:flex gap-5 hidden font-semibold">
-                    <p>name |</p>
-                    <p>Category</p>
-                </div>
-                <div className="sm:flex sm:justify-between gap-5 hidden font-semibold">
-                    <p>Order Date: 12/12/2021</p>
+                <div className="sm:flex hidden gap-10 font-semibold">
+                    <div className="sm:flex hidden font-semibold">
+                        <h2>Order State <p className="font-light p-1 rounded-xl bg-green-300">{data.status}</p> </h2>
+                    </div>
+                    <h2>Order Date <p className="font-light">{data.createdAt}</p> </h2>
                 </div>
             </div>
           </AccordionTrigger>
           <AccordionContent>
-            <div className="grid grid-cols-3 gap-10" >
+            <div className="sm:grid sm:grid-cols-3 gap-10 flex flex-col w-full" >
                 <div>
                     <DelivaryDetails
                         buyer={{
-                            name: 'John Doe',
-                            phoneNum: '0123456789',
-                            address: '123 Main St',
-                            area: 'Area',
-                            district: 'District',
-                            province: 'Province',
+                            name: data.buyer.name,
+                            phoneNum: data.buyer.phoneNum,
+                            address: data.buyer.address,
+                            area: data.buyer.area,
+                            district: data.buyer.district,
+                            province: data.buyer.province,
                         }}
                     />
                     <div>
                         <h2 className="flex gap-4 p-2 px-4 font-semibold">
-                            OrderId : <h3 className="font-light">b8cddd44-ce1c-4e21-8595-ea23599f0787</h3> 
+                            Order Id : <h3 className="font-light">{data.orderId}</h3> 
                             <p 
                                 className="text-blue-600 font-semibold text-xs cursor-pointer hover:text-blue-800" 
-                                onClick={()=>copyToClipboard("ygdyfgvf")}
+                                onClick={()=>copyToClipboard(data.orderId)}
                                 >
                                     copy
                             </p> 
                         </h2>
                     </div>
                     <h2 className="flex gap-4 p-2 px-4 font-semibold">
-                            Order Amount : <h3 className="font-light">$50.50</h3> 
+                            Order Amount : <h3 className="font-light">{formatter.format(data.price)}</h3> 
                     </h2>
                     <h2 className="flex gap-4 p-2 px-4 font-semibold">
                             Order Completed on : <h3 className="font-light">15/08/2024</h3> 
