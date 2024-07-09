@@ -5,7 +5,6 @@ import {
     TabsList,
     TabsTrigger,
   } from "@/components/ui/tabs";
-  import SubCatProducts from "@/components/buyer-components/subCatList";
 import OrderItem from "./components/orderItem";
 
 
@@ -28,15 +27,12 @@ const OrderPage = () => {
                     </TabsTrigger>
                 </TabsList>
                     <TabsContent value="Processing">
-                        {/* <SubCatProducts plist={category.products} /> */}
                     <OrderItem/>
                     </TabsContent>
                     <TabsContent value="Shipped">
-                        {/* <SubCatProducts plist={category.products} /> */}
                         shipped
                     </TabsContent>
                     <TabsContent value="Completed">
-                        {/* <SubCatProducts plist={category.products} /> */}
                         completed
                     </TabsContent>
             

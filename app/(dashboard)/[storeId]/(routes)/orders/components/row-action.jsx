@@ -1,13 +1,12 @@
 'use client'
 
-import axios from "axios";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import AlertModal from "@/components/modals/alert-modal";
+
 
 const CellAction = ({
     data
@@ -19,7 +18,7 @@ const CellAction = ({
 
     const copyToClipboard = (id) => {
         navigator.clipboard.writeText(id)
-        toast.success("Product Id copied the to clipboard")
+        toast.success("Copied the to clipboard")
     }
 
     return ( 

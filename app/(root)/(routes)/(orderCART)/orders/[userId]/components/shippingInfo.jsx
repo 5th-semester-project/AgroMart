@@ -6,7 +6,7 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import StepContent from '@mui/material/StepContent';
-import Button from '@mui/material/Button';
+import { Button } from '@/components/ui/button';
 import Typography from '@mui/material/Typography';
 
 
@@ -22,7 +22,7 @@ export default function VerticalLinearStepper() {
           status: true || activeStep
         },
         {
-          label: 'Order is Shipped',
+          label: 'Order is Shipped from the warehouse',
           description: 'Order has been shipped from our warehouse',
           status: true || activeStep 
         },
@@ -69,7 +69,7 @@ export default function VerticalLinearStepper() {
       <Button
         variant='contained'
         onClick={Delivered}
-        className='mt-4 font-bold py-2 px-4 rounded-full'
+        className='mt-4 font-bold py-2 px-4 rounded-full bg-blue-500 hover:bg-blue-700 text-white'
         disabled={activeStep}
       >
         Order Delivered
