@@ -60,8 +60,6 @@ const Summery = ({buyer}) => {
       try {
           const res = await axios.post('/api/checkout/createPayment', data);
 
-          console.log("Payment data:", res.data);
-
           if (typeof window.payhere !== 'undefined') {
               window.payhere.startPayment(res.data);
           } else {
@@ -71,6 +69,8 @@ const Summery = ({buyer}) => {
           console.error("Error initiating payment:", error);
       } finally {
           setIsLoading(false);
+          cart.removeAll();
+
       }
   };
 
