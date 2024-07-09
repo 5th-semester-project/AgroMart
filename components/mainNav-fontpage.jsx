@@ -19,12 +19,22 @@ import watchCart from "@/hooks/watchlistStore"
 import useCart from "@/hooks/addtocardStore"
 import { UserButton } from "@clerk/nextjs"
 import { useUser } from "@clerk/clerk-react";
+import { useRouter } from "next/navigation"
 
 
 
 export function NavigationMenubar() {
 
   const { user} = useUser();
+  const router = useRouter()
+  
+  const routeOrders = () => {
+    router.push(`/orders/${user.id}`)
+  }
+
+  const routeCart = () => {
+    router.push(`/cart/${user.id}`)
+  }
 
   const wishlist = watchCart((state)=>state.items)
   const cartlist = useCart((state)=>state.items)
@@ -56,17 +66,9 @@ export function NavigationMenubar() {
           </NavigationMenuContent>
         </NavigationMenuItem>}
 
-        {user &&  <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent">Orders</NavigationMenuTrigger>
-          <NavigationMenuContent >
-            <ScrollArea className="h-72 w-[300px] rounded-md">
-              {wishlist.map((item) => (
-                <SmallCard key={item.id} product={item} type="watchlist"/>
-              ))}
-
-            </ScrollArea>
-          </NavigationMenuContent>
-        </NavigationMenuItem>}
+        {user && <NavigationMenuItem>
+          <NavigationMenuTrigger onClick={routeOrders} className="bg-transparent cursor-pointer">Orders</NavigationMenuTrigger>
+        </NavigationMenuItem>  }
 
 
         <NavigationMenuItem>
@@ -83,7 +85,7 @@ export function NavigationMenubar() {
 
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent">Cart</NavigationMenuTrigger>
+          <NavigationMenuTrigger onClick={routeCart} className="bg-transparent cursor-pointer">Cart</NavigationMenuTrigger>
           <NavigationMenuContent >
             <ScrollArea className="h-72 w-[300px] rounded-md ">
               {cartlist.map((item) => (
@@ -98,7 +100,7 @@ export function NavigationMenubar() {
 
 
         <NavigationMenuItem >
-          <NavigationMenuTrigger className="bg-transparent">Account</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="bg-transparent cursor-pointer">Account</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="flx flex-col space-y-2 w-[200px]">
               {components.map((component) => (

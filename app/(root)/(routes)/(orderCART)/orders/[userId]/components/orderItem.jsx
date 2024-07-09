@@ -20,6 +20,7 @@ import {
   import {Label} from "@/components/ui/label"
   import { formatter } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 
   const labels = {
     0.5: 'Useless',
@@ -152,6 +153,9 @@ import { Separator } from "@/components/ui/separator";
                         <div className="grid w-full gap-1.5 pr-5 mt-5">
                             <Label htmlFor="message">Give a review</Label>
                             <Textarea placeholder="Type your message here." id="message" />
+                            <Button className="cursor-pointer">
+                                Submit
+                            </Button>
                         </div>
                     </div>
                 </div>
