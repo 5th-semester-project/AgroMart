@@ -34,6 +34,7 @@ const ProductPage = async({params}) => {
         products:order.products.map((product)=>product.name).join(", "),
         status:order.status,
         amount:order.products.reduce((acc,product)=>acc+product.price,0),
+        discount:order.products.reduce((acc,product)=>acc+(product.discount*product.price/100),0),
         name:order.buyer.name,
         phoneNum:order.buyer.phoneNum,
         email:order.buyer.email,

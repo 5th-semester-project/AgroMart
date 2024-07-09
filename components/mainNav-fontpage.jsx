@@ -18,32 +18,57 @@ import SmallCard from "./buyer-components/small-card"
 import watchCart from "@/hooks/watchlistStore"
 import useCart from "@/hooks/addtocardStore"
 import { UserButton } from "@clerk/nextjs"
+import { useUser } from "@clerk/clerk-react";
 
-const components= [
-  {
-    title: "Create Seller Account",
-    href: "/seller",
-    description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
-  },
-  {
-    title: "Create Buyer Account",
-    href: "/buyer",
-    description:
-      "For sighted users to preview content available behind a link.",
-  },
-  
-]
+
 
 export function NavigationMenubar() {
+
+  const { user} = useUser();
 
   const wishlist = watchCart((state)=>state.items)
   const cartlist = useCart((state)=>state.items)
 
 
+
+  const components= [
+    {
+      title: user ? "Login to Seller Account":"Create Seller Account",
+      href: "/seller"
+    },
+    {
+      title: user ? "Login to Buyer Account":"Create Buyer Account",
+      href: "/buyer"
+    },
+    
+  ]
+
   return (
     <NavigationMenu>
       <NavigationMenuList>
+
+    {user &&  <NavigationMenuItem>
+          <NavigationMenuTrigger className="bg-transparent">Messages</NavigationMenuTrigger>
+          <NavigationMenuContent >
+            <ScrollArea className="h-72 w-[300px] rounded-md">
+              
+            </ScrollArea>
+          </NavigationMenuContent>
+        </NavigationMenuItem>}
+
+        {user &&  <NavigationMenuItem>
+          <NavigationMenuTrigger className="bg-transparent">Orders</NavigationMenuTrigger>
+          <NavigationMenuContent >
+            <ScrollArea className="h-72 w-[300px] rounded-md">
+              {wishlist.map((item) => (
+                <SmallCard key={item.id} product={item} type="watchlist"/>
+              ))}
+
+            </ScrollArea>
+          </NavigationMenuContent>
+        </NavigationMenuItem>}
+
+
         <NavigationMenuItem>
           <NavigationMenuTrigger className="bg-transparent">Watch List</NavigationMenuTrigger>
           <NavigationMenuContent >
@@ -82,10 +107,21 @@ export function NavigationMenubar() {
                   title={component.title}
                   href={component.href}
                 >
-                  {component.description}
                 </ListItem>
               ))}
             </ul>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <NavigationMenuTrigger className="bg-transparent">Notifications</NavigationMenuTrigger>
+          <NavigationMenuContent >
+            <ScrollArea className="h-72 w-[300px] rounded-md">
+              {wishlist.map((item) => (
+                <SmallCard key={item.id} product={item} type="watchlist"/>
+              ))}
+
+            </ScrollArea>
           </NavigationMenuContent>
         </NavigationMenuItem>
 

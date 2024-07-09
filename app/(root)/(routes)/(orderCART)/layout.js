@@ -3,6 +3,7 @@ import prismadb from "@/lib/prismadb";
 import { NavigationMenubar } from "@/components/mainNav-fontpage";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from 'next/navigation';
+import toast from "react-hot-toast";
 
 const cartLayout = async({children}) => {
 

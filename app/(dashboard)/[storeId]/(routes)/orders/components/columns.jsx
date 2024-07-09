@@ -32,6 +32,12 @@ export const columns = [
     cell: ({ row }) => `${formatter.format(row.original.amount)}`, // Format amount as currency
   },
   {
+    accessorKey: "discount",
+    header: "Discount",
+    cell: ({ row }) => `${formatter.format(row.original.discount)}`, // Format amount as currency
+  },
+
+  {
     accessorKey: "name",
     header: "Name",
   },

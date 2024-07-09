@@ -10,8 +10,11 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^5.1.6",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "@headlessui/react": "^2.1.1",
     "@hookform/resolvers": "^3.6.0",
+    "@mui/material": "^5.16.0",
     "@prisma/client": "^5.16.1",
     "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-aspect-ratio": "^1.1.0",
