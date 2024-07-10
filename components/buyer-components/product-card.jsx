@@ -59,9 +59,6 @@ export function ProductCard({product}) {
 
     if(!isMounted) return null;
 
-    console.log("product", product);
-
-
     const productRouting = () =>{
       router.push(`/product/${product.id}`);
       

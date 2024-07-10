@@ -9,8 +9,6 @@ import GalleryTab from "./galleryTb"
 const Gallery = ({images}) => {
 
 
-    console.log("images inside the gallery", images);
-
     
     return ( 
         <TabGroup as="div" className="flex flex-col-reverse">

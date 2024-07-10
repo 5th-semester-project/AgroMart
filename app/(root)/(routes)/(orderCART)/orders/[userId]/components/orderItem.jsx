@@ -51,6 +51,7 @@ import { Button } from "@/components/ui/button";
         toast.success("Copied the to clipboard")
     }
 
+    console.log("data",data)
 
     return (
       <Accordion type="single" collapsible className="w-full">
