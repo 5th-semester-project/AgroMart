@@ -132,7 +132,8 @@ model Message {
   conversation  Conversation @relation("MessageToConversation",fields: [conversationId], references: [id])
   senderId  String
   receiverId String
-  body   String
+  body   String?
+  image  String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

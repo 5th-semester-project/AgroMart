@@ -4,13 +4,13 @@ import axios from "axios"
 import { ImageUp ,SendHorizontal } from "lucide-react";
 import { useForm,SubmitHandler,FieldValues } from "react-hook-form"
 
-const FormMessage = ({conversationId}) => {
+const FormMessage = ({conversationId,receiverId}) => {
 
     const {
         register,
         handleSubmit,
         setValue,
-        errors
+        formState: { errors }
     } = useForm({
         defaultValues:{
             message:""
@@ -23,6 +23,7 @@ const FormMessage = ({conversationId}) => {
         axios.post("/api/messages",{
             ...data,
             conversationId,
+            receiverId
         
         })
     }
@@ -39,8 +40,7 @@ const FormMessage = ({conversationId}) => {
                     type="text" 
                     name="message" 
                     required
-                    register={register}
-                    errors={errors}
+                    {...register("message", { required: true })}
                     className="w-full p-1 text-sm px-2 rounded-lg border-0 bg-gray-200 focus:outline-none focus:border-none"
                     placeholder="Type a message"
                 />

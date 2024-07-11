@@ -27,6 +27,11 @@ const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) =
         return user.users[0].name.split(' ')[0];
     },[convList,currentConversation.id])
 
+
+    const GetId = useMemo(() => {
+        const user = convList.find((conv) => conv.id === currentConversation.id);
+        return user.users[0].sellerid || user.users[0].userId;
+    })
    
     return ( 
         <div>
@@ -75,7 +80,7 @@ const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) =
                     <MessageBody/>
                     <div className="absolute bottom-0 w-full bg-white">
                         <Separator/>
-                        <FormMessage conversationId={currentConversation.id}/>
+                        <FormMessage conversationId={currentConversation.id} receiverId ={GetId}/>
                     </div>
                     </> 
                     : 
