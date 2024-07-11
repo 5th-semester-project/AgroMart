@@ -38,7 +38,7 @@ export async function POST(req){
 
         const conversation = await prismadb.conversation.create({
             data:{
-                userIds:[userId,sellerId]
+                userIds:[userId,seller.sellerid]
             }
         }) 
 

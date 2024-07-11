@@ -19,7 +19,7 @@ export async function POST(req){
             return new NextResponse("receiverId and conversationId are required", { status: 400 });
         }
 
-        const messageData = await prismadb.Message.create({
+        const newMessage = await prismadb.Message.create({
             data:{
                 senderId: userId,
                 receiverId,
@@ -29,7 +29,26 @@ export async function POST(req){
             }
         });
 
-        return new NextResponse(messageData);
+
+        const updatedConversation = await prismadb.conversation.update({
+            where:{
+                id: conversationId
+            },
+            data:{
+                lastMessageAt: new Date(),
+                messageIds: {
+                    push: newMessage.id 
+                },
+                messages:{
+                    connect:{
+                        id: newMessage.id
+                    }
+                }
+            },
+        
+        });
+
+        return new NextResponse(newMessage);
         
     } catch (error) {
         console.log("error in the POST request of message", error);
