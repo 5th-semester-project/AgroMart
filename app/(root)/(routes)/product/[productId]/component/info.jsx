@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from "react";
 import { ShoppingCart, CreditCard, MessageCirclePlus } from "lucide-react";
 import { formatter } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
@@ -9,20 +10,44 @@ import useCart from "@/hooks/addtocardStore";
 import StarRatings from "react-star-ratings";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/clerk-react";
+
+
 
 const Info = ({product}) => {
     
+    const [loading,setLoading] = useState(false);
     const cart = useCart();
+    const router = useRouter();
+    const {user} = useUser();
     
     const onAddToCard =(event)=>{
+        setLoading(true)
         event.stopPropagation();
   
         cart.addItem(product);
+        setLoading(false)
       }
 
     if(!product) return null;
 
     const discountPrice = product.price - (product.price * (product.discount / 100));
+
+    //create conversation 
+    const CreateConversation = async () => {
+      setLoading(true);
+      
+      try {
+        const res = await axios.post("/api/conversation/create", { storeId: product.storeId });
+        router.push(`/conversation/${user.id}/${res.data.id}`);
+      } catch (error) {
+        console.error("Failed to create conversation:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
     
     return ( 
         <div className="py-6 w-full">
@@ -58,18 +83,21 @@ const Info = ({product}) => {
                                     onClick={onAddToCard}
                                     icon={<ShoppingCart size={20} className="text-gray-600"/>}
                                     name="Add to cart"
+                                    disabled={loading}
                                 />
                                 <CustomButton
                                     onClick={()=>{}}
                                     icon={<CreditCard size={20} className="text-gray-600"/>}
                                     name="Buy now"
+                                    disabled={loading}
                                 />
                                 <CustomButton
-                                    onClick={()=>{}}
+                                    onClick={CreateConversation}
                                     icon={<MessageCirclePlus size={20} className="text-gray-600"/>}
                                     name="Contact seller"
                                     variant="outline"
                                     className="bg-gray-50 hover:bg-gray-100"
+                                    disabled={loading}
                                 />
                               </div>
                               <div className="pt-4">

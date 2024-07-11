@@ -36,6 +36,7 @@ const OrderPage = async({params}) => {
     const mappedOrders = orders.flatMap(order =>
         order.products.map(product => ({
           image: product.imageUrls[0].url,
+          storeId: product.storeId,
           name: product.name,
           status: order.status,
           category: product.category.name,
@@ -45,6 +46,7 @@ const OrderPage = async({params}) => {
           buyer: order.buyer,
         }))
       );
+      
     return ( 
         <div className="px-4">
             <h1 className="font-bold text-xl mt-3">Orders Info</h1>
@@ -62,7 +64,7 @@ const OrderPage = async({params}) => {
                 </TabsList>
                     <TabsContent value="Processing">
                         {mappedOrders.map((order) => (
-                            <OrderItem key={order.orderId} data={order} />
+                            <OrderItem key={order.image} data={order} />
                         ))}
                     </TabsContent>
                     <TabsContent value="Shipped">

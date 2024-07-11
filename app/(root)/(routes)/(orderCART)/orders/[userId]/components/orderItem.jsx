@@ -21,6 +21,10 @@ import {
   import { formatter } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import { useUser } from "@clerk/clerk-react";
+import { CommandLoading } from "cmdk";
 
   const labels = {
     0.5: 'Useless',
@@ -43,6 +47,11 @@ import { Button } from "@/components/ui/button";
   
  function OrderItem({data}) {
 
+    const[loading,setLoading] = useState(false);
+
+    const {user} = useUser();
+    const router = useRouter();
+
     const [value, setValue] = useState(0);
     const [hover, setHover] = useState(-1);
 
@@ -51,7 +60,21 @@ import { Button } from "@/components/ui/button";
         toast.success("Copied the to clipboard")
     }
 
-    console.log("data",data)
+
+    
+
+    const CreateConversation = async () => {
+        setLoading(true);
+        try {
+          const res = await axios.post("/api/conversation/create", { storeId: data.storeId });
+          router.push(`/conversation/${user.id}/${res.data.id}`);
+        } catch (error) {
+          console.error("Failed to create conversation:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      
 
     return (
       <Accordion type="single" collapsible className="w-full">
@@ -111,11 +134,12 @@ import { Button } from "@/components/ui/button";
                     </h2>
                     <div className="p-2 px-4">
                         <CustomButton
-                            onClick={()=>{}}
+                            onClick={CreateConversation}
                             icon={<MessageCirclePlus size={20} className="text-gray-600"/>}
                             name="Contact seller"
                             variant="outline"
                             className="bg-gray-50 hover:bg-gray-100"
+                            disabled={loading}
                         />
                     </div>
             

@@ -11,13 +11,15 @@ import CustomerReviews from "./component/reviewTab";
 import getSubCatProducts from "@/actions/get-subCatProducts";
 import SubCatProducts from "@/components/buyer-components/subCatList";
 import getMainCatProduct from "@/actions/get-mainCatProducts";
+import getSeller from "@/actions/get-seller";
+
 
 
 const ProductPage = async({params}) => {
 
-    console.log("params ",params);
-    const data = await getProduct(params.productId);
-    
+
+    const data = await getProduct(params.productId);  
+
 
     const subproducts = await getSubCatProducts(data.categoryId);
     const mainCat = await getMainCatProduct(data.categoryId,data.mainCategory);
@@ -26,11 +28,10 @@ const ProductPage = async({params}) => {
     const combinedProducts = subFilteredProduct.concat(mainCat);
     
 
-    console.log("product ",subproducts);
 
     return ( 
         <div className="px-4">
-          <Info product={data} />
+          <Info product={data}/>
           <CustomerReviews />
           <Tabs defaultValue="products" className="w-full mt-6">
             <TabsList>
