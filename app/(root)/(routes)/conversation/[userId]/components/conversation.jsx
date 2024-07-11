@@ -1,16 +1,18 @@
 'use client'
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import BadgeAvatars from "./avatar";
 import {  ChevronLeft, MoreHorizontal } from "lucide-react";
 import { cn } from "@/lib/utils";
+import ConvItem from "./convItem";
 
 
 
 
-const Conversation = ({convList}) => {
+
+const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) => {
 
     const [open , setOpen] = useState(false);
 
@@ -18,6 +20,12 @@ const Conversation = ({convList}) => {
         setOpen(!open);
     }
 
+    const Getname = useMemo(() => {
+        const user = convList.find((conv) => conv.id === currentConversation.id);
+        return user.users[0].name.split(' ')[0];
+    },[convList,currentConversation.id])
+
+   
     return ( 
         <div>
             <div className="flex w-full">
@@ -29,14 +37,9 @@ const Conversation = ({convList}) => {
                             <h4 className="mb-4 text-2xl font-bold leading-none flex">Chats (<p className="font-semibold text-xl">{convList.length}</p>)</h4>
                             <Separator className="bg-gray-400"/>
                         </div>
+                        <div className="mt-10">  </div>
                         {convList.map((conv, index) => (
-                            <div key={index} className="flex items-center justify-between p-3 cursor-pointer hover:bg-gray-300">
-                                <BadgeAvatars/>
-                                <div className="px-4 p-1">
-                                    <h4 className="text-lg font-semibold leading-none">{conv.name}</h4>
-                                    <p className="text-gray-500 text-xs">last seen at 4.00 pm</p>
-                                </div>
-                            </div>
+                            <ConvItem key={index} conversation={conv} currentCovId ={ Select ? currentConversation.id : ""}/>
                         ))}
                         {convList.length === 0 && (
                             <div className="flex items-center justify-center h-[100vh]">
@@ -46,6 +49,8 @@ const Conversation = ({convList}) => {
                     </div>
                 </ScrollArea>
                 <ScrollArea className="h-[100vh] w-full rounded-md border">
+                { isDisplayMessages ?
+                    <>
                     <div className="absolute w-full">
                         <div className="flex items-center justify-between">
                             <div className="p-3 px-4 flex">
@@ -54,7 +59,7 @@ const Conversation = ({convList}) => {
                                 />
                                 <BadgeAvatars/>
                                 <div className="px-4 p-1">
-                                    <h4 className="text-lg font-semibold leading-none">Neranjan</h4>
+                                    <h4 className="text-lg font-semibold leading-none">{Getname}</h4>
                                     <p className="text-gray-500 text-xs">last seen at 4.00 pm</p>
                                 </div>
                             </div>
@@ -64,6 +69,14 @@ const Conversation = ({convList}) => {
                         </div>
                         <Separator/>
                     </div>
+                    
+                    {/* conversation to be build */}
+                    </> 
+                    : 
+                    <div className="flex items-center justify-center h-[100vh]">
+                        <h1 className ="text-2xl text-muted-foreground font-semibold">No Conversation Started</h1>
+                    </div>
+                    }
                 </ScrollArea>
             </div>
         </div>
