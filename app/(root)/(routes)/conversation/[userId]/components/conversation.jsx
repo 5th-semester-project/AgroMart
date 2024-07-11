@@ -7,6 +7,8 @@ import BadgeAvatars from "./avatar";
 import {  ChevronLeft, MoreHorizontal } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ConvItem from "./convItem";
+import MessageBody from "./messageBody";
+import FormMessage from "./form";
 
 
 
@@ -52,7 +54,7 @@ const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) =
                 { isDisplayMessages ?
                     <>
                     <div className="absolute w-full">
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between bg-white">
                             <div className="p-3 px-4 flex">
                                 <ChevronLeft className="flex md:hidden w-8 h-8 cursor-pointer text-gray-600 self-center mr-5"
                                     onClick={handleOpen}
@@ -69,8 +71,12 @@ const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) =
                         </div>
                         <Separator/>
                     </div>
-                    
-                    {/* conversation to be build */}
+                    <div className="mt-10"></div>
+                    <MessageBody/>
+                    <div className="absolute bottom-0 w-full bg-white">
+                        <Separator/>
+                        <FormMessage conversationId={currentConversation.id}/>
+                    </div>
                     </> 
                     : 
                     <div className="flex items-center justify-center h-[100vh]">
