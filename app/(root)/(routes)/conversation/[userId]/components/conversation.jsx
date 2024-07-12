@@ -4,39 +4,87 @@ import { useMemo, useState } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import BadgeAvatars from "./avatar";
-import {  ChevronLeft, MoreHorizontal } from "lucide-react";
+import {  ChevronLeft, MoreHorizontal, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ConvItem from "./convItem";
 import MessageBody from "./messageBody";
 import FormMessage from "./form";
-
-
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+  } from "@/components/ui/dropdown-menu";
+  import AlertModal from "@/components/modals/alert-modal";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useParams, useRouter } from "next/navigation";
 
 
 
 
 const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) => {
 
+    const [delOpen,setDelOpen] = useState(false);
     const [open , setOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const router = useRouter();
+    const {userId} =useParams();
 
     const handleOpen = () => {
         setOpen(!open);
     }
 
+    if(!currentConversation){
+        router.push(`/conversation/${userId}`)
+    }
+
+    const handleDelete = async() => {
+        try {
+            setLoading(true);
+
+            await axios.delete(`/api/conversation/delete/${currentConversation.id}`)
+
+            router.push(`/conversation/${userId}`);
+      
+            toast.success("Deleted successfully");
+
+        } catch (error) {
+            toast.error(
+                "Something went wrong!"
+              );
+        }finally {
+            setLoading(false);
+            setDelOpen(false);
+          }
+    }
     
-
     const Getname = useMemo(() => {
-        const user = convList.find((conv) => conv.id === currentConversation.id);
-        return user.users[0].name.split(' ')[0];
-    },[convList,currentConversation.id])
-
+        if (currentConversation) {
+            const user = convList.find((conv) => conv.id === currentConversation.id);
+            return user.users[0].name.split(' ')[0];
+        }
+        return '';
+    }, [convList, currentConversation]);
 
     const GetId = useMemo(() => {
-        const user = convList.find((conv) => conv.id === currentConversation.id);
-        return user.users[0].sellerid || user.users[0].userId;
-    })
-   
+        if (currentConversation) {
+            const user = convList.find((conv) => conv.id === currentConversation.id);
+            return user.users[0].sellerid || user.users[0].userId;
+        }
+        return '';
+    }, [convList, currentConversation]);
+
+
     return ( 
+        <>
+            <AlertModal
+                isOpen={delOpen}
+                onClose={() => setDelOpen(false)}
+                onConfirm={() => handleDelete()}
+                loading={loading}
+                description="Are you sure you want to delete this chat? This action cannot be undone"
+            />
         <div>
             <div className="flex w-full">
                 <ScrollArea className={cn("h-[100vh] hidden md:flex md:w-96 rounded-md border bg-gray-200",
@@ -61,30 +109,42 @@ const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) =
                 <ScrollArea className="h-[100vh] w-full rounded-md border">
                 { isDisplayMessages ?
                     <>
-                    <div className="absolute w-full  bg-white z-10">
-                        <div className="flex items-center justify-between bg-white">
-                            <div className="p-3 px-4 flex">
-                                <ChevronLeft className="flex md:hidden w-8 h-8 cursor-pointer text-gray-600 self-center mr-5"
-                                    onClick={handleOpen}
-                                />
-                                <BadgeAvatars user ={Getname}/>
-                                <div className="px-4 p-1">
-                                    <h4 className="text-lg font-semibold leading-none">{Getname}</h4>
-                                    <p className="text-gray-500 text-xs">last seen at 4.00 pm</p>
+                        {currentConversation && 
+                        <div className="absolute w-full  bg-white z-10">
+                            <div className="flex items-center justify-between bg-white">
+                                <div className="p-3 px-4 flex">
+                                    <ChevronLeft className="flex md:hidden w-8 h-8 cursor-pointer text-gray-600 self-center mr-5"
+                                        onClick={handleOpen}
+                                    />
+                                    <BadgeAvatars user ={Getname}/>
+                                    <div className="px-4 p-1">
+                                        <h4 className="text-lg font-semibold leading-none">{Getname}</h4>
+                                        <p className="text-gray-500 text-xs">last seen at 4.00 pm</p>
+                                    </div>
+                                </div>
+                                <div className={cn("px-5",open ? "hidden" : "flex")}>
+                                    <DropdownMenu>
+                                        <DropdownMenuTrigger asChild>
+                                            <MoreHorizontal className="cursor-pointer text-gray-600"/>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent className="w-56">
+                                            <DropdownMenuItem onClick={() => setDelOpen(true)}>
+                                                <Trash2 className="mr-2 h-4 w-4" />
+                                                <span>Delete Chat</span>
+                                            </DropdownMenuItem>
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
                                 </div>
                             </div>
-                            <div className={cn("px-5",open ? "hidden" : "flex")}>
-                                <MoreHorizontal className="cursor-pointer text-gray-600"/>
-                            </div>
+                            <Separator/>
                         </div>
-                        <Separator/>
-                    </div>
+                    }
                     <div className="mt-20"></div>
-                    <MessageBody currentCov ={currentConversation} OtherUserName ={Getname} receiverId ={GetId}/>
+                    {currentConversation &&<MessageBody currentCov ={currentConversation} OtherUserName ={Getname} receiverId ={GetId}/>}
                     <div className="mb-20"></div>
                     <div className="absolute bottom-0 w-full bg-white">
                         <Separator/>
-                        <FormMessage conversationId={currentConversation.id} receiverId ={GetId}/>
+                        {currentConversation && <FormMessage conversationId={currentConversation.id} receiverId ={GetId}/>}
                     </div>
                     </> 
                     : 
@@ -95,7 +155,11 @@ const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) =
                 </ScrollArea>
             </div>
         </div>
+        </>
      );
 }
  
 export default Conversation;
+
+
+
