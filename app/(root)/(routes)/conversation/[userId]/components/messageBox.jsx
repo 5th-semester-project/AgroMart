@@ -1,7 +1,6 @@
 'use client'
 
 import { cn } from "@/lib/utils";
-import BadgeAvatars from "./avatar";
 import { useParams } from "next/navigation";
 import { format } from "date-fns";
 import Image from "next/image";

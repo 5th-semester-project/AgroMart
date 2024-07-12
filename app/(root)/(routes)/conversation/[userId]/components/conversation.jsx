@@ -19,6 +19,7 @@ import {
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useParams, useRouter } from "next/navigation";
+import { format } from "date-fns";
 
 
 
@@ -76,6 +77,8 @@ const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) =
     }, [convList, currentConversation]);
 
 
+
+
     return ( 
         <>
             <AlertModal
@@ -97,7 +100,7 @@ const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) =
                         </div>
                         <div className="mt-10">  </div>
                         {convList.map((conv, index) => (
-                            <ConvItem key={index} conversation={conv} currentCovId ={ Select ? currentConversation.id : ""}/>
+                            <ConvItem key={index} conversation={conv} currentCovId ={ Select ? currentConversation.id : ""} />
                         ))}
                         {convList.length === 0 && (
                             <div className="flex items-center justify-center h-[100vh]">
@@ -119,7 +122,7 @@ const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) =
                                     <BadgeAvatars user ={Getname}/>
                                     <div className="px-4 p-1">
                                         <h4 className="text-lg font-semibold leading-none">{Getname}</h4>
-                                        <p className="text-gray-500 text-xs">last seen at 4.00 pm</p>
+                                        <p className="text-gray-500 text-xs">last seen at {format(new Date(currentConversation.lastMessageAt), 'h:mm a')}</p>
                                     </div>
                                 </div>
                                 <div className={cn("px-5",open ? "hidden" : "flex")}>
