@@ -10,8 +10,6 @@ const MessageBox = ({message,OtherUserName,receiverId }) => {
 
     const {userId} = useParams();
 
-    console.log(message)
-
     return ( 
         <div className={cn("flex justify-start mx-3 items-end", (userId === message.senderId) && "justify-end")}>
             {(userId !== message.senderId) && <BadgeAvatars user={OtherUserName} />}
