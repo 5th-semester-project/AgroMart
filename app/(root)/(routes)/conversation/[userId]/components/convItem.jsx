@@ -6,6 +6,7 @@ import BadgeAvatars from "./avatar";
 import { useUser } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 
+
 const ConvItem =({conversation,currentCovId}) => {
 
     
@@ -13,6 +14,7 @@ const ConvItem =({conversation,currentCovId}) => {
     const router = useRouter();
     const {user} = useUser();
   
+
 
     const handleRouting =()=>{
         router.push(`/conversation/${user.id}/${conversation.id}`)

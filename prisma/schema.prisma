@@ -120,6 +120,7 @@ model Conversation {
   id        String   @id @default(cuid())  @map("_id")
   userIds  String[]
   messageIds  String[]
+  seenIds String[]
   messages  Message[] @relation("MessageToConversation")
   startedAt DateTime @default(now())
   lastMessageAt DateTime @updatedAt
