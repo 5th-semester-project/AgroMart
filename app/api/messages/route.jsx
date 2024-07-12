@@ -1,6 +1,7 @@
 import prismadb from '@/lib/prismadb';
 import { NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
+import { pusherServer } from "@/lib/pusher";
 
 export async function POST(req){
     try {
@@ -47,6 +48,8 @@ export async function POST(req){
             },
         
         });
+
+        await pusherServer.trigger(conversationId,'messages:new',newMessage)
 
         return new NextResponse(newMessage);
         
