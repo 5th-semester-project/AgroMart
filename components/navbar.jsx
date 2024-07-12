@@ -29,7 +29,7 @@ const NavBar =async() => {
             <StoreIcon className="h-4 w-4"/>
             <h2 className="flex font-bold text-lg">{store.name}</h2>
         </div>
-        <MainNavbar className="mx-6 hidden md:flex"/>
+        <MainNavbar className="mx-6 hidden md:flex" userId={userId}/>
         <div className="ml-auto items-center space-x-4 hidden md:flex">
             <ModeToggle/>
             <UserButton afterSignOutUrl="/"/>
