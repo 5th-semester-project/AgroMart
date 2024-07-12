@@ -1,9 +1,16 @@
 'use client'
 
-const MessageBody = () => {
+import MessageBox from "./messageBox";
+
+const MessageBody = ({currentCov,OtherUserName,receiverId }) => {
+
+
+
     return ( 
         <div>
-            MessageBody
+            {currentCov && currentCov.messages.map((message, index) => (
+                <MessageBox key={index} message={message} OtherUserName={OtherUserName} receiverId={receiverId} />
+            ))}
         </div>
      );
 }

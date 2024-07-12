@@ -3,6 +3,7 @@
 import axios from "axios"
 import { ImageUp ,SendHorizontal } from "lucide-react";
 import { useForm,SubmitHandler,FieldValues } from "react-hook-form"
+import {CldUploadButton} from "next-cloudinary";
 
 const FormMessage = ({conversationId,receiverId}) => {
 
@@ -13,7 +14,8 @@ const FormMessage = ({conversationId,receiverId}) => {
         formState: { errors }
     } = useForm({
         defaultValues:{
-            message:""
+            message:"",
+            
         }
     });
 
@@ -28,14 +30,28 @@ const FormMessage = ({conversationId,receiverId}) => {
         })
     }
 
+    const handleUplaod = (result) =>{
+        axios.post("/api/messages",{
+            image:result?.info?.secure_url,
+            conversationId,
+            receiverId
+        })
+    }
+
     return ( 
 
         <div>
             <form onSubmit={handleSubmit(onSubmit)} className="flex items-center w-full gap-4">
-                <ImageUp 
-                    size={40} 
-                    className="text-muted-foreground p-2 ml-2 cursor-pointer hover:bg-gray-100 rounded-lg hover:text-blue-500"
-                />
+                <CldUploadButton
+                    options = {{maxFiles :1}}
+                    onSuccess={handleUplaod}
+                    uploadPreset="o8jakbfq"
+                >
+                    <ImageUp 
+                        size={40} 
+                        className="text-muted-foreground p-2 ml-2 cursor-pointer hover:bg-gray-100 rounded-lg hover:text-blue-500"
+                    />
+                </CldUploadButton>
                 <input 
                     type="text" 
                     name="message" 

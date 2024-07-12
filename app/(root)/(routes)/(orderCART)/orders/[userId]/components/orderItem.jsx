@@ -24,7 +24,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useUser } from "@clerk/clerk-react";
-import { CommandLoading } from "cmdk";
+
 
   const labels = {
     0.5: 'Useless',

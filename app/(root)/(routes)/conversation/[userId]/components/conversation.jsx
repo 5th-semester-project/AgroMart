@@ -14,6 +14,7 @@ import FormMessage from "./form";
 
 
 
+
 const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) => {
 
     const [open , setOpen] = useState(false);
@@ -21,6 +22,8 @@ const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) =
     const handleOpen = () => {
         setOpen(!open);
     }
+
+    
 
     const Getname = useMemo(() => {
         const user = convList.find((conv) => conv.id === currentConversation.id);
@@ -58,13 +61,13 @@ const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) =
                 <ScrollArea className="h-[100vh] w-full rounded-md border">
                 { isDisplayMessages ?
                     <>
-                    <div className="absolute w-full">
+                    <div className="absolute w-full  bg-white z-10">
                         <div className="flex items-center justify-between bg-white">
                             <div className="p-3 px-4 flex">
                                 <ChevronLeft className="flex md:hidden w-8 h-8 cursor-pointer text-gray-600 self-center mr-5"
                                     onClick={handleOpen}
                                 />
-                                <BadgeAvatars/>
+                                <BadgeAvatars user ={Getname}/>
                                 <div className="px-4 p-1">
                                     <h4 className="text-lg font-semibold leading-none">{Getname}</h4>
                                     <p className="text-gray-500 text-xs">last seen at 4.00 pm</p>
@@ -76,8 +79,9 @@ const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) =
                         </div>
                         <Separator/>
                     </div>
-                    <div className="mt-10"></div>
-                    <MessageBody/>
+                    <div className="mt-20"></div>
+                    <MessageBody currentCov ={currentConversation} OtherUserName ={Getname} receiverId ={GetId}/>
+                    <div className="mb-20"></div>
                     <div className="absolute bottom-0 w-full bg-white">
                         <Separator/>
                         <FormMessage conversationId={currentConversation.id} receiverId ={GetId}/>
