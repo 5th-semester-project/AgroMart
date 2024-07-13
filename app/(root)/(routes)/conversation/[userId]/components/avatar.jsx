@@ -4,6 +4,8 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
+import useActiveList from '@/hooks/useActiveList';
+import { useParams } from 'next/navigation';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -36,6 +38,16 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 
 export default function BadgeAvatars({user}) {
+
+  const {userId} = useParams();
+
+  const {members} = useActiveList();
+  const isActive = members.indexOf(userId) !== -1;
+
+  console.log("isActive",isActive);
+  console.log("members",members);
+  
+
   return (
       <StyledBadge
         overlap="circular"

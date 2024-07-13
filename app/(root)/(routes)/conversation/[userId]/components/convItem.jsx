@@ -13,7 +13,6 @@ import { format } from "date-fns";
 
 const ConvItem =({conversation,currentCovId}) => {
 
-    console.log("conversation inside the convItem",conversation)
 
     const [lastMessage, setLastMessage] = useState(() => {
         if (conversation.messages.length > 0) {

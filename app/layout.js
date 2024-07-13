@@ -7,6 +7,7 @@ import "./globals.css";
 
 
 import  ToasterProvider  from "@/providers/toast-provider";
+import ActiveStatus from "@/components/ActiveStatus";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,6 +34,7 @@ export default function RootLayout({ children }) {
               enableSystem
           >
             <ToasterProvider/>
+            <ActiveStatus/>
             
             {children}
           </ThemeProvider>

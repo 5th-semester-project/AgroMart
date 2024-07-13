@@ -78,9 +78,6 @@ const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) =
     }, [convList, currentConversation]);
 
 
- 
-    console.log("convList inside the conversation",convList)
-
     return ( 
         <>
             <AlertModal
