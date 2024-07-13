@@ -20,6 +20,15 @@ export async function POST(req){
             return new NextResponse("receiverId and conversationId are required", { status: 400 });
         }
 
+        // Check if the conversation exists
+        const conversation = await prismadb.conversation.findUnique({
+            where: { id: conversationId }
+        });
+
+        if (!conversation) {
+            return new NextResponse("Conversation not found", { status: 404 });
+        }
+
         const newMessage = await prismadb.Message.create({
             data:{
                 senderId: userId,
@@ -48,6 +57,7 @@ export async function POST(req){
             },
         
         });
+
 
         await pusherServer.trigger(conversationId,'messages:new',newMessage)
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState} from "react";
+import { useMemo,useState,useEffect} from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import BadgeAvatars from "./avatar";
@@ -20,13 +20,12 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useParams, useRouter } from "next/navigation";
 import { format } from "date-fns";
-
-
+import {pusherClient} from "@/lib/pusher";
 
 
 const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) => {
 
-    
+    const [converList,setConverList] = useState(convList);
     const [delOpen,setDelOpen] = useState(false);
     const [open , setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -37,9 +36,63 @@ const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) =
         setOpen(!open);
     }
 
-    if(!currentConversation){
-        router.push(`/conversation/${userId}`)
-    }
+    useEffect(() => {
+
+        if (!currentConversation || !currentConversation.id) return;
+        pusherClient.subscribe(currentConversation.id)
+
+        const deleteConvHandler = (deletedConv) => {
+            setConverList((current) => 
+                current.filter(conv => conv.id !== deletedConv.id)
+            );
+        };
+
+        pusherClient.bind('delete:new', deleteConvHandler)
+
+
+        return () => {
+            pusherClient.unsubscribe(currentConversation.id);
+            pusherClient.unbind('delete:new', deleteConvHandler);
+            
+            if (!currentConversation) {
+                router.push(`/conversation/${userId}`);
+            }
+            
+        }
+                    
+
+    },[currentConversation?.id])
+
+
+    useEffect(() => {
+        if (!currentConversation) {
+            router.push(`/conversation/${userId}`);
+        }
+    }, [currentConversation,convList]);
+
+
+    useEffect(() => {
+        if (!userId) return;
+        pusherClient.subscribe(userId)
+
+        const convListhandler = (conv) => {
+            setConverList((current) => {
+                if (find(current, { id: conv.id })) {
+                    return current;
+                }
+                return [...current, conv];
+            });
+        };
+
+        pusherClient.bind('conversation:new', convListhandler);
+
+        return () => {
+            pusherClient.unsubscribe(userId);
+            pusherClient.unbind('conversation:new', convListhandler);
+        };
+
+    },[convList.length,userId]);
+
 
     const handleDelete = async() => {
         try {
@@ -98,10 +151,10 @@ const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) =
                             <Separator className="bg-gray-400"/>
                         </div>
                         <div className="mt-10">  </div>
-                        {convList.map((conv, index) => (
+                        {converList.map((conv, index) => (
                             <ConvItem key={index} conversation={conv} currentCovId ={ Select ? currentConversation.id : ""} />
                         ))}
-                        {convList.length === 0 && (
+                        {converList.length === 0 && (
                             <div className="flex items-center justify-center h-[100vh]">
                                 <p className="text-gray-500">No chats available</p>
                             </div>

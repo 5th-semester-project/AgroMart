@@ -4,9 +4,12 @@ import axios from "axios"
 import { ImageUp ,SendHorizontal } from "lucide-react";
 import { useForm,SubmitHandler,FieldValues } from "react-hook-form"
 import {CldUploadButton} from "next-cloudinary";
+import {useRouter,useParams } from 'next/navigation';
 
 const FormMessage = ({conversationId,receiverId}) => {
 
+    const router = useRouter();
+    const {userId} = useParams();
     const {
         register,
         handleSubmit,
@@ -21,21 +24,38 @@ const FormMessage = ({conversationId,receiverId}) => {
 
     const onSubmit = async (data) => {
 
-        setValue("message","",{shouldValidate:true});
-        axios.post("/api/messages",{
-            ...data,
-            conversationId,
-            receiverId
+        try{
+
+            setValue("message","",{shouldValidate:true});
+            await axios.post("/api/messages",{
+                ...data,
+                conversationId,
+                receiverId
+            
+            })
+        }catch(error){
+            if (error.response && error.response.status === 404) {
+                router.push(`/conversation/${userId}`);
+            }
+        }
         
-        })
     }
 
-    const handleUplaod = (result) =>{
-        axios.post("/api/messages",{
-            image:result?.info?.secure_url,
-            conversationId,
-            receiverId
-        })
+    const handleUplaod = async(result) =>{
+
+        try {
+            
+          await axios.post("/api/messages",{
+                image:result?.info?.secure_url,
+                conversationId,
+                receiverId
+            })
+        } catch (error) {
+            
+            if (error.response && error.response.status === 404) {
+                router.push(`/conversation/${userId}`);
+            }
+        }
     }
 
     return ( 

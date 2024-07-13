@@ -1,6 +1,7 @@
 import prismadb from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
+import { pusherServer } from "@/lib/pusher";
 
 export async function DELETE(req,{params}){
     try {
@@ -34,6 +35,8 @@ export async function DELETE(req,{params}){
                 id: conversationId,
             },
         });
+
+        await pusherServer.trigger(delconversation.id,'delete:new',delconversation)
 
         return NextResponse.json(delconversation)
 
