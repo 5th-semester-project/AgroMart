@@ -13,10 +13,20 @@ const ConversationPage = async({params}) => {
                 has:userId
             }
         },
+        include: {
+            messages: {
+                orderBy: {
+                    createdAt: 'desc'
+                },
+                take: 1
+            }
+        },
         orderBy:{
             lastMessageAt:'desc'
         }
     })
+
+    console.log("convleist inside the page",convList)
 
     const formattedConversations = await Promise.all(convList.map(async (conversation) => {
         const buyers = await prismadb.buyer.findMany({
@@ -58,9 +68,7 @@ const ConversationPage = async({params}) => {
         };
     }));
 
-
-    
-    
+    console.log("formattedConversations inside the page",formattedConversations)
 
     return ( 
         <>

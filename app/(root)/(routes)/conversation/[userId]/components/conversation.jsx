@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from "react";
+import { useMemo, useState} from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import BadgeAvatars from "./avatar";
@@ -26,6 +26,7 @@ import { format } from "date-fns";
 
 const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) => {
 
+    
     const [delOpen,setDelOpen] = useState(false);
     const [open , setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -77,7 +78,8 @@ const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) =
     }, [convList, currentConversation]);
 
 
-
+ 
+    console.log("convList inside the conversation",convList)
 
     return ( 
         <>

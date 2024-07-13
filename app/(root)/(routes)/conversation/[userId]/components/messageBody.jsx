@@ -14,11 +14,11 @@ const MessageBody = ({currentCov,OtherUserName,receiverId }) => {
     const {userId} = useParams();
     const bottomRef = useRef();
 
-    useEffect(() => {
-        axios.patch(`/api/conversation/${userId}/seen`,{
-            conversationId: currentCov.id
-        })
-    },[currentCov.id]);
+    // useEffect(() => {
+    //     axios.patch(`/api/conversation/${userId}/seen`,{
+    //         conversationId: currentCov.id
+    //     })
+    // },[currentCov.id]);
 
     useEffect(() => {
         pusherClient.subscribe(currentCov.id)

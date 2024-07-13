@@ -13,6 +13,14 @@ const ConversationPage = async({params}) => {
                 has:userId
             }
         },
+        include: {
+            messages: {
+                orderBy: {
+                    createdAt: 'desc'
+                },
+                take: 1
+            }
+        },
         orderBy:{
             lastMessageAt:'desc'
         }
