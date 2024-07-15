@@ -14,6 +14,7 @@ import TotalRevenue from './components/totalRevenue'
 import TotalOrders from './components/totalOrders';
 import getCategories from '@/actions/get-categories';
 import SalesAnalytics from './components/salesAnalitics';
+import RevenueAnalytics from './components/revenueAnalytics';
 import getProducts from '@/actions/analytics/get-products';
 
 
@@ -120,9 +121,7 @@ const DashboardPage = async({params}) => {
                             <CardTitle>Revenue Analytics</CardTitle>
                         </CardHeader>
                         <CardContent className="pl-2">
-                            {/* <Overview
-                                data={graphData}
-                            /> */}
+                        <RevenueAnalytics categories={categories} products={products} storeId ={params.storeId}/>
 
                         </CardContent>
 
