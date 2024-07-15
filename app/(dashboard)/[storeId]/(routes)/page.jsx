@@ -1,21 +1,30 @@
-// import getTotalRevenue from "@/actions/total-revenue";
-// import getTotalSales from "@/actions/total-salesCount";
-// import getStockCount from "@/actions/total-stockCount";
+
+
+import getTotalRevenue from '@/actions/analytics/get-totalRevenue';
+import getTotalOrderCount from '@/actions/analytics/get-totalOrders';
+
+
+
 import Heading from "@/components/ui/heading";
-// import Overview from "@/components/overview";
-// import getTotalGraphRevenue from "@/actions/total-graphRevanue";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-// import { formatter } from "@/lib/utils";
-import { CreditCard, DollarSign, Package } from "lucide-react";
+import { DollarSign, Package,Star  } from "lucide-react";
+import TotalRevenue from './components/totalRevenue'
+import TotalOrders from './components/totalOrders';
+import getCategories from '@/actions/get-categories';
+import SalesAnalytics from './components/salesAnalitics';
+import getProducts from '@/actions/analytics/get-products';
 
 
 const DashboardPage = async({params}) => {
 
-    // const totalRevenue = await getTotalRevenue(params.storeId)
-    // const salesCount =await getTotalSales(params.storeId)
-    // const stockCount =await getStockCount(params.storeId)
-    // const graphData = await getTotalGraphRevenue(params.storeId)
+    const totalRevenue = await getTotalRevenue(params.storeId)
+    const totalOrders = await getTotalOrderCount(params.storeId)
+    const categories = await  getCategories(params.storeId)
+    const products = await getProducts(params.storeId)
+
+ 
 
 
 
@@ -27,7 +36,7 @@ const DashboardPage = async({params}) => {
                     description="Overview of your store's performance and sales."
                 />
                 <Separator/>
-                <div className="grid grid-4 grid-cols-3 gap-4">
+                <div className="grid  grid-cols-4 gap-4">
                     <Card>
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 ">
                             <CardTitle className="text-sm font-medium"> 
@@ -39,31 +48,15 @@ const DashboardPage = async({params}) => {
                         </CardHeader>
 
                         <CardContent >
-                            <div className="text-2xl font-bold">
-                                {/* {formatter.format(totalRevenue)} */}
+                            <div className="text-2xl font-bold my-4">
+                                <TotalRevenue amount={totalRevenue}/>
                             </div>
                         </CardContent>
                     </Card>
                     <Card>
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 ">
                             <CardTitle className="text-sm font-medium"> 
-                                Sales
-                            </CardTitle>
-                            <CreditCard
-                                className="w-4 h-4 text-muted-foreground"
-                            />
-                        </CardHeader>
-
-                        <CardContent >
-                            <div className="text-2xl font-bold">
-                                {/* {`+${salesCount}`} */}
-                            </div>
-                        </CardContent>
-                    </Card>
-                    <Card>
-                        <CardHeader className="flex flex-row items-center justify-between space-y-0 ">
-                            <CardTitle className="text-sm font-medium"> 
-                                Product in Stock
+                                Total Orders
                             </CardTitle>
                             <Package
                                 className="w-4 h-4 text-muted-foreground"
@@ -71,25 +64,108 @@ const DashboardPage = async({params}) => {
                         </CardHeader>
 
                         <CardContent >
+                            <div className="text-2xl font-bold my-4">
+                            <TotalOrders amount={totalOrders}/>
+                            </div>
+                        </CardContent>
+                    </Card>
+                    <Card>
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 ">
+                        <CardTitle className="text-sm font-medium"> 
+                                Store Ratings
+                            </CardTitle>
+                            <Star 
+                                className="w-4 h-4 text-muted-foreground"
+                            />
+                        </CardHeader>
+
+                        <CardContent >
                             <div className="text-2xl font-bold">
-                                {/* {stockCount} */}
+                                {/* {formatter.format(totalRevenue)} */}
                             </div>
                         </CardContent>
                     </Card>
                 </div>
-                <Card className="col-span-4">
-                    <CardHeader>
-                        <CardTitle>Overview</CardTitle>
+                <div className="grid grid-cols-4 gap-4">
+                    <Card className="col-span-3">
+                        <CardHeader>
+                            <div>
+                                <CardTitle className="justify-between items-center flex">
+                                    Orders Analytics
+                                </CardTitle>
+                            </div>
+                        </CardHeader>
+                        <CardContent className="pl-2">
+                            <SalesAnalytics categories={categories} products={products} storeId ={params.storeId}/>
 
-                    </CardHeader>
-                    <CardContent className="pl-2">
-                        {/* <Overview
-                            data={graphData}
-                        /> */}
+                        </CardContent>
 
-                    </CardContent>
+                    </Card>
+                    <Card className="col-span-1">
+                        <CardHeader>
+                            <CardTitle className ="text-xl font-semibold">Top selling products</CardTitle>
+                        </CardHeader>
+                        <CardContent className="pl-2">
+                            {/* <Overview
+                                data={graphData}
+                            /> */}
 
-                </Card>
+                        </CardContent>
+
+                    </Card>
+                </div>
+                <div className="grid grid-cols-4 gap-4">
+                    <Card className="col-span-3">
+                        <CardHeader>
+                            <CardTitle>Revenue Analytics</CardTitle>
+                        </CardHeader>
+                        <CardContent className="pl-2">
+                            {/* <Overview
+                                data={graphData}
+                            /> */}
+
+                        </CardContent>
+
+                    </Card>
+                    <Card className="col-span-1">
+                        <CardHeader>
+                            <CardTitle className ="text-xl font-semibold">Top discounted products</CardTitle>
+                        </CardHeader>
+                        <CardContent className="pl-2">
+                            {/* <Overview
+                                data={graphData}
+                            /> */}
+
+                        </CardContent>
+
+                    </Card>
+                </div>
+                <div className="grid grid-cols-4 gap-4">
+                    <Card className="col-span-2">
+                        <CardHeader>
+                            <CardTitle>low stocks</CardTitle>
+                        </CardHeader>
+                        <CardContent className="pl-2">
+                            {/* <Overview
+                                data={graphData}
+                            /> */}
+
+                        </CardContent>
+
+                    </Card>
+                    <Card className="col-span-2">
+                        <CardHeader>
+                            <CardTitle>Reports</CardTitle>
+                        </CardHeader>
+                        <CardContent className="pl-2">
+                            {/* <Overview
+                                data={graphData}
+                            /> */}
+
+                        </CardContent>
+
+                    </Card>
+                </div>
             </div>
         </div>
      );

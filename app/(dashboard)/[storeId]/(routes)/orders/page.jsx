@@ -9,7 +9,8 @@ const ProductPage = async({params}) => {
         where:{
             storeIds:{
                 has:params.storeId
-            }
+            },
+            status: "SUCCESS"
 
         },
         include:{
