@@ -24,7 +24,6 @@ const CategoryPage = async({params}) => {
         CreatedAt:format(category.createdAt,"MMMM do,yyyy")
     }))
 
-    console.log("FormattedCategories in category page",FormattedCategories)
 
     return ( 
         <div className="flex-col"> 

@@ -18,6 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
@@ -37,12 +38,37 @@ const formSchema = z.object({
   name: z.string().min(1),
   imageUrls: z.array(z.object({ url: z.string().min(1) })).min(1, "Images are required"),
   price: z.coerce.number().min(1),
-  categoryId: z.string().min(1, "Category is required"),
+  categoryId: z.string().min(1, "Sub Category is required"),
+  mainCategory:z.string().min(1, "Main Category is required"),
   discount: z.coerce.number().min(0).max(100).optional(),
   availableCount: z.coerce.number().min(0),
   isDisplay: z.boolean().default(false).optional(),
+  description: z.string().min(1),
  
 });
+
+
+const mainCategories = [
+  "Crops",
+  "Livestock",
+  "Dairy Products",
+  "Poultry Products",
+  "Horticulture",
+  "Fibers",
+  "Beverage Crops",
+  "Spices and Herbs",
+  "Oilseeds",
+  "Sugar Crops",
+  "Forage and Fodder",
+  "Forestry Products",
+  "Organic Products",
+  "Processed and Packaged Foods",
+  "Agricultural Inputs",
+  "Animal Feed and Supplements",
+  "Agrochemicals",
+  "Biotechnology"
+];
+
 
 const ProductBoardForm = ({categories, initialData }) => {
   
@@ -68,9 +94,11 @@ const ProductBoardForm = ({categories, initialData }) => {
           imageUrls:storeImages.images || [],
           price: parseFloat(String(initialData?.price)) || 0,
           categoryId: initialData?.categoryId || "",
+          mainCategory: initialData?.mainCategory || "",
           discount: parseFloat(String(initialData?.discount)) || 0,
           isDisplay: initialData?.isDisplay || false,
           availableCount: parseInt(String(initialData?.availableCount)) || 0,
+          description: initialData?.description || "",
         },
   });
 
@@ -268,10 +296,42 @@ const ProductBoardForm = ({categories, initialData }) => {
             />
             <FormField
               control={form.control}
+              name="mainCategory"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Main Category</FormLabel>
+                  <Select
+                    disabled={loading}
+                    onValueChange={(value) => field.onChange(value)}
+                    value={field.value}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue
+                          defaultValue={field.value}
+                          placeholder="Select a Category"
+                        />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                        {mainCategories.map((category,index) => (
+                          <SelectItem key ={index} value={category}>
+                            {category}
+                          </SelectItem>
+                        ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="categoryId"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Category</FormLabel>
+                  <FormLabel>Sub Category</FormLabel>
                   <Select
                     disabled={loading}
                     onValueChange={(value) => field.onChange(value)}
@@ -304,6 +364,7 @@ const ProductBoardForm = ({categories, initialData }) => {
                 </FormItem>
               )}
             />
+            
             <FormField
               control={form.control}
               name="discount"
@@ -339,6 +400,26 @@ const ProductBoardForm = ({categories, initialData }) => {
                         This product will appear in the store.
                       </FormDescription>
                     </div>
+                </FormItem>
+              )}
+            />
+             <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                
+                <FormItem>
+                    <FormLabel>Description</FormLabel>
+                    <FormControl>
+                    <Textarea
+                      placeholder="Write here..."
+                      disabled={loading}
+                      {...field}  
+                    />
+                    </FormControl>
+                      <FormDescription>
+                        Add a detailed product description.
+                      </FormDescription>
                 </FormItem>
               )}
             />

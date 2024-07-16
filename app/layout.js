@@ -2,15 +2,17 @@ import { Inter } from "next/font/google";
 import { ClerkProvider } from '@clerk/nextjs'
 import { ThemeProvider } from "@/providers/theme-provider"
 
+
 import "./globals.css";
 
-import ModalProvider from "@/providers/modal-provider";
+
 import  ToasterProvider  from "@/providers/toast-provider";
+// import ActiveStatus from "@/components/ActiveStatus";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Admin",
+  title: "Agriculture Marketplace",
   description: "Advanced Engineering Project Group 15",
 };
 
@@ -18,6 +20,13 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en">
+      <head>
+          <script
+            type="text/javascript"
+            src="https://www.payhere.lk/lib/payhere.js"
+            async
+          ></script>
+        </head>
         <body className={inter.className}>
           <ThemeProvider
               attribute="class"
@@ -25,7 +34,8 @@ export default function RootLayout({ children }) {
               enableSystem
           >
             <ToasterProvider/>
-            <ModalProvider/>
+            {/* <ActiveStatus/> */}
+            
             {children}
           </ThemeProvider>
         </body>

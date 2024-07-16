@@ -57,6 +57,8 @@ export async function PATCH(req, { params }) {
         discount,
         isDisplay,
         availableCount,
+        description,
+        mainCategory
       } = body;
   
       if (!userId) {
@@ -110,24 +112,12 @@ export async function PATCH(req, { params }) {
             imageUrls,
             isDisplay,
             availableCount,
+            description,
+            mainCategory
           }
         
       });
   
-      // const product = await prismadb.Product.update({
-      //   where:{
-      //     id:productId
-      //   },
-      //   data:{
-      //     images:{
-      //       createMany:{
-      //         data:[
-      //           ...images.map((image)=>image)
-      //         ]
-      //       }
-      //     }
-      //   }
-      // })
       return NextResponse.json(product);
 
     } catch (error) {
