@@ -18,7 +18,7 @@ export default function SetupPage() {
   useEffect(() => {
     if(!isOpen){
       onOpen();
-    }
+    }             
   }, [onOpen,isOpen]);
 
 

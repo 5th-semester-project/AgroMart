@@ -2,6 +2,9 @@
 
 import getTotalRevenue from '@/actions/analytics/get-totalRevenue';
 import getTotalOrderCount from '@/actions/analytics/get-totalOrders';
+import getProducts from '@/actions/analytics/get-products';
+import getTopDiscountedProducts from '@/actions/analytics/get-topDisproduct';
+import getTopSellingProducts from '@/actions/analytics/get-TopSellProduct';
 
 
 
@@ -15,7 +18,9 @@ import TotalOrders from './components/totalOrders';
 import getCategories from '@/actions/get-categories';
 import SalesAnalytics from './components/salesAnalitics';
 import RevenueAnalytics from './components/revenueAnalytics';
-import getProducts from '@/actions/analytics/get-products';
+import TopDiscountedList from './components/TopDiscountedList';
+import TopSellingList from './components/topSellingList';
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 
 const DashboardPage = async({params}) => {
@@ -24,10 +29,10 @@ const DashboardPage = async({params}) => {
     const totalOrders = await getTotalOrderCount(params.storeId)
     const categories = await  getCategories(params.storeId)
     const products = await getProducts(params.storeId)
+    const topDiscountedProducts = await getTopDiscountedProducts(params.storeId)
+    const topSelling = await getTopSellingProducts(params.storeId)
 
  
-
-
 
     return ( 
         <div className="flex-col">
@@ -90,6 +95,29 @@ const DashboardPage = async({params}) => {
                 <div className="grid grid-cols-4 gap-4">
                     <Card className="col-span-3">
                         <CardHeader>
+                            <CardTitle>Revenue Analytics</CardTitle>
+                        </CardHeader>
+                        <CardContent className="pl-2">
+                        <RevenueAnalytics categories={categories} products={products} storeId ={params.storeId}/>
+
+                        </CardContent>
+
+                    </Card>
+                    <Card className="col-span-1">
+                        <CardHeader>
+                            <CardTitle className ="text-xl font-semibold">Top discounted products</CardTitle>
+                        </CardHeader>
+                        <CardContent className="pl-2">
+                            <ScrollArea className="w-full px-3">
+                                <TopDiscountedList list={topDiscountedProducts}/>
+                            </ScrollArea>
+                        </CardContent>
+
+                    </Card>
+                </div>
+                <div className="grid grid-cols-4 gap-4">
+                    <Card className="col-span-3">
+                        <CardHeader>
                             <div>
                                 <CardTitle className="justify-between items-center flex">
                                     Orders Analytics
@@ -104,41 +132,17 @@ const DashboardPage = async({params}) => {
                     </Card>
                     <Card className="col-span-1">
                         <CardHeader>
-                            <CardTitle className ="text-xl font-semibold">Top selling products</CardTitle>
+                            <CardTitle className ="text-xl font-semibold">Top 10 selling products</CardTitle>
                         </CardHeader>
                         <CardContent className="pl-2">
-                            {/* <Overview
-                                data={graphData}
-                            /> */}
-
+                            <ScrollArea className="w-full px-3">
+                                <TopSellingList list={topSelling}/>
+                            </ScrollArea>
                         </CardContent>
 
                     </Card>
                 </div>
-                <div className="grid grid-cols-4 gap-4">
-                    <Card className="col-span-3">
-                        <CardHeader>
-                            <CardTitle>Revenue Analytics</CardTitle>
-                        </CardHeader>
-                        <CardContent className="pl-2">
-                        <RevenueAnalytics categories={categories} products={products} storeId ={params.storeId}/>
-
-                        </CardContent>
-
-                    </Card>
-                    <Card className="col-span-1">
-                        <CardHeader>
-                            <CardTitle className ="text-xl font-semibold">Top discounted products</CardTitle>
-                        </CardHeader>
-                        <CardContent className="pl-2">
-                            {/* <Overview
-                                data={graphData}
-                            /> */}
-
-                        </CardContent>
-
-                    </Card>
-                </div>
+                
                 <div className="grid grid-cols-4 gap-4">
                     <Card className="col-span-2">
                         <CardHeader>
