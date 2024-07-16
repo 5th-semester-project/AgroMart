@@ -8,13 +8,6 @@ Ensure you have the following installed on your system:
 - Python 3.x
 - pip (Python package installer)
 
-## Setup
-
-1. **Clone the Repository**
-
-   ```bash
-   git clone https://github.com/your-username/your-repository-name.git
-   cd your-repository-name
 
 # navigade 
 cd ChatBot

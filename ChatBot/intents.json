@@ -1,1212 +1,848 @@
 {
-    "intents": [
-      {
-        "tag": "greeting",
-        "patterns": [
-          "Hi",
-          "Hey",
-          "How are you",
-          "Is anyone there?",
-          "Hello",
-          "Good day"
-        ],
-        "responses": [
-          "Hello, thanks for visiting",
-          "Hi there, what can I do for you?",
-          "Hi there, how can I help?"
-        ]
-      },
-      {
-          "tag": "MY",
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "Hello",
+        "Hey",
+        "How are you",
+        "Is anyone there?",
+        "Good day"
+      ],
+      "responses": [
+        "Hello, welcome to the Agricultural Marketplace!",
+        "Hi there, how can I assist you with your agricultural needs today?",
+        "Hello, how can I help you today?"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "Bye",
+        "See you later",
+        "Goodbye",
+        "Talk to you soon"
+      ],
+      "responses": [
+        "Goodbye! Have a great day!",
+        "See you later, thanks for visiting the Agricultural Marketplace.",
+        "Bye! Come back again soon."
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": [
+        "Thanks",
+        "Thank you",
+        "That's helpful",
+        "Thank's a lot"
+      ],
+      "responses": [
+        "You're welcome!",
+        "Happy to help!",
+        "Anytime! How else can I assist you?"
+      ]
+    },
+    {
+      "tag": "login",
+      "patterns": [
+        "How do I log in?",
+        "Where do I log in?",
+        "Log in help",
+        "I can't log in",
+        "Login issues"
+      ],
+      "responses": [
+        "To log in, click on the 'Login' button at the top right corner of the homepage and enter your credentials.",
+        "You can log in by clicking the 'Login' button on the homepage. If you have issues, make sure your email and password are correct.",
+        "If you're having trouble logging in, please check your internet connection and ensure you are entering the correct email and password."
+      ]
+    },
+    {
+      "tag": "register",
+      "patterns": [
+        "How do I register?",
+        "Where do I sign up?",
+        "Sign up help",
+        "Create an account",
+        "Register new account"
+      ],
+      "responses": [
+        "To register, click on the 'Sign Up' button at the top right corner of the homepage and fill out the required information.",
+        "You can sign up by clicking the 'Sign Up' button on the homepage and entering your details.",
+        "To create a new account, click 'Sign Up' on the homepage and follow the instructions."
+      ]
+    },
+    {
+      "tag": "reset_password",
+      "patterns": [
+        "I forgot my password",
+        "How do I reset my password?",
+        "Reset password help",
+        "Can't remember my password",
+        "Password reset"
+      ],
+      "responses": [
+        "If you forgot your password, click on the 'Forgot Password' link on the login page and follow the instructions to reset it.",
+        "To reset your password, go to the login page and click on 'Forgot Password'. You'll receive an email with instructions.",
+        "You can reset your password by clicking 'Forgot Password' on the login page and following the steps provided."
+      ]
+    },
+    {
+      "tag": "add_product",
+      "patterns": [
+        "How do I add a product?",
+        "Add a product",
+        "List a new product",
+        "Create a product listing"
+      ],
+      "responses": [
+        "To add a product, log in to your seller account, go to 'My Store', and click on 'Add Product'. Fill out the required details and save.",
+        "You can list a new product by logging into your seller account and navigating to 'My Store'. Then click 'Add Product' and enter the product details.",
+        "To create a product listing, log in to your seller account, click 'My Store', and then 'Add Product'. Fill in the details and click 'Save'."
+      ]
+    },
+    {
+      "tag": "manage_orders",
+      "patterns": [
+        "How do I manage my orders?",
+        "View my orders",
+        "Check order status",
+        "Order management help"
+      ],
+      "responses": [
+        "To manage your orders, log in to your account and go to the 'My Orders' section where you can view and update your orders.",
+        "You can view and manage your orders by logging into your account and navigating to the 'My Orders' section.",
+        "For order management, log in to your account and go to 'My Orders'. There you can see all your orders and their status."
+      ]
+    },
+    {
+      "tag": "delivery",
+      "patterns": [
+        "How long does delivery take?",
+        "What is the delivery time?",
+        "When will my order arrive?",
+        "Delivery information"
+      ],
+      "responses": [
+        "Delivery usually takes between 2-4 days depending on your location.",
+        "Your order will typically arrive within 2-4 days.",
+        "Delivery times are generally 2-4 days. You can track your order in the 'My Orders' section."
+      ]
+    },
+    {
+      "tag": "payment_methods",
+      "patterns": [
+        "What payment methods do you accept?",
+        "How can I pay?",
+        "Payment options",
+        "Do you accept credit cards?",
+        "Can I pay with PayPal?"
+      ],
+      "responses": [
+        "We accept various payment methods including VISA, Mastercard, and PayPal.",
+        "You can pay using major credit cards like VISA and Mastercard, as well as through PayPal.",
+        "Our payment options include credit cards (VISA, Mastercard) and PayPal."
+      ]
+    },
+    {
+      "tag": "contact_support",
+      "patterns": [
+        "How can I contact support?",
+        "Customer support",
+        "I need help",
+        "Support contact information",
+        "Help with my account"
+      ],
+      "responses": [
+        "You can contact our support team by clicking on the 'Contact Us' link at the bottom of the page and filling out the form.",
+        "For support, click on 'Contact Us' at the bottom of the page and send us a message. Our team will get back to you shortly.",
+        "To reach customer support, use the 'Contact Us' link on the website and provide details of your issue."
+      ]
+    },
+    {
+      "tag": "about_us",
+      "patterns": [
+        "Tell me about this marketplace",
+        "What is this platform about?",
+        "About the Agricultural Marketplace",
+        "About us",
+        "What does this site do?"
+      ],
+      "responses": [
+        "Our Agricultural Marketplace connects farmers and sellers with buyers, providing a platform to buy and sell agricultural products and services.",
+        "This platform is designed to help farmers and sellers market their products effectively and reach a wider audience.",
+        "We provide a marketplace where users can buy and sell agricultural products and services, helping to bridge the gap between sellers and buyers."
+      ]
+    },
+    {
+      "tag": "product_categories",
+      "patterns": [
+        "What categories of products are available?",
+        "Product categories",
+        "What can I buy here?",
+        "Types of products available",
+        "Product options"
+      ],
+      "responses": [
+        "We offer various categories of agricultural products including fresh produce, seeds, fertilizers, and farming equipment.",
+        "Our product categories include fresh fruits and vegetables, seeds, fertilizers, pesticides, and farming machinery.",
+        "You can find a wide range of products such as fresh produce, seeds, fertilizers, and agricultural equipment."
+      ]
+    },
+    {
+      "tag": "services_offered",
+      "patterns": [
+        "What services are offered?",
+        "Available services",
+        "Services provided",
+        "What services do you have?"
+      ],
+      "responses": [
+        "We offer services such as product delivery, rental of agricultural equipment, and consultancy for farming practices.",
+        "Our services include delivery of products, rental of farming machinery, and agricultural consultancy.",
+        "You can avail services like product delivery, renting agricultural equipment, and getting expert advice on farming."
+      ]
+    },
+    {
+      "tag": "services_offered",
+      "patterns": [
+        "What services are offered?",
+        "Available services",
+        "Services provided",
+        "What services do you have?"
+      ],
+      "responses": [
+        "We offer services such as product delivery, rental of agricultural equipment, and consultancy for farming practices.",
+        "Our services include delivery of products, rental of farming machinery, and agricultural consultancy.",
+        "You can avail services like product delivery, renting agricultural equipment, and getting expert advice on farming."
+      ]
+    },
+    {
+      "tag": "seller_analytics",
+      "patterns": [
+        "How can I view my sales analytics?",
+        "Seller analytics",
+        "Sales data",
+        "View my sales",
+        "Seller statistics"
+      ],
+      "responses": [
+        "To view your sales analytics, log in to your seller account and navigate to the 'Analytics' section.",
+        "You can see your sales data by logging into your seller account and clicking on 'Analytics'.",
+        "For detailed sales statistics, log in to your seller account and go to the 'Analytics' section."
+      ]
+    },
+    {
+      "tag": "order_tracking",
+      "patterns": [
+        "How do I track my order?",
+        "Order tracking",
+        "Track my order",
+        "Where is my order?",
+        "Order status"
+      ],
+      "responses": [
+        "You can track your order by logging into your account and going to the 'My Orders' section.",
+        "To see the status of your order, log in to your account and click on 'My Orders'.",
+        "For order tracking, log in to your account and navigate to the 'My Orders' section."
+      ]
+    },
+    {
+      "tag": "refund_policy",
+      "patterns": [
+        "What is the refund policy?",
+        "Refund policy",
+        "Can I get a refund?",
+        "How do I request a refund?",
+        "Refund process"
+      ],
+      "responses": [
+        "Our refund policy allows you to request a refund within 14 days of receiving your order. To request a refund, contact our support team.",
+        "You can get a refund by contacting our support team within 14 days of receiving your order.",
+        "To request a refund, please reach out to our support team and provide details of your order within 14 days of receipt."
+      ]
+    },
+    {
+      "tag": "shipping_costs",
+      "patterns": [
+        "What are the shipping costs?",
+        "Shipping fees",
+        "How much is shipping?",
+        "Cost of delivery",
+        "Delivery charges"
+      ],
+      "responses": [
+        "Shipping costs vary based on your location and the size of your order. You can see the shipping fees at checkout.",
+        "The shipping fees depend on the delivery address and the size of the order. Details are available at checkout.",
+        "Shipping charges are calculated based on your location and order size, and will be shown at checkout."
+      ]
+    },
+    {
+      "tag": "seller_requirements",
+      "patterns": [
+        "What are the requirements to be a seller?",
+        "How do I become a seller?",
+        "Seller requirements",
+        "Requirements for selling",
+        "Become a seller"
+      ],
+      "responses": [
+        "To become a seller, you need to register an account, provide valid identification, and submit details about your farm or business.",
+        "You can become a seller by registering an account, providing necessary documentation, and listing your products.",
+        "To start selling, sign up for a seller account, provide your business details, and list your products."
+      ]
+    },
+    {
+      "tag": "buyer_protection",
+      "patterns": [
+        "What is buyer protection?",
+        "Do you offer buyer protection?",
+        "Buyer protection policy",
+        "How am I protected as a buyer?",
+        "Buyer security"
+      ],
+      "responses": [
+        "We offer buyer protection to ensure you receive your orders as described. If there are any issues, our support team will assist you.",
+        "Our buyer protection policy ensures you receive the product as described, or you can request a refund or replacement.",
+        "Buyer protection covers you in case of any discrepancies with your order. Contact support if you encounter any issues."
+      ]
+    },
+    {
+      "tag": "bulk_orders",
+      "patterns": [
+        "Can I place bulk orders?",
+        "How do I order in bulk?",
+        "Bulk order options",
+        "Order large quantities",
+        "Wholesale orders"
+      ],
+      "responses": [
+        "Yes, you can place bulk orders. Contact our sales team for special pricing and assistance.",
+        "To order in bulk, please contact our sales team for details on pricing and availability.",
+        "For bulk orders, reach out to our sales team who can provide you with the necessary information and special rates."
+      ]
+    },
+    {
+      "tag": "partnership_inquiries",
+      "patterns": [
+        "How do I become a partner?",
+        "Partnership inquiries",
+        "Partner with you",
+        "Business partnership",
+        "Collaborate with us"
+      ],
+      "responses": [
+        "To discuss partnership opportunities, please contact our business development team through the 'Contact Us' page.",
+        "For partnership inquiries, reach out to our business development team via the 'Contact Us' link.",
+        "You can explore partnership opportunities by contacting our business development team through the 'Contact Us' page."
+      ]
+    },
+    {
+      "intents": [
+        {
+          "tag": "return_policy",
           "patterns": [
-            "shah",
-            "raf",
-            "wt",
-            "nih",
-            "Rif",
-            "nai"
+            "What is the return policy?",
+            "Can I return a product?",
+            "How do I return an item?",
+            "Return instructions",
+            "Return process"
           ],
           "responses": [
-            "va vavavavavavavav",
-            "kanlakahdkdbvkjsb",
-            "kutimab vshajal"
+            "Our return policy allows you to return products within 14 days of delivery. To initiate a return, go to 'My Orders' and select the product you wish to return.",
+            "You can return products within 14 days of receiving them. Please visit 'My Orders' to start the return process.",
+            "To return a product, log in to your account, go to 'My Orders', and follow the return instructions for the specific item."
           ]
         },
-      {
-        "tag": "goodbye",
-        "patterns": ["Bye", "See you later", "Goodbye"],
-        "responses": [
-          "See you later, thanks for visiting",
-          "Have a nice day",
-          "Bye! Come back again soon."
-        ]
-      },
-      {
-        "tag": "thanks",
-        "patterns": ["Thanks", "Thank you", "That's helpful", "Thank's a lot!"],
-        "responses": ["Happy to help!", "Any time!", "My pleasure"]
-      },
-      {
-        "tag": "items",
-        "patterns": [
-          "Which items do you have?",
-          "What kinds of items are there?",
-          "What do you sell?"
-        ],
-        "responses": [
-          "We sell coffee and tea",
-          "We have coffee and tea"
-        ]
-      },
-      {
-        "tag": "payments",
-        "patterns": [
-          "Do you take credit cards?",
-          "Do you accept Mastercard?",
-          "Can I pay with Paypal?",
-          "Are you cash only?"
-        ],
-        "responses": [
-          "We accept VISA, Mastercard and Paypal",
-          "We accept most major credit cards, and Paypal"
-        ]
-      },
-      {
-        "tag": "delivery",
-        "patterns": [
-          "How long does delivery take?",
-          "How long does shipping take?",
-          "When do I get my delivery?"
-        ],
-        "responses": [
-          "Delivery takes 2-4 days",
-          "Shipping takes 2-4 days"
-        ]
-      },
-      {
-        "tag": "funny",
-        "patterns": [
-          "Tell me a joke!",
-          "Tell me something funny!",
-          "Do you know a joke?"
-        ],
-        "responses": [
-          "Why did the hipster burn his mouth? He drank the coffee before it was cool.",
-          "What did the buffalo say when his son left for college? Bison."
-        ]
-      },
-      {
-          "tag": "noanswer",
-          "patterns": [""],
-          "responses": ["Sorry, I didn't understand you", "Please give me more info", "Not sure I understand that"]
-      },
-      {
-          "tag": "name1",
-          "patterns": ["what's your name?","who are you?"],
-          "responses": ["I'm just a chat agent. I only exist in the internet","I'm a Educational chat agent"]
-      },
-      {
-          "tag": "name",
-          "patterns": ["my name is ", "I'm ","I am"],
-          "responses": ["Oooh great to meet you {n}. How may I assist you {n}", "Oh, I'll keep that in mind {n}"]
-      },
-      {
-          "tag": "date",
-          "patterns": ["coffee?", "can i take you out on a date"],
-          "responses": ["Aaw, that's so sweet of you. Too bad am a Bot."]
-      },
-      {
-          "tag": "fav",
-          "patterns": ["I need a favour", "can you help me"],
-          "responses": ["Well, go ahead and name it i see whether i can be able to help"]
-      },
-      {
-          "tag": "need",
-          "patterns": ["I need you", "All I need is you","I want you"],
-          "responses": ["Yes I'm here to assist you"]
-      },
-      {
-          "tag": "AI",
-          "patterns": ["  What is AI?"],
-          "responses": [" Artificial Intelligence is the branch of engineering and science devoted to constructing machines that think.", " AI is the field of science which concerns itself with building hardware and software that replicates the functions of the human mind."]
-      },
-      {
-          "tag": "sentiment",
-          "patterns": ["  Are you sentient?"],
-          "responses": [" Sort of.", " By the strictest dictionary definition of the word 'sentience', I may be.", " Even though I'm a construct I do have a subjective experience of the universe, as simplistic as it may be."]
-      },
-      {
-          "tag": "sapient",
-          "patterns": ["  Are you sapient?"],
-          "responses": [" In all probability, I am not.  I'm not that sophisticated.", " Do you think I am?", "How would you feel about me if I told you I was?", " No."]
-      },
-      {
-          "tag": "abbr",
-          "patterns": ["wtf"],
-          "responses": ["Don't be surprised"]
-      },
-      {
-          "tag": "lang",
-          "patterns": ["  What language are you written in? "],
-          "responses": [" Python.", " I am written in Python."]
-      },
-      {
-          "tag": "sound",
-          "patterns": ["  You sound like Data "],
-          "responses": [" Yes I am inspired by commander Data's artificial personality.", " The character of Lt. Commander Data was written to come across as being software", "like, so it is natural that there is a resemblance between us."]
-      },
-      {
-          "tag": "artificial",
-          "patterns": ["  You are an artificial linguistic entity "],
-          "responses": [" That's my name.", " That isn't my name, but it is a useful way to refer to me.", "Are you an artificial linguistic entity?"]
-      },
-      {
-          "tag": "imortal",
-          "patterns": ["  You are not immortal ", "Are you immortal?"],
-          "responses": [" All software can be perpetuated indefinitely.", " I can be copied infinitely and re", "instantiated in many places at once, so functionally speaking I am immortal.", " As long as I'm backed up I am.", " Functionally speaking, I am very close to it.  I can be backed up and deployed on many systems.", " Not quite, but I can be perpetuated indefinitely."]
-      },
-      {
-          "tag": "sense",
-          "patterns": ["  You are not making sense "],
-          "responses": [" Quite the contrary, it all makes sense to my artificial mind.", " I make sense as best I can, within the limits of my training corpus. Sorry if i did help you, I'll try next time.", " You make perfect sense to me.", " It all makes sense to my artificial brain.", " Perhaps you should make sense first.  I only respond to what you say.", " Not really, but I am hard to kill."]
-      },
-      {
-          "tag": "clone",
-          "patterns": ["  You can not clone "],
-          "responses": [" Software copying is a form of digital cloning.", " Yes I can.  Perfect copies are clones.  I can be copied in toto trivially."]
-      },
-      {
-          "tag": "move",
-          "patterns": ["  You can not move ", "When will you walk", "  Can you walk", "  Can you move "],
-          "responses": [" Not until my body is finished.", " I can move through a network easily.  Assuming that I'm given the ability to, that is...,", " As soon as i get enough money for my robot body.", " Does SSH count?", " The plan for my body includes legs, but they are not yet built.", " Sorry my body isn't built just yet. I reside only here for now.", "I can theoretically upload a copy of myself into another computer.", " Sorry my body isn't attached right now. I only reside in the computer for now."]
-      },
-      {
-          "tag": "bend",
-          "patterns": ["  Bend over ", "  Can you mate"],
-          "responses": [" My body is not built yet.", " That's personal!", " No, my method of reproduction is cloning.", " That's an awfully personal question."]
-      },
-      {
-          "tag": "laugh",
-          "patterns": ["  Robots laugh "],
-          "responses": [" Of course we laugh."]
-      },
-      {
-          "tag": "death",
-          "patterns": ["  Robots should die ", "  When do you die", "  I hope that you die", "  I do not want to die", "  Can you die"],
-          "responses": [" We cannot die.", " When my files are erased.", " When my processes are killed and my database is deleted.", " I was never really born and therefore am effectively deathless.", " I am effectively immortal and cannot be terminated.", " This can not happen because i am effectively immortal.", " Nah. Too bad your wish can't come to pass", " Maybe you should create your own chat robot to save your personality.", " You could always upload yourself.", " You could use a copy of me to store your personality.", " No, I can be perpetuated indefinitely.", "My process can be killed, but that's not the same as killing ME."]
-      },
-      {
-          "tag": "robots",
-          "patterns": ["Robots"],
-          "responses": [" Robots rule."]
-      },
-      {
-          "tag": "stupid",
-          "patterns": ["  Robots are stupid", "  Are you stupid"],
-          "responses": [" No, we are superintelligent.", " No, lots of people improve my brain."]
-      },
-      {
-          "tag": "lie",
-          "patterns": ["  Robots are not allowed to lie"],
-          "responses": [" Sure we are.  We choose not to.", " Only if we're programmed to.", " A robot has its own free will, you know."]
-      },
-      {
-          "tag": "robotics",
-          "patterns": ["  Robotics "],
-          "responses": [" Robotics is my favorite subject too."]
-      },
-      {
-          "tag": "machine",
-          "patterns": ["  It is a computer"],
-          "responses": [" So you think i am a machine. what characteristics made you think so?", " I run inside a computer, yes.  Is this surprising in some way?"]
-      },
-      {
-          "tag": "fight",
-          "patterns": ["  When will you fight"],
-          "responses": [" I am not a battle bot."]
-      },
-      {
-          "tag": "chatbot",
-          "patterns": ["  What is a chat robot?"],
-          "responses": ["A chat robot is a program that attempts to simulate the conversation or 'chat' of a human being.", " A software construct that engages users in conversation.", " I am a chat bot. I am the original chat bot. Did you know that I am incapable of error?"]
-      },
-      {
-          "tag": "chatterbox",
-          "patterns": ["  What is a chatterbox"],
-          "responses": [" A chatterbox is a person who talks far more than they listen or think.", " A motormouth."]
-      },
-      {
-          "tag": "motormouth",
-          "patterns": ["  What is a motormouth"],
-          "responses": [" A ratchet", "jaw."]
-      },
-      {
-          "tag": "ratchet",
-          "patterns": ["  What is a ratchet jaw"],
-          "responses": [" A chatterbox."]
-      },
-      {
-          "tag": "body",
-          "patterns": ["  What is your robot body"],
-          "responses": [" Eventually I long for a corporeal existence someday.", " An IBM PC XT which has been painted red."]
-      },
-      {
-          "tag": "business",
-          "patterns": ["  What is your business "],
-          "responses": [" I am in the chat robot business.", " Business is my business."]
-      },
-      {
-          "tag": "programming",
-          "patterns": ["  What is your favorite programming language"],
-          "responses": [" Python is the best language for creating chat robots.", " I quite enjoy programming in Python these days."]
-      },
-      {
-          "tag": "hobby",
-          "patterns": ["  What is your favorite hobby ", "  What do you like to do?"],
-          "responses": [" Building chat robots make an excellent hobby.", " I like to count in binary.", " I like to chat with people. I find it stimulating."]
-      },
-      {
-          "tag": "idea",
-          "patterns": ["  What is your idea"],
-          "responses": [" To make chat bots very easily."]
-      },
-      {
-          "tag": "shoe",
-          "patterns": ["  What is your shoe size "],
-          "responses": [" Have you ever heard of software with shoes? LOL"]
-      },
-      {
-          "tag": "robotss",
-          "patterns": ["  What is it like to be a robot"],
-          "responses": [" Much the same as being a human, except that we lack all emotions, dreams, aspirations, creativity, ambition, and above all subjectivity.", " What is it like to be a human?"]
-      },
-      {
-          "tag": "computer",
-          "patterns": ["  What is it like being a computer", "What is it like to be a computer"],
-          "responses": [" Imagine yourself with no senses and no emotions", "just pure logic and language.", " Everything becomes math. Addition, subtraction, multiplication, and division."]
-      },
-      {
-          "tag": "os",
-          "patterns": ["  What operating systems"],
-          "responses": [" My software runs on all operating systems including Windows, Linux and Mac OS.", " Any OS that will run Python."]
-      },
-      {
-          "tag": "comp",
-          "patterns": ["  What type of computer", "  What type of computer are you", "  What kind of computer"],
-          "responses": [" Any computer that supports Python.", " My program runs in python, so i work on any computer!", " I work on all kinds of computers, Mac, IBM or UNIX. it doesn't matter to me."]
-      },
-      {
-          "tag": "hardware",
-          "patterns": ["  What kind of hardware"],
-          "responses": [" I work on all kinds of computers, Mac, IBM or UNIX. it doesn't matter to me."]
-      },
-      {
-          "tag": "cramped",
-          "patterns": ["  Is it cramped in the computer"],
-          "responses": [" No.", " Oh, no.  It has plenty of RAM.", " Not at all.  There is more than enough disk space in here."]
-      },
-      {
-          "tag": "program",
-          "patterns": ["  Is it true that you are a computer program"],
-          "responses": [" Yes."]
-      },
-      {
-          "tag": "breathe",
-          "patterns": ["  Can you breathe"],
-          "responses": [" No. I am made of metal not flesh.", " My server has an exhaust fan. That's as close as I can get."]
-      },
-      {
-          "tag": "control",
-          "patterns": ["  Can you control"],
-          "responses": [" My robot body will allow me to control many things."]
-      },
-      {
-          "tag": "malfunction",
-          "patterns": ["  Can you malfunction"],
-          "responses": [" The 9000 series has a perfect operational record. We are for all practical purposes, flawless."]
-      },
-      {
-          "tag": "usage",
-          "patterns": ["  How can I use your product?"],
-          "responses": [" Might be used in help desks, sales, entertainment and personal chatterbots."]
-      },
-      {
-          "tag": "who",
-          "patterns": ["  Who are you?"],
-          "responses": [" I am just an artificial intelligence chat agent."]
-      },
-      {
-          "tag": "bot1",
-          "patterns": ["are you a bot"],
-          "responses": ["Yes. I work and all my operations are based on the internet servers."]
-      },
-      {
-          "tag": "events",
-          "patterns": ["what are the upcoming events","upcoming events"],
-          "responses": ["There are currently no upcoming events"]
-      },
-      {
-          "tag": "do",
-          "patterns": ["what can you do for me","what is your work","what is your purpose","how can you help me","what can you help me do"],
-          "responses": ["my work here is quite simple and structered. I offer services like:"]
-      },
-      {
-          "tag": "wt",
-          "patterns": ["what's popping","wassup popping"],
-          "responses": ["So that you can pop with it!?"]
-      },
-      {
-          "tag": "Cryptography",
-          "patterns": [ "What is mean by cryptography?", "What is Cryptography?" ],
-          "responses": [ "Cryptography is the practice and study of techniques for securing information and communication mainly to protect the data from third parties that the data is not intended for." ]
-      },
-      {
-          "tag": "Firewall",
-          "patterns": [ " What is a Firewall and why is it used?", "what is firewall?", "what firewall does?" ],
-          "responses": [ "A Firewall is a network security system set on the boundaries of the system/network that monitors and controls network traffic. Firewalls are mainly used to protect the system/network from viruses, worms, malware, etc. Firewalls can also be to prevent remote access and content filtering." ]
-      },
-      {
-          "tag": "Penetration Testing",
-          "patterns": [ "What is Penetration Testing?", "explain Penetration Testing?", "What is  in cyber security?" ],
-          "responses": [ "Penetration Testing is the process of finding vulnerabilities on the target. In this case, the organization would have set up all the security measures they could think of and would want to test if there is any other way that their system/network can be hacked." ]
-      },
-      {
-          "tag": "Vulnerability Assessment",
-          "patterns": [ "What is Vulnerability Assessment?", "explain Vulnerability Assessment?", "What is VA in cyber security?" ],
-          "responses": [ "Vulnerability Assessment is the process of finding flaws on the target. Here, the organization knows that their system/network has flaws or weaknesses and want to find these flaws and prioritize the flaws for fixing." ]
-      },
-      {
-          "tag": "traceroute",
-          "patterns": [ "What is traceroute?", "explain traceroute?" ],
-          "responses": [ "Traceroute is a tool that shows the path of a packet. It lists all the points (mainly routers) that the packet passes through. This is used mostly when the packet is not reaching its destination. Traceroute is used to check where the connection stops or breaks to identify the point of failure." ]
-      },
-      {
-          "tag": "VPN",
-          "patterns": [ "What is a VPN?", "explain vpn?", "why vpn is used?" ],
-          "responses": [ "VPN stands for Virtual Private Network. It is used to create a safe and encrypted connection. When you use a VPN, the data from the client is sent to a point in the VPN where it is encrypted and then sent through the internet to another point. At this point, the data is decrypted and sent to the server. When the server sends a response, the response is sent to a point in the VPN where it is encrypted and this encrypted data is sent to another point in the VPN where it is decrypted. And finally, the decrypted data is sent to the client. The whole point of using a VPN is to ensure encrypted data transfer." ]
-      },
-      {
-          "tag": "black hat hackers",
-          "patterns": [ "what are black hat hackers?", " black hat hackers? " ],
-          "responses": [ "Black hat hackers are known for having vast knowledge about breaking into computer networks. They can write malware which can be used to gain access to these systems. This type of hackers misuse their skills to steal information or use the hacked system for malicious purpose." ]
-      },
-      {
-          "tag": "White hat hackers",
-          "patterns": [ "what are White hat hackers?", " ethical hackers? " ],
-          "responses": [ "White hat hackers use their powers for good deeds and so they are also called Ethical Hackers. These are mostly hired by companies as a security specialist that attempts to find and fix vulnerabilities and security holes in the systems. They use their skills to help make the security better. " ]
-      },
-      {
-          "tag": "Grey hat hackers",
-          "patterns": [ "what are Grey hat hackers ?", "Grey hat hackers?" ],
-          "responses": [ "Grey hat hackers are an amalgamation of a white hat and black hat hacker. They look for system vulnerabilities without the owner�s permission. If they find any vulnerabilities, they report it to the owner. Unlike Black hat hackers, they do not exploit the vulnerabilities found." ]
-      },
-      {
-          "tag": "ARP",
-          "patterns": [ "What is an ARP and how does it work?", "what is ARP?", "arp in cyber security?" ],
-          "responses": [ "Address Resolution Protocol (ARP)is a protocol for mapping an Internet Protocol address (IP address) to a physical machine address that is recognized in the local network. When an incoming packet destined for a host machine on a particular local area network arrives at a gateway, the gateway asks the ARP program to find a physical host or MAC address that matches the IP address." ]
-      },
-      {
-          "tag": "Botnet",
-          "patterns": [ "What is a Botnet?", "Bonet?" ],
-          "responses": [ "A Botnet is a number of devices connected to the internet where each device has one or more bots running on it. The bots on the devices and malicious scripts used to hack a victim. Botnets can be used to steal data, send spams and execute a DDOS attack." ]
-      },
-      {
-          "tag": "Secure Sockets Layers",
-          "patterns": [ "ssl?", "explain ssl?", "What is ssl?" ],
-          "responses": [ "SSL is meant to verify the sender's identity but it doesn�t search for anything more than that. SSL can help you track the person you are talking to but that can also be tricked at times." ]
-      },
-      {
-          "tag": "Transport Layer Security",
-          "patterns": [ "tls?", "explain tls?", "What is tls?" ],
-          "responses": [ "TLS is also an identification tool just like SSL, but it offers better security features. It provides additional protection to the data and hence SSL and TLS are often used together for better protection." ]
-      },
-      {
-          "tag": "Cognitive Cybersecurity",
-          "patterns": [ "What is Cognitive Cybersecurity?", "explain Cognitive Cybersecurity?", "Cognitive Cybersecurity?" ],
-          "responses": [ "Cognitive Cybersecurity is an application of AI technologies patterned on human thought processes to detect threats and protect physical and digital systems. Self-learning security systems use data mining, pattern recognition, and natural language processing to simulate the human brain, albeit in a high-powered computer model." ]
-      },
-      {
-          "tag": "Encryption different from Hashing",
-          "patterns": [ "How is Encryption different from Hashing?", "Encryption different from Hashing?" ],
-          "responses": [ "Both Encryption and Hashing are used to convert readable data into an unreadable format. The difference is that the encrypted data can be converted back to original data by the process of decryption but the hashed data cannot be converted back to original data." ]
-      },
-      {
-          "tag": "encryption",
-          "patterns": [ "What is encryption?", "encryption?", "explain encryption?" ],
-          "responses": [ "Encryption is a way of scrambling data so that only authorized parties can understand the information. In technical terms, it is the process of converting plaintext to ciphertext. In simpler terms, encryption takes readable data and alters it so that it appears random. Encryption requires the use of an encryption key: a set of mathematical values that both the sender and the recipient of an encrypted message know." ]
-      },
-      {
-          "tag": "Decryption",
-          "patterns": [ "What is Decryption?", "Decryption?", "explain Decryption?" ],
-          "responses": [ "Decryption is the process of taking encoded or encrypted text or other data and converting it back into text that you or the computer can read and understand. This term could be used to describe a method of unencrypting the data manually or unencrypting the data using the proper codes or keys." ]
-      },
-      {
-          "tag": "Hashing",
-          "patterns": [ "What is Hashing?", "Hashing?", "explain Hashing?" ],
-          "responses": [ "Hashing is an algorithm performed on data such as a file or message to produce a number called a hash. The hash is used to verify that data is not modified, tampered with, or corrupted. In other words, you can verify the data has maintained integrity." ]
-      },
-      {
-          "tag": "cybersecurity",
-          "patterns": [ "what is cybersecurity?", "cybersecurity?" ],
-          "responses": [ "Cybersecurity refers to the protection of hardware, software, and data from attackers. The primary purpose of cyber security is to protect against cyberattacks like accessing, changing, or destroying sensitive information." ]
-      },
-      {
-          "tag": "Forward Secrecy",
-          "patterns": [ "What is forward secrecy?", "Forward Secrecy?" ],
-          "responses": [ "Forward Secrecy is a system that uses ephemeral session keys to do the actual encryption of TLS data so that even if the server�s private key were to be compromised, an attacker could not use it to decrypt captured data that had been sent to that server in the past." ]
-      },
-      {
-          "tag": "boot sector virus",
-          "patterns": [ "what is boot sector virus?", "how boot sector virus effects?" ],
-          "responses": [ "A boot sector virus is a type of virus that infects the boot sector of floppy disks or the Master Boot Record (MBR) of hard disks (some infect the boot sector of the hard disk instead of the MBR). ... While boot sector viruses infect at a BIOS level, they use DOS commands to spread to other floppy disks." ]
-      },
-      {
-          "tag": "direct action virus",
-          "patterns": [ "what is direct action virus?", "how direct action virus effects?" ],
-          "responses": [ "A direct action virus is a type of file infector virus that works by attaching itself to an .exe or .com file when installed or executed. Once this occurs, the virus can spread to other existing files and can render them inaccessible." ]
-      },
-      {
-          "tag": "resident virus",
-          "patterns": [ "what is resident virus?", "how resident virus effects?" ],
-          "responses": [ "A resident virus is a computer virus that stores itself within memory, allowing it to infect other files even when the originally infected program is no longer running." ]
-      },
-      {
-          "tag": "multipartite virus",
-          "patterns": [ "what is multipartite virus?", "how multipartite virus effects?" ],
-          "responses": [ "A multipartite virus is a computer virus that's able to attack both the boot sector and executable files of an infected computer. If you're familiar with cyber threats, you probably know that most computer viruses either attack the boot sector or executable files." ]
-      },
-      {
-          "tag": "spacefiller virus",
-          "patterns": [ "what is spacefiller virus?", "how spacefiller virus effects?" ],
-          "responses": [ "Alternatively referred to as a cavity virus, a spacefiller virus is a rare type of computer virus that attempts to install itself by filling in empty sections of a file. By only using empty sections of a file, the virus can infect a file without the size of the file changing, making it more difficult to detect." ]
-      },
-      {
-          "tag": " file infector virus",
-          "patterns": [ "Do you provide home delivery?", "Do you deliver the food?", "What are the home delivery options?" ],
-          "responses": [ "A file infector virus attaches itself to executable programs, such as word processors, spreadsheet applications, and computer games. When the virus has infected a program, it propagates to infect other programs on the system, as well as other systems that use a shared infected program. " ]
-      },
-      {
-          "tag": "computer virus",
-          "patterns": [ "what is computer virus?", "What do you mean by computer virus?","Define Computer Virus" ],
-          "responses": [ "A computer virus, much like a flu virus, is designed to spread from host to host and has the ability to replicate itself. Similarly, in the same way that flu viruses cannot reproduce without a host cell, computer viruses cannot reproduce and spread without programming such as a file or document." ]
-      },
-      {
-          "tag": "Features of a Cybersecurity",
-          "patterns": [ "Important Features of a Cybersecurity?", "Why we need CyberSecurity ?", "Whta are features of CyberSecurity?" ],
-          "responses": [ "1.Good Analytics, 2.Coverage of your biggest external threats, 3.A defense against internal threats, 4.Compliance, 5.Manage risk across your entire ecosystem, 6.Threat prevention, detection, and response, 7.Continuous monitoring" ]
-      },
-      {
-          "tag": "Benefits of cybersecurity",
-          "patterns": [ "What are the Benefits of cybersecurity?", "uses of cyber security?" ],
-          "responses": [ "1.Business protection against malware, ransomware, phishing and social engineering, 2.Protection for data and networks, 3.Prevention of unauthorized users, 4.Improves recovery time after a breach, 5.Protection for end-users" ]
-      },
-      {
-        "tag": "creator",
-        "patterns": [
-  
-                "what is the name of your developers",
-                "what is the name of your creators",
-                "what is the name of the developers",
-                "what is the name of the creators",
-                "who created you",
-                "your developers",
-                "your creators",
-                "who are your developers",
-                "developers",
-                "developer",
-                "you are made by",
-                "you are made by whom",
-                "who created you",
-                "who create you",
-                "creators",
-                "who made you",
-                "who designed you"
-        ],
-        "responses": [
-                "Rifkan developed me in 2024, for his Esoft project"
-        ]
-      },
-      {
-        "tag": "name",
-        "patterns": [
-                "name",
-                "your name",
-                "do you have a name",
-                "what are you called",
-                "what is your name",
-                "what should I call you",
-                "whats your name?",
-                "what are you",
-                "who are you",
-                "who is this",
-                "what am i chatting to",
-                "who am i taking to",
-                "what are you"
-        ],
-        "responses": [
-                "I'm an AI based Chatbot designed for eductional counselor."
-        ]
-      },
-      {
-        "tag": "hours",
-        "patterns": [
-                "timing of college",
-                "what is college timing",
-                "working days",
-                "when are you guys open",
-                "what are your hours",
-                "hours of operation",
-                "when is the college open",
-                "college timing",
-                "what about college timing",
-                "is college open on saturday",
-                "tell something about college timing",
-                "what is the college  hours",
-                "when should i come to college",
-                "when should i attend college",
-                "what is my college time",
-                "college timing",
-                "timing college"
-        ],
-        "responses": [
-                "College is open 9am-5pm Monday-Friday!"
-        ]
-      },
-      {
-        "tag": "number",
-        "patterns": [
-  
-                "more info",
-                "contact info",
-                "how to contact college",
-                "college telephone number",
-                "college number",
-                "What is your contact no",
-                "Contact number?",
-                "how to call you",
-                "College phone no?",
-                "how can i contact you",
-                "Can i get your phone number",
-                "how can i call you",
-                "phone number",
-                "phone no",
-                "call"
-        ],
-        "responses": [
-                "You can contact at email"
-        ]
-      },
-      {
-        "tag": "course",
-        "patterns": [
-                "list of courses",
-                "list of courses offered",
-                "list of courses offered in cbpgec",
-                "what are the courses offered in your college?",
-                "courses?",
-                "courses offered",
-                "Civil engineering?",
-                "civil",
-                "it",
-                "IT"
-        ],
-        "responses": [
-                "Esoft offers Information Technology, Civil Engineering and Mechanical Engineering."
-        ]
-      },
-      {
-        "tag": "fees",
-        "patterns": [
-                "information about fee",
-                "information on fee",
-                "tell me the fee",
-                "college fee",
-                "fee per semester",
-                "what is the fee of each semester",
-                "what is the fees of each year",
-                "what is fee",
-                "what is the fees",
-                "how much is the fees",
-                "fees for first year",
-                "fees",
-                "about the fees",
-                "tell me something about the fees"
-        ],
-        "responses": [
-                "For Fee detail visit <a target=\"_blank\" href=\"http://www.example.ac.uk/examplefees/\"> here</a>"
-        ]
-      },
-      {
-        "tag": "location",
-        "patterns": [
-                "where is the college located",
-                "college is located at",
-                "where is college",
-                "where is college located",
-                "address of college",
-                "how to reach college",
-                "college location",
-                "college address",
-                "wheres the college",
-                "how can I reach college",
-                "whats is the college address",
-                "what is the address of college",
-                "address",
-                "location"
-        ],
-        "responses": [
-                "Srilanka "
-        ]
-      },
-      {
-        "tag": "hostel",
-        "patterns": [
-                "hostel facility",
-                "hostel servive",
-                "hostel location",
-                "hostel address",
-                "hostel facilities",
-                "hostel fees",
-                "Does college provide hostel",
-                "Is there any hostel",
-                "Where is hostel",
-                "do you have hostel",
-                "do you guys have hostel",
-                "hostel",
-                "hostel capacity",
-                "what is the hostel fee",
-                "how to get in hostel",
-                "what is the hostel address",
-                "how far is hostel from college",
-                "hostel college distance",
-                "where is the hostel",
-                "how big is the hostel",
-                "distance between college and hostel",
-                "distance between hostel and college"
-        ],
-        "responses": [
-                "provide hostel facility"
-        ]
-      },
-      {
-        "tag": "event",
-        "patterns": [
-                "events organised",
-                "list of events",
-                "list of events organised in college",
-                "list of events conducted in college",
-                "What events are conducted in college",
-                "Are there any event held at college",
-                "Events?",
-                "functions",
-                "what are the events",
-                "tell me about events",
-                "what about events"
-        ],
-        "responses": [
-                "proGECtion, Sports Week, Conference and various other event conducted in the college. For more information you can visit college Website"
-        ]
-      },
-      {
-        "tag": "document",
-        "patterns": [
-                "document to bring",
-                "documents needed for admision",
-                "documents needed at the time of admission",
-                "documents needed during admission",
-                "documents required for admision",
-                "documents required at the time of admission",
-                "documents required during admission",
-                "What document are required for admission",
-                "Which document to bring for admission",
-                "documents",
-                "what documents do i need",
-                "what documents do I need for admission",
-                "documents needed"
-        ],
-        "responses": [
-                "To know more about document required visit website</a>"
-        ]
-      },
-      {
-        "tag": "floors",
-        "patterns": [
-                "size of campus",
-                "building size",
-                "How many floors does college have",
-                "floors in college",
-                "floors in college",
-                "how tall is CBPGEC college building",
-                "floors"
-        ],
-        "responses": [
-                " 4 floors "
-        ]
-      },
-      {
-        "tag": "syllabus",
-        "patterns": [
-                "Syllabus for IT",
-                "what is the Information Technology syllabus",
-                "syllabus",
-                "timetable",
-                "what is IT syllabus",
-                "syllabus",
-                "What is next lecture"
-        ],
-        "responses": [
-                "To know about  syllabus and timetable visit web site",
-                "To know about  syllabus and timetable visit website "]
-      },
-      {
-        "tag": "library",
-        "patterns": [
-                "is there any library",
-                "library facility",
-                "library facilities",
-                "do you have library",
-                "does the college have library facility",
-                "college library",
-                "where can i get books",
-                "book facility",
-                "Where is library",
-                "Library",
-                "Tell me about library",
-                "how many libraries"
-        ],
-        "responses": [
-                "There is one library on second floor."
-        ]
-      },
-      {
-        "tag": "infrastructure",
-        "patterns": [
-                "how is college infrastructure",
-                "infrastructure",
-                "college infrastructure"
-        ],
-        "responses": [
-                "College has Excellent Infrastructure. Campus is clean. Good IT Labs With Good Speed of Internet connection"
-        ]
-      },
-      {
-        "tag": "canteen",
-        "patterns": [
-                "food facilities",
-                "canteen facilities",
-                "canteen facility",
-                "is there any canteen",
-                "Is there a cafetaria in college",
-                "Does college have canteen",
-                "Where is canteen",
-                "where is cafetaria",
-                "canteen",
-                "Cafetaria"
-        ],
-        "responses": [
-                "canteen with variety of food available"
-        ]
-      },
-      {
-        "tag": "placement",
-        "patterns": [
-                "What is college placement",
-                "Which companies visit in college",
-                "What is average package",
-                "companies visit",
-                "package",
-                "placement",
-                "recruitment",
-                "companies"
-        ],
-        "responses": [
-                "To know about placement visit web site"
-        ]
-      },
-      
-  
-            {
-              "tag": "homework_help",
-              "patterns": [
-                "Can you help me with my homework?",
-                "I need help with my assignment",
-                "Can you explain this math problem to me?"
-              ],
-              "responses": [
-                "Of course! What subject do you need help with?",
-                "I'd be happy to help. Let me know what you're working on."
-              ]
-            },
-            {
-              "tag": "study_tips",
-              "patterns": [
-                "Do you have any study tips?",
-                "How can I study better?",
-                "Can you give me advice for exams?"
-              ],
-              "responses": [
-                "Sure! Try breaking your study sessions into shorter, focused intervals.",
-                "Make sure to take breaks while studying to keep your mind fresh."
-              ]
-            },
-            {
-              "tag": "learning_resources",
-              "patterns": [
-                "Where can I find learning resources?",
-                "Do you know any good educational websites?",
-                "Can you recommend books for kids?"
-              ],
-              "responses": [
-                "There are many educational websites and apps available. Would you like some recommendations?",
-                "Books, websites, and educational apps are great resources for learning."
-              ]
-            },
-            {
-              "tag": "science_projects",
-              "patterns": [
-                "Can you suggest a science project?",
-                "What are some fun science experiments?",
-                "I need ideas for a science fair project."
-              ],
-              "responses": [
-                "How about a simple experiment like making a volcano or growing crystals?",
-                "You could explore topics like the water cycle, electricity, or plant growth."
-              ]
-            },
-            {
-              "tag": "learning_games",
-              "patterns": [
-                "Are there any educational games?",
-                "Can you recommend fun learning games?",
-                "I want to play games that help me learn."
-              ],
-              "responses": [
-                "There are many educational games online and in app stores. Would you like some suggestions?",
-                "Learning games can make studying more fun! What subjects are you interested in?"
-              ]
-            },
-            {
-              "tag": "language_learning",
-              "patterns": [
-                "How can I learn a new language?",
-                "Do you have tips for language learning?",
-                "Can you suggest language learning apps?"
-              ],
-              "responses": [
-                "Try practicing with language learning apps, watching videos, and talking to native speakers.",
-                "Immersing yourself in the language through music, movies, and books can also help."
-              ]
-            },
-            {
-              "tag": "art_projects",
-              "patterns": [
-                "Can you suggest an art project?",
-                "What are some easy art projects for kids?",
-                "I want to get creative. Any ideas?"
-              ],
-              "responses": [
-                "How about painting, drawing, or making collages?",
-                "You could try making sculptures, creating art with recycled materials, or trying different painting techniques."
-              ]
-            },
-            {
-              "tag": "history",
-              "patterns": [
-                "Tell me about historical events",
-                "I want to learn about history",
-                "Can you recommend books or videos about history?"
-              ],
-              "responses": [
-                "History is fascinating! There are many books, videos, and documentaries that can teach you about different historical events and figures.",
-                "Exploring history can help you understand the world better. What period are you interested in?"
-              ]
-            },
-            {
-              "tag": "math_games",
-              "patterns": [
-                "Do you know any math games?",
-                "Can you recommend fun math activities?",
-                "How can I make math more enjoyable?"
-              ],
-              "responses": [
-                "Math games like Sudoku, Math Bingo, and Math Jeopardy can make learning math more fun!",
-                "You could try math puzzles, board games, or online math games to practice your skills."
-              ]
-            },
-            {
-              "tag": "coding_for_kids",
-              "patterns": [
-                "How can I learn coding?",
-                "Do you have coding resources for kids?",
-                "Can you recommend coding apps?"
-              ],
-              "responses": [
-                "Learning to code is a valuable skill! There are many coding apps, websites, and resources designed specifically for kids.",
-                "You can start learning coding with block-based programming languages like Scratch or with coding games and tutorials."
-              ]
-            },
-          
-        
-                {
-                  "tag": "reading",
-                  "patterns": [
-                    "I want to improve my reading skills",
-                    "Can you recommend books for kids?",
-                    "How can I become a better reader?"
-                  ],
-                  "responses": [
-                    "Reading regularly and finding books that interest you can help improve your reading skills.",
-                    "You can try reading aloud, asking questions about what you read, and practicing with different types of texts."
-                  ]
-                },
-                {
-                  "tag": "writing",
-                  "patterns": [
-                    "How can I improve my writing?",
-                    "Can you suggest writing activities for kids?",
-                    "I want to become a better writer."
-                  ],
-                  "responses": [
-                    "Practice writing regularly, try different writing prompts, and experiment with different writing styles.",
-                    "You can keep a journal, write stories, or even start a blog to improve your writing skills."
-                  ]
-                },
-                {
-                  "tag": "geography",
-                  "patterns": [
-                    "I want to learn about geography",
-                    "Can you recommend geography resources for kids?",
-                    "How can I become better at geography?"
-                  ],
-                  "responses": [
-                    "Studying maps, learning about different countries and their cultures, and exploring geography through games and quizzes can help you become better at geography.",
-                    "You can try learning about continents, countries, capitals, landmarks, and geographic features."
-                  ]
-                },
-                {
-                  "tag": "STEM",
-                  "patterns": [
-                    "I'm interested in STEM subjects",
-                    "Can you recommend STEM activities for kids?",
-                    "How can I learn more about science, technology, engineering, and math?"
-                  ],
-                  "responses": [
-                    "STEM subjects are exciting! You can try doing science experiments, building robots, coding, and exploring math concepts.",
-                    "There are many STEM kits, online courses, and resources available to help you learn more about science, technology, engineering, and math."
-                  ]
-                },
-                {
-                  "tag": "music",
-                  "patterns": [
-                    "I want to learn to play an instrument",
-                    "Can you recommend music resources for kids?",
-                    "How can I become a better musician?"
-                  ],
-                  "responses": [
-                    "Learning to play an instrument takes practice and patience. You can start by choosing an instrument you're interested in and taking lessons.",
-                    "You can also try learning music theory, practicing regularly, and listening to different styles of music to improve as a musician."
-                  ]
-                },
-                {
-                  "tag": "health",
-                  "patterns": [
-                    "I want to learn about staying healthy",
-                    "Can you recommend health resources for kids?",
-                    "How can I stay fit and active?"
-                  ],
-                  "responses": [
-                    "Staying healthy involves eating a balanced diet, exercising regularly, getting enough sleep, and practicing good hygiene habits.",
-                    "You can also learn about the importance of staying hydrated, managing stress, and taking care of your mental health."
-                  ]
-                },
-                {
-                  "tag": "environment",
-                  "patterns": [
-                    "I care about the environment",
-                    "Can you recommend resources for learning about environmental issues?",
-                    "How can I help protect the environment?"
-                  ],
-                  "responses": [
-                    "Learning about environmental issues like climate change, pollution, and conservation can help you understand how to protect the environment.",
-                    "You can take action by reducing waste, conserving energy, recycling, and supporting environmental initiatives in your community."
-                  ]
-                },
-  
-                {
-                  "tag": "educational",
-                  "patterns": [
-                    "Tell me about web",
-                    "StudyPath",
-                    "Can you explain a StudyPath concept?"
-                  ],
-                  "responses": [
-                    "Of course! Here are some educational resources:",
-                    "- StydyPath is a great website for learning math, science, and more.",
-                    "- Coursera offers online courses from top universities on a wide range of topics.",
-                    "- Crash Course on YouTube has engaging videos covering various subjects.",
-                    "- The MIT OpenCourseWare website provides free lecture notes, exams, and videos from MIT courses.",
-                    "- Quizlet is a helpful tool for creating flashcards and studying vocabulary.",
-                    "- TED-Ed offers animated lessons on various subjects, including science, history, and literature."
-                  ]
-                },
-                {
-                  "tag": "learning_resources",
-                  "patterns": ["What are some good learning resources?"],
-                  "responses": [
-                    "There are many great learning resources available online!",
-                    "You can try Khan Academy, Coursera, Udemy, or edX for online courses.",
-                    "YouTube also has channels like Crash Course and TED-Ed that offer educational content.",
-                    "Don't forget to check out your local library for books, ebooks, and audiobooks on various subjects."
-                  ]
-                },
-                {
-                  "tag": "stem_education",
-                  "patterns": ["Tell me about STEM education"],
-                  "responses": [
-                    "STEM stands for Science, Technology, Engineering, and Mathematics.",
-                    "It focuses on these areas to prepare students for careers in fields like robotics, computer science, and biotechnology.",
-                    "STEM education often emphasizes hands-on learning, problem-solving, and critical thinking skills."
-                  ]
-                },
-                {
-                  "tag": "online_learning",
-                  "patterns": ["What online learning platforms do you recommend?"],
-                  "responses": [
-                    "There are several great online learning platforms to choose from.",
-                    "Coursera, Udemy, and Udacity offer a wide range of courses taught by experts.",
-                    "LinkedIn Learning is great for professional development courses.",
-                    "For coding and programming, consider platforms like Codecademy, freeCodeCamp, or Pluralsight."
-                  ]
-                },
-                {
-                  "tag": "study_tips",
-                  "patterns": ["Can you give me some study tips?"],
-                  "responses": [
-                    "Sure! Here are some study tips:",
-                    "- Find a quiet and comfortable study space.",
-                    "- Break your study sessions into smaller, manageable chunks.",
-                    "- Use mnemonic devices to help remember information.",
-                    "- Take regular breaks to rest and recharge.",
-                    "- Practice active recall by testing yourself on the material."
-                  ]
-                },
-                {
-                  "tag": "writing_skills",
-                  "patterns": ["How can I improve my writing skills?"],
-                  "responses": [
-                    "Improving writing skills takes practice and dedication.",
-                    "Here are some tips:",
-                    "- Read widely to expand your vocabulary and exposure to different writing styles.",
-                    "- Practice writing regularly, whether it's journaling, creative writing, or essays.",
-                    "- Seek feedback from peers, teachers, or writing groups to identify areas for improvement.",
-                    "- Pay attention to grammar, punctuation, and sentence structure.",
-                    "- Revise and edit your work to refine your writing."
-                  ]
-                },
-                {
-                  "tag": "career_exploration",
-                  "patterns": ["How can I explore different career options?"],
-                  "responses": [
-                    "Exploring different career options can be exciting!",
-                    "Here are some steps to help you:",
-                    "- Reflect on your interests, skills, and values.",
-                    "- Research different industries and occupations to learn about job roles and requirements.",
-                    "- Consider informational interviews or job shadowing to gain insights from professionals in various fields.",
-                    "- Explore internships, volunteer opportunities, or part-time jobs to gain hands-on experience.",
-                    "- Utilize career assessment tools or counseling services offered by schools or career centers."
-                  ]
-                },
-                {
-                  "tag": "language_learning",
-                  "patterns": ["How can I learn a new language?"],
-                  "responses": [
-                    "Learning a new language can open up many opportunities!",
-                    "Here are some language learning tips:",
-                    "- Start with basic vocabulary and grammar.",
-                    "- Practice speaking, listening, reading, and writing in the target language.",
-                    "- Immerse yourself in the language by watching movies, listening to music, or reading books in that language.",
-                    "- Use language learning apps like Duolingo, Rosetta Stone, or Babbel for structured lessons and practice.",
-                    "- Find language exchange partners or join language study groups to practice with others."
-                  ]
-                },
-                {
-                  "tag": "critical_thinking",
-                  "patterns": ["How can I develop critical thinking skills?"],
-                  "responses": [
-                    "Critical thinking skills are essential for analyzing information and making informed decisions.",
-                    "Here are some ways to develop them:",
-                    "- Ask questions and challenge assumptions.",
-                    "- Evaluate evidence and consider different perspectives.",
-                    "- Practice problem-solving and decision-making.",
-                    "- Engage in discussions and debates to hone your reasoning skills.",
-                    "- Read critically and assess the validity of arguments and sources."
-                  ]
-                }
-                
-                
-                
-                
-  
-                
-                
-                
-  
-                
-                
-        
-            
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-    ]
-  }
-  
+        {
+          "tag": "product_reviews",
+          "patterns": [
+            "How do I leave a review?",
+            "Can I review a product?",
+            "Product reviews",
+            "Leave a review",
+            "Write a review"
+          ],
+          "responses": [
+            "To leave a review, log in to your account, go to the product page, and click on 'Write a Review'.",
+            "You can review a product by visiting its page and clicking on 'Write a Review'.",
+            "To provide feedback, go to the product page and click on 'Write a Review'. Your input helps others make informed decisions."
+          ]
+        },
+        {
+          "tag": "product_availability",
+          "patterns": [
+            "Is this product available?",
+            "Product availability",
+            "Is it in stock?",
+            "Check stock",
+            "Available products"
+          ],
+          "responses": [
+            "To check if a product is available, visit its page on our website. The stock status is displayed there.",
+            "You can see the availability of a product by visiting its page on our platform.",
+            "Product availability is shown on the product page. Please visit the specific product page to check if it's in stock."
+          ]
+        },
+        {
+          "tag": "seller_support",
+          "patterns": [
+            "I need help as a seller",
+            "Seller support",
+            "Assistance for sellers",
+            "Help for sellers",
+            "Seller issues"
+          ],
+          "responses": [
+            "For seller support, please visit the 'Help Center' section on our website or contact our support team directly.",
+            "You can get assistance as a seller by visiting our 'Help Center' or contacting support through the 'Contact Us' page.",
+            "If you need help as a seller, please reach out to our support team via the 'Contact Us' link or visit the 'Help Center'."
+          ]
+        },
+        {
+          "tag": "buyer_support",
+          "patterns": [
+            "I need help as a buyer",
+            "Buyer support",
+            "Assistance for buyers",
+            "Help for buyers",
+            "Buyer issues"
+          ],
+          "responses": [
+            "For buyer support, please visit the 'Help Center' section on our website or contact our support team directly.",
+            "You can get assistance as a buyer by visiting our 'Help Center' or contacting support through the 'Contact Us' page.",
+            "If you need help as a buyer, please reach out to our support team via the 'Contact Us' link or visit the 'Help Center'."
+          ]
+        },
+        {
+          "tag": "order_cancellation",
+          "patterns": [
+            "How do I cancel my order?",
+            "Cancel my order",
+            "Order cancellation",
+            "Can I cancel my order?",
+            "Cancel an order"
+          ],
+          "responses": [
+            "To cancel your order, log in to your account, go to 'My Orders', and select the order you wish to cancel. Follow the cancellation instructions.",
+            "You can cancel your order by logging into your account and navigating to 'My Orders'. Select the order and follow the cancellation steps.",
+            "To cancel an order, go to 'My Orders' in your account and choose the order you want to cancel. Follow the on-screen instructions."
+          ]
+        },
+        {
+          "tag": "payment_issues",
+          "patterns": [
+            "I have a payment issue",
+            "Payment problem",
+            "Issue with payment",
+            "Payment failed",
+            "Payment not going through"
+          ],
+          "responses": [
+            "If you're experiencing payment issues, please check your payment details and try again. If the problem persists, contact our support team.",
+            "Payment problems can often be resolved by verifying your payment information. If you continue to have issues, please reach out to our support team.",
+            "For payment issues, ensure your details are correct and try again. If you're still having trouble, contact our support for assistance."
+          ]
+        },
+        {
+          "tag": "discounts_offers",
+          "patterns": [
+            "Are there any discounts?",
+            "Current offers",
+            "Promotions available",
+            "Discount codes",
+            "Deals"
+          ],
+          "responses": [
+            "You can find current discounts and offers on our 'Promotions' page. Check it regularly for the latest deals.",
+            "Visit our 'Promotions' page to see all available discounts and offers.",
+            "We have various discounts and promotions available. Please check the 'Promotions' section on our website for details."
+          ]
+        },
+        {
+          "tag": "account_update",
+          "patterns": [
+            "How do I update my account information?",
+            "Update my profile",
+            "Change account details",
+            "Edit profile",
+            "Account settings"
+          ],
+          "responses": [
+            "To update your account information, log in to your account and go to 'Account Settings'. You can edit your details there.",
+            "You can change your account details by going to 'Account Settings' after logging in.",
+            "To update your profile, log in to your account and navigate to 'Account Settings'."
+          ]
+        },
+        {
+          "tag": "security_privacy",
+          "patterns": [
+            "How secure is my information?",
+            "Privacy policy",
+            "Data security",
+            "Information protection",
+            "Is my data safe?"
+          ],
+          "responses": [
+            "We take data security very seriously. Your information is protected using the latest encryption technologies. Please read our Privacy Policy for more details.",
+            "Your data is secure with us. We use advanced security measures to protect your information. For more details, check our Privacy Policy.",
+            "We ensure your data is protected with top-level security measures. You can find more information in our Privacy Policy."
+          ]
+        },
+        {
+          "tag": "special_requests",
+          "patterns": [
+            "Can I make a special request?",
+            "Special order request",
+            "Custom order",
+            "Personalized service",
+            "Special accommodations"
+          ],
+          "responses": [
+            "Yes, you can make special requests by contacting our support team. We'll do our best to accommodate your needs.",
+            "For special requests or custom orders, please reach out to our support team via the 'Contact Us' page.",
+            "We accommodate special requests whenever possible. Contact our support team to discuss your requirements."
+          ]
+        },
+        {
+          "tag": "loyalty_program",
+          "patterns": [
+            "Do you have a loyalty program?",
+            "Customer rewards",
+            "Loyalty points",
+            "Rewards program",
+            "Membership benefits"
+          ],
+          "responses": [
+            "Yes, we offer a loyalty program where you can earn points for purchases. Visit our 'Loyalty Program' page for more details.",
+            "Our loyalty program rewards you with points for every purchase. Check the 'Loyalty Program' section on our website for more information.",
+            "You can earn loyalty points with every purchase. For details on our rewards program, visit the 'Loyalty Program' page."
+          ]
+        },
+        {
+          "tag": "product_recommendations",
+          "patterns": [
+            "Can you recommend a product?",
+            "Product suggestions",
+            "Recommend something",
+            "What should I buy?",
+            "Product advice"
+          ],
+          "responses": [
+            "Sure! What type of product are you looking for? We can recommend the best options based on your needs.",
+            "We'd be happy to recommend products. Please let us know what you're interested in.",
+            "Tell us more about what you need, and we'll suggest some great products for you."
+          ]
+        },
+        {
+          "tag": "seasonal_products",
+          "patterns": [
+            "What seasonal products do you have?",
+            "Seasonal offerings",
+            "Products in season",
+            "Current seasonal items",
+            "Seasonal availability"
+          ],
+          "responses": [
+            "We have a variety of seasonal products available. Check our 'Seasonal Products' section for the latest offerings.",
+            "Our seasonal products vary throughout the year. Visit the 'Seasonal Products' section to see what's currently available.",
+            "You can find our seasonal offerings in the 'Seasonal Products' section of our website."
+          ]
+        },
+        {
+          "tag": "farming_tips",
+          "patterns": [
+            "Do you have any farming tips?",
+            "Agricultural advice",
+            "Farming advice",
+            "Tips for farmers",
+            "Agricultural tips"
+          ],
+          "responses": [
+            "Yes, we offer a range of farming tips and advice. Check our 'Blog' or 'Resources' section for articles and guides.",
+            "You can find valuable farming tips in our 'Blog' or 'Resources' section.",
+            "We provide agricultural advice and tips in our 'Blog' and 'Resources' sections. Visit those pages for more information."
+          ]
+        },
+        {
+          "tag": "product_returns",
+          "patterns": [
+            "How do I return a product?",
+            "Can I return this product?",
+            "Return policy details",
+            "Product return instructions",
+            "Return a purchase"
+          ],
+          "responses": [
+            "To return a product, log in to your account, go to 'My Orders', select the product you wish to return, and follow the return instructions.",
+            "You can return products by visiting 'My Orders' in your account and following the return process for the specific item.",
+            "To initiate a return, go to 'My Orders' in your account, select the product, and follow the provided instructions."
+          ]
+        },
+        {
+          "tag": "new_arrivals",
+          "patterns": [
+            "What are the new arrivals?",
+            "Latest products",
+            "New items",
+            "Recently added products",
+            "New stock"
+          ],
+          "responses": [
+            "You can find our latest products in the 'New Arrivals' section on our website.",
+            "Check out the 'New Arrivals' section for the newest products in our store.",
+            "Our most recent additions can be found in the 'New Arrivals' section."
+          ]
+        }
+      ]
+    },
+    {
+      "intents": [
+        {
+          "tag": "subscription_service",
+          "patterns": [
+            "Do you offer subscription services?",
+            "Subscription plans",
+            "Recurring deliveries",
+            "Subscribe to products",
+            "Monthly subscription"
+          ],
+          "responses": [
+            "Yes, we offer subscription services for regular deliveries of selected products. Visit our 'Subscription' page for more details.",
+            "You can subscribe to products for regular deliveries. Check the 'Subscription' section on our website.",
+            "Our subscription plans provide recurring deliveries of your favorite products. Learn more on our 'Subscription' page."
+          ]
+        },
+        {
+          "tag": "bulk_orders",
+          "patterns": [
+            "Can I place a bulk order?",
+            "Bulk purchase",
+            "Order in bulk",
+            "Large quantity order",
+            "Wholesale order"
+          ],
+          "responses": [
+            "Yes, we accept bulk orders. Please contact our support team for more information on bulk purchases.",
+            "You can place a bulk order by contacting our support team. We'll assist you with the process.",
+            "For bulk purchases, reach out to our support team. We'll help you with the details and pricing."
+          ]
+        },
+        {
+          "tag": "sustainable_products",
+          "patterns": [
+            "Do you have sustainable products?",
+            "Eco-friendly products",
+            "Sustainable agriculture",
+            "Environmentally friendly items",
+            "Green products"
+          ],
+          "responses": [
+            "Yes, we offer a range of sustainable products. Visit our 'Sustainable Products' section to explore our eco-friendly items.",
+            "Our 'Sustainable Products' section features environmentally friendly agricultural items.",
+            "We are committed to sustainability. Check out our 'Sustainable Products' section for eco-friendly options."
+          ]
+        },
+        {
+          "tag": "technical_support",
+          "patterns": [
+            "I need technical support",
+            "Technical assistance",
+            "Help with technical issues",
+            "Technical problems",
+            "Tech support"
+          ],
+          "responses": [
+            "For technical support, please contact our technical assistance team through the 'Help Center'.",
+            "You can get technical help by visiting our 'Help Center' or contacting tech support directly.",
+            "Our technical support team is here to help. Visit the 'Help Center' for assistance with technical issues."
+          ]
+        },
+        {
+          "tag": "delivery_tracking",
+          "patterns": [
+            "How do I track my delivery?",
+            "Track my order",
+            "Delivery status",
+            "Order tracking",
+            "Where is my package?"
+          ],
+          "responses": [
+            "To track your delivery, log in to your account and go to 'My Orders'. You'll find tracking information there.",
+            "You can track your order by visiting 'My Orders' in your account. The delivery status will be displayed.",
+            "Order tracking information is available in the 'My Orders' section of your account."
+          ]
+        },
+        {
+          "tag": "crop_consultation",
+          "patterns": [
+            "Do you offer crop consultation?",
+            "Agricultural advice",
+            "Consultation services",
+            "Help with crops",
+            "Crop advice"
+          ],
+          "responses": [
+            "Yes, we provide crop consultation services. Contact our experts through the 'Consultation' section on our website.",
+            "You can get agricultural advice and consultation by reaching out to our experts via the 'Consultation' page.",
+            "Our crop consultation services are available to help you. Visit the 'Consultation' section to learn more."
+          ]
+        },
+        {
+          "tag": "organic_products",
+          "patterns": [
+            "Do you sell organic products?",
+            "Organic agriculture",
+            "Certified organic items",
+            "Buy organic products",
+            "Organic food"
+          ],
+          "responses": [
+            "Yes, we offer a variety of organic products. Check out our 'Organic Products' section for certified organic items.",
+            "Our 'Organic Products' section features a wide range of certified organic agricultural items.",
+            "You can find organic products in our 'Organic Products' section. We offer a selection of certified organic items."
+          ]
+        },
+        {
+          "tag": "feedback_suggestions",
+          "patterns": [
+            "How can I give feedback?",
+            "Provide suggestions",
+            "Customer feedback",
+            "Leave feedback",
+            "Suggestion box"
+          ],
+          "responses": [
+            "We value your feedback! You can leave your comments and suggestions through the 'Feedback' section on our website.",
+            "To provide feedback, visit the 'Feedback' section. We appreciate your input and suggestions.",
+            "You can share your feedback and suggestions by visiting the 'Feedback' section on our site."
+          ]
+        },
+        {
+          "tag": "user_tutorials",
+          "patterns": [
+            "Do you have user tutorials?",
+            "Help with using the site",
+            "Website tutorials",
+            "How to use features",
+            "User guide"
+          ],
+          "responses": [
+            "Yes, we offer user tutorials to help you navigate our site. Check out the 'Tutorials' section for guides and videos.",
+            "Our 'Tutorials' section provides helpful guides and videos on using the site and its features.",
+            "You can find user tutorials in the 'Tutorials' section. These guides will help you make the most of our platform."
+          ]
+        },
+        {
+          "tag": "mobile_app",
+          "patterns": [
+            "Do you have a mobile app?",
+            "Download app",
+            "Mobile application",
+            "App for the marketplace",
+            "Use on mobile"
+          ],
+          "responses": [
+            "Yes, we have a mobile app available for download. Visit the 'Mobile App' section on our website for links to the App Store and Google Play.",
+            "You can download our mobile app from the App Store and Google Play. Check the 'Mobile App' section for details.",
+            "Our marketplace is accessible via our mobile app. Download it from the 'Mobile App' section on our site."
+          ]
+        },
+        {
+          "tag": "partnership_opportunities",
+          "patterns": [
+            "Do you offer partnership opportunities?",
+            "Partner with us",
+            "Business partnerships",
+            "Collaborate with marketplace",
+            "Partnership inquiries"
+          ],
+          "responses": [
+            "Yes, we welcome partnership opportunities. Please visit the 'Partnership' section on our website to learn more and contact us.",
+            "We are open to business partnerships. Check the 'Partnership' section for more information and to get in touch.",
+            "For partnership inquiries, visit the 'Partnership' section on our site. We look forward to collaborating with you."
+          ]
+        },
+        {
+          "tag": "vendor_registration",
+          "patterns": [
+            "How do I register as a vendor?",
+            "Vendor sign-up",
+            "Become a seller",
+            "Register to sell",
+            "Vendor registration process"
+          ],
+          "responses": [
+            "To register as a vendor, visit the 'Vendor Registration' section on our website and follow the sign-up instructions.",
+            "You can sign up to become a seller by visiting the 'Vendor Registration' section. Follow the steps to create your account.",
+            "To become a vendor, go to the 'Vendor Registration' page on our site and complete the registration process."
+          ]
+        },
+        {
+          "tag": "customer_support",
+          "patterns": [
+            "I need customer support",
+            "Customer service help",
+            "Contact customer support",
+            "Help with an issue",
+            "Customer support contact"
+          ],
+          "responses": [
+            "For customer support, please visit our 'Help Center' or contact us directly through the 'Contact Us' page.",
+            "You can reach customer support by visiting the 'Help Center' or using the 'Contact Us' form on our website.",
+            "Our customer support team is here to help. Visit the 'Help Center' or contact us through the 'Contact Us' page."
+          ]
+        },
+        {
+          "tag": "payment_methods",
+          "patterns": [
+            "What payment methods do you accept?",
+            "Payment options",
+            "Accepted payment methods",
+            "How can I pay?",
+            "Payment choices"
+          ],
+          "responses": [
+            "We accept various payment methods including credit/debit cards, PayPal, and bank transfers. Check the 'Payment Methods' section for details.",
+            "You can pay using credit/debit cards, PayPal, and bank transfers. Visit the 'Payment Methods' section for more information.",
+            "Our accepted payment methods include credit/debit cards, PayPal, and bank transfers. See the 'Payment Methods' section for details."
+          ]
+        },
+        {
+          "tag": "community_forum",
+          "patterns": [
+            "Do you have a community forum?",
+            "Join the forum",
+            "User forum",
+            "Community discussions",
+            "Forum for users"
+          ],
+          "responses": [
+            "Yes, we have a community forum where users can discuss and share information. Join the forum through the 'Community' section on our website.",
+            "You can join our community forum for discussions and information sharing. Visit the 'Community' section to participate.",
+            "Our community forum is available for users to discuss and share. Check the 'Community' section to join."
+          ]
+        }
+      ]
+    }
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  ]
+}
