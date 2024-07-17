@@ -5,17 +5,14 @@ import { NextResponse } from "next/server";
 
 // in here params should be as a second argument.if it first argument it will not works 
 export async function PATCH(req, { params }) {
-    
-   
-  
-    
+
   
     try {
       const { userId } = auth();
       const { storeId } = params;
       const body = await req.json();
   
-      
+
       const { 
         StoreName,
         disLabel,
@@ -54,7 +51,7 @@ export async function PATCH(req, { params }) {
 
       await prismadb.seller.updateMany({
         where:{
-            id:userId,
+            sellerid:userId,
             storeId
             },
         data:{
@@ -111,7 +108,7 @@ export async function DELETE( req, {params} ) {
 
         await prismadb.seller.delete({
             where:{
-                id:userId,
+                sellerid:userId,
                 storeId:params.storeId
         }})
 

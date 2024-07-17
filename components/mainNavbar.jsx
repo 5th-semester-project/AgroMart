@@ -7,7 +7,7 @@ import Link from "next/link";
 import { SquareKanban ,Folders ,PackagePlus , ShoppingCart, MessageCircle, Settings} from "lucide-react";
 
 
-const MainNavbar = ({className,...props}) => {
+const MainNavbar = ({className,userId,...props}) => {
 
     const pathname = usePathname();
 
@@ -23,7 +23,7 @@ const MainNavbar = ({className,...props}) => {
         },
         {
             href:`/${params.storeId}/categories`,
-            label:" ",
+            label:"Categories ",
             active: pathname === `/${params.storeId}/categories`,
             icon: <Folders />
         },
@@ -40,7 +40,7 @@ const MainNavbar = ({className,...props}) => {
             icon: <ShoppingCart />
         },
         {
-            href:`/${params.storeId}/messages`,
+            href:`/conversation/${userId}`,
             label:"Messages",
             active: pathname === `/${params.storeId}/messages`,
             icon: <MessageCircle />

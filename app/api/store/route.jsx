@@ -21,7 +21,7 @@ export async function POST(req) {
     //checking if the user already has a store
     const storeCheck = await prismadb.Seller.findFirst({
       where: {
-        id: userId,
+        sellerid: userId,
       },
     });
     
@@ -43,7 +43,7 @@ export async function POST(req) {
     // Create a new seller
     await prismadb.Seller.create({
         data:{
-            id    : userId,
+            sellerid    : userId,
             name  : UserFullName,   
             storeId : store.id,   
             email   : UserEmail, 

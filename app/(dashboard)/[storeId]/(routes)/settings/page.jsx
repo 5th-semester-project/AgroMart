@@ -21,7 +21,7 @@ const SettingPage = async({params}) => {
     const seller = await prismadb.seller.findFirst({
         where: {
             storeId: params.storeId,
-            id: userId
+            sellerid: userId        //sellerid is the clerk user id
         }
     })
 
