@@ -171,5 +171,5 @@ const DashboardPage = async({params}) => {
         </div>
      );
 }
- 
+
 export default DashboardPage;
