@@ -139,6 +139,7 @@ model Message {
   updatedAt DateTime @updatedAt
 }
 
+
 model Review {
   id        String   @id @default(cuid())  @map("_id")
   productId String
