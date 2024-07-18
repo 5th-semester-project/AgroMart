@@ -62,6 +62,7 @@ model Product {
   category  Category @relation("CategoryToProduct",fields: [categoryId], references: [id])
   orderIds  String[]
   orders    Order[] @relation("OrderToProduct" ,fields: [orderIds], references: [id])
+  reviews  Review[]
   mainCategory String?
   imageUrls    Json
   clickCount  Int @default(0)
@@ -145,8 +146,9 @@ model Review {
   productId String
   storeId   String
   buyerId   String
-  rating    Int
+  rating    Float
   comment   String?
+  product   Product @relation(fields: [productId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

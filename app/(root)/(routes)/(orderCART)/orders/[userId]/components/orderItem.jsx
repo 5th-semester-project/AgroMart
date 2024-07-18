@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import DelivaryDetails from "./info";
 import VerticalLinearStepper from "./shippingInfo";
 import toast from "react-hot-toast";
@@ -24,6 +24,21 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useUser } from "@clerk/clerk-react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormItem,
+} from "@/components/ui/form";
+
+
+
+const formSchema = z.object({
+  rate: z.number().min(0.5).max(5),
+  comment: z.string().optional(),
+});
+
 
 
   const labels = {
@@ -48,11 +63,12 @@ import { useUser } from "@clerk/clerk-react";
  function OrderItem({data}) {
 
     const[loading,setLoading] = useState(false);
+    const [submitDisabled, setSubmitDisabled] = useState( data.rating ? true : false);
 
     const {user} = useUser();
     const router = useRouter();
 
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState(data.rating || 0.5);
     const [hover, setHover] = useState(-1);
 
     const copyToClipboard = (id) => {
@@ -60,7 +76,20 @@ import { useUser } from "@clerk/clerk-react";
         toast.success("Copied the to clipboard")
     }
 
+    
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      rate: 0.5 || data.rating,
+      comment: "" || data.comment,
+    },
+  });
 
+  useEffect(() => {
+    setValue(data.rating || 0.5);
+    form.setValue("rate", data.rating || 0.5);
+    form.setValue("comment", data.comment || "");
+  }, [data.rating, data.comment]);
     
 
     const CreateConversation = async () => {
@@ -73,6 +102,30 @@ import { useUser } from "@clerk/clerk-react";
         } finally {
           setLoading(false);
         }
+      };
+
+
+
+      const onSubmit = async (formData) => {
+
+        setLoading(true);
+
+        const completeData = {
+          ...formData,
+          productId: data.productId,
+          storeId :data.storeId,  
+          buyerId :user.id,  
+        };
+       
+        try {
+          await axios.post(`/api/buyer/review/${user.id}`, completeData);
+          setSubmitDisabled(true);
+          toast.success("Review submitted successfully");
+        } catch (error) {
+          console.error("Failed to submit review:", error);
+          toast.error("Failed to submit review");
+        }
+        setLoading(false);
       };
       
 
@@ -151,37 +204,53 @@ import { useUser } from "@clerk/clerk-react";
                         Review
                     </h1>
                     <div className="mt-4 ml-4">
-                        <Box
-                            sx={{
+                      <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)}>
+                          <FormItem>
+                            <Box
+                              sx={{
                                 width: 200,
                                 display: 'flex',
                                 alignItems: 'center',
-                            }}
+                              }}
                             >
-                            <Rating
+                              <Rating
                                 name="hover-feedback"
+                                disabled={loading || submitDisabled}
                                 value={value}
                                 precision={0.5}
                                 getLabelText={getLabelText}
                                 onChange={(event, newValue) => {
-                                setValue(newValue);
+                                  setValue(newValue);
+                                  form.setValue("rate", newValue);
                                 }}
                                 onChangeActive={(event, newHover) => {
-                                setHover(newHover);
+                                  setHover(newHover);
                                 }}
-                                emptyIcon={<Star style={{ opacity: 0.55 }}  />}
-                            />
-                            {value !== null && (
+                                emptyIcon={<Star style={{ opacity: 0.55 }} />}
+                              />
+                              {value !== null && (
                                 <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
-                            )}
-                        </Box>
-                        <div className="grid w-full gap-1.5 pr-5 mt-5">
+                              )}
+                            </Box>
+                          </FormItem>
+
+                          <div className="grid w-full gap-1.5 pr-5 mt-5">
                             <Label htmlFor="message">Give a review</Label>
-                            <Textarea placeholder="Type your message here." id="message" />
-                            <Button className="cursor-pointer">
-                                Submit
+                            <FormItem>
+                              <Textarea
+                                disabled={loading || submitDisabled}
+                                placeholder="Type your message here."
+                                id="message"
+                                {...form.register("comment")}
+                              />
+                            </FormItem>
+                            <Button className="cursor-pointer" type="submit" disabled={submitDisabled || loading}>
+                              Submit
                             </Button>
-                        </div>
+                          </div>
+                        </form>
+                      </Form>
                     </div>
                 </div>
             </div>
