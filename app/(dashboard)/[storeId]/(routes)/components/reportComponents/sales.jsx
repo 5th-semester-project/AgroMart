@@ -1,31 +1,127 @@
 'use client'
 
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import DatePickerWithRange from './datePicker';
+import { Button } from "@/components/ui/button";
+import axios from "axios";
 
-const Sales = () => {
+const Sales = ({ categories = [], products = [] ,storeId}) => {
+  const [isMounted, setIsMounted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [category, setCategory] = useState('all');
+  const [product, setProduct] = useState('all');
+  const [duration, setDuration] = useState("Last7days");
+  const [customDateRange, setCustomDateRange] = useState(null);
 
-    const [isMounted,setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const handleCategoryChange = (value) => {
+    setCategory(value);
+    console.log(value);
+  };
+
+  const handleProductChange = (value) => {
+    setProduct(value);
+    console.log(value);
+  };
+
+  const handleDurationChange = (value) => {
+    setDuration(value);
+    console.log(value);
+  };
+
+  const handleDateRangeChange = (range) => {
+    setCustomDateRange(range);
+    console.log(range);
+  };
 
 
-    useEffect(()=>{
-        setIsMounted(true)
-    },[])
 
-    if(!isMounted) {
-        return null
-    }
+  const handleExport = async() => {
+    setLoading(true);
+    const response = await axios.get(`/api/${storeId}/analytics/reports/sales`,{
+        params:{category,product,duration,customDateRange}
+    })
+    console.log(response.data);
+    setLoading(false);
+  }
 
-    return ( 
-        <div>
-            {/* 1. Sales Reports
-            Date Range: Last 7 days, Last 30 days, This month, Last month, Custom range
-            Product Category: All categories, Specific category
-            Product: All products, Specific product
-            Region: All regions, Specific region
-            Payment Method: All methods, Credit Card, PayPal, etc.
-            Customer Type: All customers, New customers, Returning customers */}
+
+  if (!isMounted) {
+    return null;
+  }
+
+  return (
+    <div className=" w-full">
+      <div className="grid grid-cols-3 gap-3 mt-4">
+        <Select onValueChange={handleCategoryChange} disabled={product !== 'all'} defaultValue="all">
+          <SelectTrigger>
+            <SelectValue placeholder="Category" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem key="all" value="all">
+              All
+            </SelectItem>
+            {categories.map((category) => (
+              <SelectItem key={category.id} value={category.id}>
+                {category.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Select onValueChange={handleProductChange} disabled={category !== 'all'} defaultValue="all">
+          <SelectTrigger>
+            <SelectValue placeholder="Products" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem key="all" value="all">
+              All
+            </SelectItem>
+            {products.map((product) => (
+              <SelectItem key={product.id} value={product.id}>
+                {product.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Select onValueChange={handleDurationChange} defaultValue="Last7days">
+          <SelectTrigger>
+            <SelectValue placeholder="Duration" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="Last7days">
+              Last 7 days
+            </SelectItem>
+            <SelectItem value="Last30days">
+              Last 30 days
+            </SelectItem>
+            <SelectItem value="ThisMonth">
+              This month
+            </SelectItem>
+            <SelectItem value="LastMonth">
+              Last month
+            </SelectItem>
+            <SelectItem value="CustomRange">
+              Custom range
+            </SelectItem>
+          </SelectContent>
+        </Select>
+        {duration === "CustomRange" && (
+          <div className="col-span-3 ">
+            <DatePickerWithRange onDateRangeChange={handleDateRangeChange} />
+          </div>
+        )}
+        <div className="col-span-3 flex justify-end">
+          <Button onClick ={handleExport} disabled={loading}>
+            Export
+          </Button>
         </div>
-     );
-}
- 
+        </div>
+    </div>
+  );
+};
+
 export default Sales;

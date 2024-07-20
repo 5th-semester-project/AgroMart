@@ -160,7 +160,7 @@ const DashboardPage = async({params}) => {
                             <CardTitle>Reports</CardTitle>
                         </CardHeader>
                         <CardContent className="pl-2">
-                            <Reports/>
+                            <Reports categories={categories} products={products} storeId={params.storeId}/>
                         </CardContent>
                     </Card>
                 </div>

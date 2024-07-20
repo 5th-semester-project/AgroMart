@@ -6,8 +6,9 @@ import Order from "./reportComponents/orders";
 import Inventory from "./reportComponents/inventory";
 import Delivery from "./reportComponents/deliveries";
 import Customer from "./reportComponents/customers";
+import { Separator } from "@/components/ui/separator";
 
-const Reports = () => {
+const Reports = ({categories,products,storeId}) => {
 
     const [isMounted,setIsMounted] = useState(false);
 
@@ -24,10 +25,14 @@ const Reports = () => {
 
     return ( 
         <div>
-            <Sales/>
+            <Sales categories={categories} products={products} storeId={storeId}/>
+            <Separator className="my-3"/>
             <Order/>
+            <Separator className="my-3"/>
             <Inventory/>
+            <Separator className="my-3"/>
             <Delivery/>
+            <Separator className="my-3"/>
             <Customer/>
         </div>
      );
