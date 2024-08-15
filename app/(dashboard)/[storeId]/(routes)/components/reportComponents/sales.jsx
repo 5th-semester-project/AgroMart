@@ -1,10 +1,12 @@
 'use client'
 
 import { useState, useEffect } from "react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue,SelectLabel, SelectGroup } from "@/components/ui/select";
 import DatePickerWithRange from './datePicker';
 import { Button } from "@/components/ui/button";
 import axios from "axios";
+import ExportReport from './exportFuncion';
+
 
 const Sales = ({ categories = [], products = [] ,storeId}) => {
   const [isMounted, setIsMounted] = useState(false);
@@ -43,9 +45,11 @@ const Sales = ({ categories = [], products = [] ,storeId}) => {
   const handleExport = async() => {
     setLoading(true);
     const response = await axios.get(`/api/${storeId}/analytics/reports/sales`,{
-        params:{category,product,duration,customDateRange}
+      params:{category,product,duration,customDateRange}
     })
     console.log(response.data);
+    // export function call here 
+    ExportReport(response.data);
     setLoading(false);
   }
 
@@ -58,6 +62,8 @@ const Sales = ({ categories = [], products = [] ,storeId}) => {
     <div className=" w-full">
       <div className="grid grid-cols-3 gap-3 mt-4">
         <Select onValueChange={handleCategoryChange} disabled={product !== 'all'} defaultValue="all">
+          <SelectGroup>
+          <SelectLabel>category</SelectLabel>
           <SelectTrigger>
             <SelectValue placeholder="Category" />
           </SelectTrigger>
@@ -71,8 +77,11 @@ const Sales = ({ categories = [], products = [] ,storeId}) => {
               </SelectItem>
             ))}
           </SelectContent>
+          </SelectGroup>
         </Select>
         <Select onValueChange={handleProductChange} disabled={category !== 'all'} defaultValue="all">
+          <SelectGroup>
+          <SelectLabel>product</SelectLabel>
           <SelectTrigger>
             <SelectValue placeholder="Products" />
           </SelectTrigger>
@@ -86,28 +95,29 @@ const Sales = ({ categories = [], products = [] ,storeId}) => {
               </SelectItem>
             ))}
           </SelectContent>
+          </SelectGroup>
         </Select>
         <Select onValueChange={handleDurationChange} defaultValue="Last7days">
-          <SelectTrigger>
-            <SelectValue placeholder="Duration" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="Last7days">
-              Last 7 days
-            </SelectItem>
-            <SelectItem value="Last30days">
-              Last 30 days
-            </SelectItem>
-            <SelectItem value="ThisMonth">
-              This month
-            </SelectItem>
-            <SelectItem value="LastMonth">
-              Last month
-            </SelectItem>
-            <SelectItem value="CustomRange">
-              Custom range
-            </SelectItem>
-          </SelectContent>
+          <SelectGroup>
+            <SelectLabel>Duration</SelectLabel>
+              <SelectTrigger>
+                <SelectValue placeholder="Duration" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Last7days">
+                  Last 7 days
+                </SelectItem>
+                <SelectItem value="Last30days">
+                  Last 30 days
+                </SelectItem>
+                <SelectItem value="Last365days">
+                  Last 365 days
+                </SelectItem>
+                <SelectItem value="CustomRange">
+                  Custom range
+                </SelectItem>
+              </SelectContent>
+          </SelectGroup>
         </Select>
         {duration === "CustomRange" && (
           <div className="col-span-3 ">
