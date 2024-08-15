@@ -2,7 +2,7 @@
 
 import { useState,useEffect } from "react";
 
-const Order = () => {
+const Revenue = () => {
 
     const [isMounted,setIsMounted] = useState(false);
 
@@ -27,4 +27,4 @@ const Order = () => {
      );
 }
  
-export default Order;
+export default Revenue;

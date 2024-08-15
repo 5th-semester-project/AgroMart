@@ -2,7 +2,7 @@
 
 import { useState,useEffect } from "react";
 import Sales from "./reportComponents/sales";
-import Order from "./reportComponents/orders";
+import Revenue from "./reportComponents/revenue";
 import Inventory from "./reportComponents/inventory";
 import Delivery from "./reportComponents/deliveries";
 import Customer from "./reportComponents/customers";
@@ -27,7 +27,7 @@ const Reports = ({categories,products,storeId}) => {
         <div>
             <Sales categories={categories} products={products} storeId={storeId}/>
             <Separator className="my-3"/>
-            <Order/>
+            <Revenue/>
             <Separator className="my-3"/>
             <Inventory/>
             <Separator className="my-3"/>

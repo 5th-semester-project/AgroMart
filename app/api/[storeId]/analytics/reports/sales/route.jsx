@@ -39,11 +39,6 @@ export async function GET(req, { params }) {
             endDate = currentDate;
         }
 
-        console.log("startDate", startDate);
-        console.log("endDate", endDate);
-        console.log("category", category);
-        console.log("product", product);
-
         const orders = await prismadb.order.findMany({
             where: {
                 status: "SUCCESS",
