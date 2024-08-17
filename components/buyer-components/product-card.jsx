@@ -65,15 +65,15 @@ export function ProductCard({product}) {
     }
 
   return (
-    <Card className="w-[270px] hover:scale-105 transition hover:shadow-md cursor-pointer" onClick={productRouting}>
+    <Card className="w-[220px] hover:scale-105 transition hover:shadow-md cursor-pointer" onClick={productRouting}>
         <CardHeader className="relative">
           { (product.discount > 0) && <div className="absolute inset-y-4 ">
-                <p className="bg-green-600 text-white text-xl font-semibold p-3 rounded-full italic">{product.discount}% </p>
+                <p className="bg-green-600 text-white text-xl font-semibold p-2 rounded-full italic">{product.discount}% </p>
             </div>}
             <img 
                 src={product.imageUrls[0].url}
                 alt="product" 
-                className="w-full h-[280px] object-cover rounded-lg" 
+                className="w-full h-[200px] object-cover rounded-lg" 
             />
             <div className="opacity-40  hover:opacity-100 transition absolute w-full bottom-5 ">
                   <div className="flex gap-x-5 justify-center items-center">
