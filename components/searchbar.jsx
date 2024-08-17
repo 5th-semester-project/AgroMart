@@ -59,7 +59,7 @@ const mainCategories = [
   ];
   
 
-const SearchBar = () => {
+const SearchBar = ({onSearch}) => {
 
     const [isMounted, setIsMounted] = useState(false);
     const [location, setLocation] = useState('all');
@@ -80,18 +80,9 @@ const SearchBar = () => {
         setCategory(event.target.value);
       };
 
-
-    const Search = async(event) => {
+    const handleSearch = async () => {
         setLoading(true);
-        
-        try {
-            
-        } catch (error) {
-            console.log(error);
-            
-        }
-
-        console.log(location,category);
+        await onSearch(location, category);
         setLoading(false);
       };
 
@@ -133,8 +124,8 @@ const SearchBar = () => {
                 </FormControl>
             </Box>
 
-            <button onClick={Search} className='bg-green-500 mr-3 text-white p-4 rounded-md hover:bg-green-300' disabled={loading}>
-                Search
+            <button onClick={handleSearch} className='bg-green-500 mr-3 text-white p-4 rounded-md hover:bg-green-300' disabled={loading}>
+                Search Products
             </button>
 
         </div>
