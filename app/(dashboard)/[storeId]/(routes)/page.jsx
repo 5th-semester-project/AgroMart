@@ -23,6 +23,7 @@ import TopSellingList from './components/topSellingList';
 import { ScrollArea } from "@/components/ui/scroll-area"
 import LowStock from './components/lowStockTable';
 import Reports from './components/reports';
+import getStoreRating from '@/actions/analytics/get-storeRatings';
 
 
 const DashboardPage = async({params}) => {
@@ -33,6 +34,7 @@ const DashboardPage = async({params}) => {
     const products = await getProducts(params.storeId)
     const topDiscountedProducts = await getTopDiscountedProducts(params.storeId)
     const topSelling = await getTopSellingProducts(params.storeId)
+    const rate =  await getStoreRating(params.storeId)
 
  
 
@@ -88,8 +90,8 @@ const DashboardPage = async({params}) => {
                         </CardHeader>
 
                         <CardContent >
-                            <div className="text-2xl font-bold">
-                                {/* {formatter.format(totalRevenue)} */}
+                            <div className="text-2xl font-bold my-4">
+                                {rate}  / 5
                             </div>
                         </CardContent>
                     </Card>
