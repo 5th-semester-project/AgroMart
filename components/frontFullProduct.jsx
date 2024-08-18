@@ -6,6 +6,7 @@ import Heading from "@/components/ui/heading";
 import SearchBar from "@/components/searchbar";
 import HighestDesProductList from "@/components/buyer-components/highest-descounted-products";
 import getSearchProducts from "@/actions/get-searchProduct";
+import FilterComponents from "./filterComponents";
 
 
 
@@ -72,7 +73,11 @@ const FrontFullProducts = ({ initialProduct }) => {
       </>
       )}
 
-      {searchResultDisplay && <div>filterbox</div>}
+      {searchResultDisplay && 
+      <>
+          <FilterComponents products={searchResult} />
+      </>
+      }
     </>
   );
 };
