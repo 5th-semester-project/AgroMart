@@ -15,7 +15,6 @@ const FrontFullProducts = ({ initialProduct }) => {
   const [isMounted, setIsMounted] = useState(false);
   const [searchResultDisplay, setSearchResultDisplay] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -25,8 +24,6 @@ const FrontFullProducts = ({ initialProduct }) => {
 
 
   const handleSearch = async (location, category) => {
-    setLoading(true);
-
     try {
         const result = await getSearchProducts(location, category);
         setSearchResult(result);
@@ -34,7 +31,6 @@ const FrontFullProducts = ({ initialProduct }) => {
       console.log(error);
     }
 
-    setLoading(false);
     setSearchResultDisplay(true);
   }
 
