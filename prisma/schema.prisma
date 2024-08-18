@@ -143,6 +143,7 @@ model Message {
 
 model Review {
   id        String   @id @default(cuid())  @map("_id")
+  payId     String? 
   productId String
   storeId   String
   buyerId   String

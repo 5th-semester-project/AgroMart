@@ -22,6 +22,7 @@ import TopDiscountedList from './components/TopDiscountedList';
 import TopSellingList from './components/topSellingList';
 import { ScrollArea } from "@/components/ui/scroll-area"
 import LowStock from './components/lowStockTable';
+import Reports from './components/reports';
 
 
 const DashboardPage = async({params}) => {
@@ -159,12 +160,9 @@ const DashboardPage = async({params}) => {
                             <CardTitle>Reports</CardTitle>
                         </CardHeader>
                         <CardContent className="pl-2">
-                            {/* <Overview
-                                data={graphData}
-                            /> */}
-
+                            <p className="pl-1 pt-4 text-sm">Sales</p>
+                            <Reports categories={categories} products={products} storeId={params.storeId}/>
                         </CardContent>
-
                     </Card>
                 </div>
             </div>
