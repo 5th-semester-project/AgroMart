@@ -13,12 +13,49 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+const districtsOfSriLanka = [
+  "Ampara",
+  "Anuradhapura",
+  "Badulla",
+  "Batticaloa",
+  "Colombo",
+  "Galle",
+  "Gampaha",
+  "Hambantota",
+  "Jaffna",
+  "Kalutara",
+  "Kandy",
+  "Kegalle",
+  "Kilinochchi",
+  "Kurunegala",
+  "Mannar",
+  "Matale",
+  "Matara",
+  "Monaragala",
+  "Mullaitivu",
+  "Nuwara Eliya",
+  "Polonnaruwa",
+  "Puttalam",
+  "Ratnapura",
+  "Trincomalee",
+  "Vavuniya"
+];
+
 
 //for validate the form
 const formSchema = z.object({
   StoreName: z.string().min(1),
   UserEmail: z.string().email(),
   UserFullName: z.string().min(1),
+  district:z.string().min(1),
   UserPhoneNum: z
   .string()
   .min(10, "Phone number must be exactly 10 digits")
@@ -40,6 +77,7 @@ const StoreModal = () => {
         defaultValues: {
           StoreName: "",
           UserEmail: "",
+          district:"",
           UserFullName: "",
           UserPhoneNum: "",
         },
@@ -51,6 +89,7 @@ const StoreModal = () => {
           setDataLoading(false);
           form.reset({
             StoreName: "",
+            district:"",
             UserEmail: user.primaryEmailAddress?.emailAddress || "",
             UserFullName: user.fullName || "",
             UserPhoneNum: user.primaryPhoneNumber?.number || "",
@@ -60,8 +99,6 @@ const StoreModal = () => {
 
 
   const onSubmit = async(values) => {
-
-    console.log("value",values);
     
     //TODO :Create store
     try {
@@ -69,8 +106,6 @@ const StoreModal = () => {
 
       const response = await axios.post("/api/store", values);
       toast.success("Store created successfully");
-
-      console.log("response",response);
 
       // THIS IS USED BECAUSE, THIS ONE ENSURE PAGE RELOAD 100%
       window.location.assign(`/${response.data.id}`)
@@ -156,6 +191,37 @@ const StoreModal = () => {
                      </FormItem>
                      )}
                  />
+
+                <FormField
+                  control={form.control}
+                  name="district"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Select Your District</FormLabel>
+                      <FormControl>
+                        <Select
+                          value={field.value}
+                          onValueChange={(value) => field.onChange(value)} // Handle onChange
+                        >
+                          <SelectTrigger>
+                            <SelectValue>
+                              {field.value || "district"}
+                            </SelectValue>
+                          </SelectTrigger>
+                          <SelectContent>
+                            {districtsOfSriLanka.map((district) => (
+                              <SelectItem key={district} value={district}>
+                                {district}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
                  <div className="pt-6 space-x-2 flex items-center justify-end w-full">
                          <Button variant="outline" onClose={usestoremodal.onClose} disabled={loading}>
                              Cancel
