@@ -3,6 +3,7 @@
 import { useEffect,useState} from "react";
 import { Button } from "@/components/ui/button";
 import useCart from "@/hooks/addtocardStore";
+import payCart from "@/hooks/addtoPayCart";
 import { formatter } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
@@ -12,18 +13,16 @@ import axios from "axios";
 const Summery = ({buyer}) => {
     
     const [isLoading, setIsLoading] = useState(false);
-
-    const cart = useCart();
+    const paycartItems = payCart((state)=>state.itemsToPay);
     const items = useCart((state)=>state.items)
-    const searchParams = useSearchParams();
 
     //subtotal 
-    const basePriceTotal = items.reduce((acc, item) => {
+    const basePriceTotal = paycartItems.reduce((acc, item) => {
         return acc + item.price;
     },0)
 
     //discount
-    const discountTotal = items.reduce((acc, item) => {
+    const discountTotal = paycartItems.reduce((acc, item) => {
 
         const discount_value  = (item.price * (item.discount / 100));
 
@@ -46,11 +45,11 @@ const Summery = ({buyer}) => {
         address :buyer?.address,
         city :buyer?.area,
         country :"Sri Lanka",
-        productIds : items.map(item => item.id),
-        items:items.map(item => item.name).join(','),
+        productIds : paycartItems.map(item => item.id),
+        items:paycartItems.map(item => item.name).join(','),
         currency : "USD",
         amount : parseFloat(subTotal).toFixed(2),
-        storeIds : items.map((item)=>item.storeId)
+        storeIds : paycartItems.map((item)=>item.storeId)
     }
 
    
@@ -69,7 +68,7 @@ const Summery = ({buyer}) => {
           console.error("Error initiating payment:", error);
       } finally {
           setIsLoading(false);
-          cart.removeAll();
+        //   cart.removeAll();
 
       }
   };
