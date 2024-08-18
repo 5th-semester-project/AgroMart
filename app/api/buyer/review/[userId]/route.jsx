@@ -14,7 +14,8 @@ export async function POST(req) {
      const {
         productId,
         storeId ,  
-        buyerId ,  
+        buyerId ,
+        payId,  
         rate, 
         comment
      } = body;
@@ -28,7 +29,8 @@ export async function POST(req) {
         data: {
             productId,
             storeId ,  
-            buyerId ,  
+            buyerId , 
+            payId, 
             rating:rate, 
             comment
         }

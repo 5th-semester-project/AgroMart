@@ -58,7 +58,7 @@ export function NavigationMenubar() {
   ]
 
   return (
-    <NavigationMenu>
+    <NavigationMenu className="z-40">
       <NavigationMenuList>
 
     {user &&  <NavigationMenuItem>

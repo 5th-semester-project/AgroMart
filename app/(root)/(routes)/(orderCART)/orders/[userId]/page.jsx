@@ -37,7 +37,7 @@ const OrderPage = async({params}) => {
     const mappedOrders = orders.flatMap(order =>
         order.products.map(product => {
             
-          const userReview = product.reviews.find(review => review.buyerId === params.userId);
+          const userReview = product.reviews.find(review => review.buyerId === params.userId && review.payId === order.payId);
       
           return {
             image: product.imageUrls[0].url,

@@ -114,7 +114,8 @@ const formSchema = z.object({
           ...formData,
           productId: data.productId,
           storeId :data.storeId,  
-          buyerId :user.id,  
+          buyerId :user.id,
+          payId :data.orderId,  
         };
        
         try {
