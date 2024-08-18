@@ -7,6 +7,7 @@ import SearchBar from "@/components/searchbar";
 import HighestDesProductList from "@/components/buyer-components/highest-descounted-products";
 import getSearchProducts from "@/actions/get-searchProduct";
 import FilterComponents from "./filterComponents";
+import { Button } from "@/components/ui/button";
 
 
 
@@ -14,7 +15,6 @@ const FrontFullProducts = ({ initialProduct }) => {
   const [isMounted, setIsMounted] = useState(false);
   const [searchResultDisplay, setSearchResultDisplay] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
-  const [products, setProducts] = useState(initialProduct);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -38,10 +38,18 @@ const FrontFullProducts = ({ initialProduct }) => {
     setSearchResultDisplay(true);
   }
 
+  const handleClear = () => { 
+    setSearchResultDisplay(false);
+  }
+
   return (
     <>
       <div className="flex absolute inset-0 justify-center items-center z-30">
       <SearchBar onSearch={handleSearch} />
+      {
+       searchResultDisplay && <Button type="destructive" className="mx-3 bg-red-600" onClick={handleClear}>Clear</Button>
+
+      }
       </div>
       
       {!searchResultDisplay && (
@@ -75,7 +83,7 @@ const FrontFullProducts = ({ initialProduct }) => {
 
       {searchResultDisplay && 
       <>
-          <FilterComponents products={searchResult} />
+          <FilterComponents key={searchResult.length} products={searchResult} />
       </>
       }
     </>

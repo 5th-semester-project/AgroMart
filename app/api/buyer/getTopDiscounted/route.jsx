@@ -10,7 +10,8 @@ export async function GET(){
         },
       },
       include:{
-        category:true
+        category:true,
+        reviews:true
       },
       orderBy: {
         discount: 'desc', 
@@ -18,6 +19,7 @@ export async function GET(){
       take: 10, 
     });
 
+   
     return NextResponse.json(products);
   } catch (error) {
     console.error("Error fetching top discounted products", error);

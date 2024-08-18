@@ -6,6 +6,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { Button } from './ui/button';
 
 
 const districtsOfSriLanka = [
@@ -87,7 +88,7 @@ const SearchBar = ({onSearch}) => {
       };
 
     return ( 
-        <div className='flex flex-row text-center justify-center items-center bg-white p-1'>
+        <div className='flex flex-row text-center justify-center items-center bg-white rounded-lg'>
             <Box sx={{ minWidth: 200, margin:2 }}>
                 <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">Location</InputLabel>
@@ -124,9 +125,9 @@ const SearchBar = ({onSearch}) => {
                 </FormControl>
             </Box>
 
-            <button onClick={handleSearch} className='bg-green-500 mr-3 text-white p-4 rounded-md hover:bg-green-300' disabled={loading}>
+            <Button onClick={handleSearch} className='bg-green-500 mr-3 text-white rounded-md hover:bg-green-300' disabled={loading}>
                 Search Products
-            </button>
+            </Button>
 
         </div>
 

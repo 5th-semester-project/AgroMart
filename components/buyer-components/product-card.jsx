@@ -35,6 +35,26 @@ export function ProductCard({product}) {
     const discountPrice = product.price - (product.price * product.discount / 100);
 
 
+    //calculate rating
+    const calculateRating = () => {
+      const reviews = product.reviews;
+  
+      if (!reviews || reviews.length === 0) {
+          return 0; 
+      }
+  
+      
+      const totalRating = reviews.reduce((sum, review) => {
+          return sum + review.rating;
+      }, 0);
+  
+      
+      const averageRating = totalRating / reviews.length;
+  
+      return averageRating;
+  }
+
+
     //add product to cart
     const onAddToCard =(event)=>{
       event.stopPropagation();
@@ -98,7 +118,7 @@ export function ProductCard({product}) {
 
         {/* have to update after creating the rating schema */}
         <StarRatings
-          rating={4}
+          rating={calculateRating()}
           starRatedColor="orange"
           numberOfStars={5}
           name='rating'
@@ -107,7 +127,7 @@ export function ProductCard({product}) {
           />
 
           {/* have to update after create the orders schema */}
-        <p className="text-sm text-muted-foreground">5000+ sold</p>
+        <p className="text-sm text-muted-foreground">{product.orderIds.length}+ sold</p>
 
       </CardDescription>
       <div className="flex items-baseline gap-x-3 gap-y-0 ml-3 my-4">

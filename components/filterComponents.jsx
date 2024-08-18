@@ -26,7 +26,7 @@ const FilterComponents = ({products=[]}) => {
     const [subCategory,setSubCategory] = useState("all");
     const [rating,setRating] = useState("all");
     const [minPrice,setMinPrice] = useState(0);
-    const [maxPrice,setMaxPrice] = useState(0);
+    const [maxPrice,setMaxPrice] = useState(100000);
 
     useEffect(()=>{
         setIsMounted(true);
@@ -37,18 +37,34 @@ const FilterComponents = ({products=[]}) => {
     const subCat = products.map(product=>product.category.name);
     const uniqueSubCat = [...new Set(subCat)];
 
+    const calculateRating = (reviews) => {
+        if (!reviews || reviews.length === 0) {
+            return 0; 
+        }
+    
+        const totalRating = reviews.reduce((sum, review) => {
+            return sum + review.rating;
+        }, 0);
+    
+        return totalRating / reviews.length;
+    }
+
     const filterHandler =()=>{
         let filtered = products;
         if(subCategory !== "all"){
             filtered = filtered.filter(product => product.category.name === subCategory);
         }
         if(rating !== "all"){
-            filtered = filtered.filter(product => product.rating >= rating);
+            filtered = filtered.filter(product => {
+                const averageRating = calculateRating(product.reviews);
+                return averageRating >= rating;
+            });
         }
         if(minPrice){
             filtered = filtered.filter(product => product.price >= minPrice);
         }
         if(maxPrice){
+
             filtered = filtered.filter(product => product.price <= maxPrice);
         }
         setFilteredProducts(filtered);
@@ -83,7 +99,7 @@ const FilterComponents = ({products=[]}) => {
                                     </SelectTrigger>
                                     <SelectContent position="popper">
                                         <SelectItem value="all">All</SelectItem>
-                                        <SelectItem value="1">
+                                        <SelectItem value={1}>
                                         <StarRatings
                                             rating={1}
                                             starRatedColor="orange"
@@ -93,7 +109,7 @@ const FilterComponents = ({products=[]}) => {
                                             starSpacing="0.5px"
                                             />
                                         </SelectItem>
-                                        <SelectItem value="2">
+                                        <SelectItem value={2}>
                                         <StarRatings
                                             rating={2}
                                             starRatedColor="orange"
@@ -103,7 +119,7 @@ const FilterComponents = ({products=[]}) => {
                                             starSpacing="0.5px"
                                             />
                                         </SelectItem>
-                                        <SelectItem value="3">
+                                        <SelectItem value={3}>
                                         <StarRatings
                                             rating={3}
                                             starRatedColor="orange"
@@ -113,7 +129,7 @@ const FilterComponents = ({products=[]}) => {
                                             starSpacing="0.5px"
                                             />
                                         </SelectItem>
-                                        <SelectItem value="4">
+                                        <SelectItem value={4}>
                                         <StarRatings
                                             rating={4}
                                             starRatedColor="orange"
@@ -123,7 +139,7 @@ const FilterComponents = ({products=[]}) => {
                                             starSpacing="0.5px"
                                             />
                                         </SelectItem>
-                                        <SelectItem value="5">
+                                        <SelectItem value={5}>
                                         <StarRatings
                                             rating={5}
                                             starRatedColor="orange"
@@ -156,7 +172,7 @@ const FilterComponents = ({products=[]}) => {
                         </div>
                     </CardContent>
                     <CardFooter className="flex justify-between">
-                        <Button variant="outline" onClick={() => setFilteredProducts(products)}>Cancel</Button>
+                        <Button variant="outline" onClick={() => setFilteredProducts(products)}>Clear</Button>
                         <Button onClick={filterHandler}>Filter</Button>
                     </CardFooter>
                 </Card>

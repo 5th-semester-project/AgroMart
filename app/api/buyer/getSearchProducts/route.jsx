@@ -13,6 +13,7 @@ export async function GET(req) {
       products = await prismadb.product.findMany({
         include: {
           category: true,
+          reviews:true
         },
       });
     } else if (location === "all" && category !== "all") {
@@ -22,6 +23,7 @@ export async function GET(req) {
         },
         include: {
           category: true,
+          reviews:true
         },
       });
     } else if (location !== "all" && category === "all") {
@@ -41,6 +43,7 @@ export async function GET(req) {
         },
         include: {
           category: true,
+          reviews:true
         },
       });
     } else if (location !== "all" && category !== "all") {
@@ -61,10 +64,10 @@ export async function GET(req) {
         },
         include: {
           category: true,
+          reviews:true
         },
       });
     }
-    console.log("products", products);
     return NextResponse.json(products);
   } catch (error) {
     console.log("error inside the getsearchproduct GET", error);
