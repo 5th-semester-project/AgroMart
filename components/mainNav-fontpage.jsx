@@ -18,26 +18,26 @@ import SmallCard from "./buyer-components/small-card"
 import watchCart from "@/hooks/watchlistStore"
 import useCart from "@/hooks/addtocardStore"
 import { UserButton } from "@clerk/nextjs"
-import { useUser } from "@clerk/clerk-react";
+import { useAuth } from "@clerk/clerk-react";
 import { useRouter } from "next/navigation"
 
 
 
 export function NavigationMenubar() {
 
-  const { user} = useUser();
+  const { userId} = useAuth();
   const router = useRouter()
   
   const routeOrders = () => {
-    router.push(`/orders/${user.id}`)
+    router.push(`/orders/${userId}`)
   }
 
   const routeCart = () => {
-    router.push(`/cart/${user.id}`)
+    router.push(`/cart/${userId}`)
   }
 
   const routeConversation = () => {
-    router.push(`/conversation/${user.id}`)
+    router.push(`/conversation/${userId}`)
   }
 
   const wishlist = watchCart((state)=>state.items)
@@ -47,11 +47,11 @@ export function NavigationMenubar() {
 
   const components= [
     {
-      title: user ? "Login to Seller Account":"Create Seller Account",
+      title: userId ? "Login to Seller Account":"Create Seller Account",
       href: "/seller"
     },
     {
-      title: user ? "Login to Buyer Account":"Create Buyer Account",
+      title: userId ? "Login to Buyer Account":"Create Buyer Account",
       href: "/buyer"
     },
     
@@ -61,7 +61,7 @@ export function NavigationMenubar() {
     <NavigationMenu className="z-40">
       <NavigationMenuList>
 
-    {user &&  <NavigationMenuItem>
+    {userId &&  <NavigationMenuItem>
           <NavigationMenuTrigger className="bg-transparent" onClick={routeConversation} >Messages</NavigationMenuTrigger>
           <NavigationMenuContent >
             <ScrollArea className="h-72 w-[300px] rounded-md">
@@ -70,7 +70,7 @@ export function NavigationMenubar() {
           </NavigationMenuContent>
         </NavigationMenuItem>}
 
-        {user && <NavigationMenuItem>
+        {userId && <NavigationMenuItem>
           <NavigationMenuTrigger onClick={routeOrders} className="bg-transparent cursor-pointer">Orders</NavigationMenuTrigger>
         </NavigationMenuItem>  }
 
@@ -88,7 +88,7 @@ export function NavigationMenubar() {
         </NavigationMenuItem>
 
 
-        <NavigationMenuItem>
+      {userId &&  <NavigationMenuItem>
           <NavigationMenuTrigger onClick={routeCart} className="bg-transparent cursor-pointer">Cart</NavigationMenuTrigger>
           <NavigationMenuContent >
             <ScrollArea className="h-72 w-[300px] rounded-md ">
@@ -98,7 +98,7 @@ export function NavigationMenubar() {
 
             </ScrollArea>
           </NavigationMenuContent>
-        </NavigationMenuItem>
+        </NavigationMenuItem>}
 
 
 

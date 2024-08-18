@@ -221,7 +221,6 @@ const StoreModal = () => {
                     </FormItem>
                   )}
                 />
-
                  <div className="pt-6 space-x-2 flex items-center justify-end w-full">
                          <Button variant="outline" onClose={usestoremodal.onClose} disabled={loading}>
                              Cancel
