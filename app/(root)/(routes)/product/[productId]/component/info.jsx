@@ -12,7 +12,8 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useUser } from "@clerk/clerk-react";
+import { useAuth } from '@clerk/clerk-react'
+import payCart from "@/hooks/addtoPayCart";
 
 
 
@@ -20,8 +21,9 @@ const Info = ({product}) => {
     
     const [loading,setLoading] = useState(false);
     const cart = useCart();
+    const paycart= payCart();
     const router = useRouter();
-    const {user} = useUser();
+    const {userId} = useAuth();
     
     const onAddToCard =(event)=>{
         setLoading(true)
@@ -35,13 +37,22 @@ const Info = ({product}) => {
 
     const discountPrice = product.price - (product.price * (product.discount / 100));
 
+    //buy now handler
+    const onBuyNow = ()=>{
+      setLoading(true);
+      cart.addItem(product);
+      paycart.addItemToPay(product);
+      router.push(`/cart/${userId}`)
+      setLoading(false);
+    }
+
     //create conversation 
-    const CreateConversation = async () => {
+    const CreateConversation = async() => {
       setLoading(true);
       
       try {
         const res = await axios.post("/api/conversation/create", { storeId: product.storeId });
-        router.push(`/conversation/${user.id}/${res.data.id}`);
+        router.push(`/conversation/${userId}/${res.data.id}`);
       } catch (error) {
         console.error("Failed to create conversation:", error);
       } finally {
@@ -86,7 +97,7 @@ const Info = ({product}) => {
                                     disabled={loading}
                                 />
                                 <CustomButton
-                                    onClick={()=>{}}
+                                    onClick={onBuyNow}
                                     icon={<CreditCard size={20} className="text-gray-600"/>}
                                     name="Buy now"
                                     disabled={loading}
