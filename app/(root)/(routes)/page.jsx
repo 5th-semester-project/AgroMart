@@ -28,7 +28,7 @@ const HomePage = async() => {
           <NavigationMenubar/>
       </div>
       <CarouselPlugin />
-      <FrontFullProducts initialProduct={disProducts}topSelling={topSelling}/>
+      <FrontFullProducts initialProduct={disProducts}topSelling={topSelling} stores={stores}/>
       <Footer/>
     </div>
    );

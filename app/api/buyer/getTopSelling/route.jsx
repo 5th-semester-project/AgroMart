@@ -18,6 +18,7 @@ export async function GET() {
         ...product,
         orderCount: product.orderIds.length
       }))
+      .filter((product) => product.orderCount > 0)
       .sort((a, b) => b.orderCount - a.orderCount); 
 
 

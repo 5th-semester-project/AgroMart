@@ -8,10 +8,11 @@ import HighestDesProductList from "@/components/buyer-components/highest-descoun
 import getSearchProducts from "@/actions/get-searchProduct";
 import FilterComponents from "./filterComponents";
 import { Button } from "@/components/ui/button";
+import StoreCardlist from "./buyer-components/store-list";
 
 
 
-const FrontFullProducts = ({ initialProduct,topSelling }) => {
+const FrontFullProducts = ({ initialProduct,topSelling,stores }) => {
   const [isMounted, setIsMounted] = useState(false);
   const [searchResultDisplay, setSearchResultDisplay] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
@@ -65,7 +66,9 @@ const FrontFullProducts = ({ initialProduct,topSelling }) => {
             className="text-center"
             />
         </div>
-        <HighestDesProductList products={topSelling} />
+
+        {/* best selling products  name change but no issue.*/}
+        <HighestDesProductList products={topSelling} /> 
         <div className="flex my-5 w-full items-center justify-center">
             <Heading
             title="Top Performing Stores"
@@ -73,7 +76,7 @@ const FrontFullProducts = ({ initialProduct,topSelling }) => {
             className="text-center"
             />
         </div>
-        <HighestDesProductList products={initialProduct} />
+        <StoreCardlist plist={stores} />
       </>
       )}
 
