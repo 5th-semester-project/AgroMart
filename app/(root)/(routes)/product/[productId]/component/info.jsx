@@ -36,6 +36,11 @@ const Info = ({product}) => {
     if(!product) return null;
 
     const discountPrice = product.price - (product.price * (product.discount / 100));
+    
+
+    // const totalReviews = product.reviews.length;
+
+    // const averageRating = (product.reviews.reduce((sum, review) => sum + review.rating, 0) / totalReviews).toFixed(1);
 
     //buy now handler
     const onBuyNow = ()=>{
@@ -73,7 +78,7 @@ const Info = ({product}) => {
                               <div className="flex gap-4 my-1">
                                   {/* have to update after creating the rating schema */}
                                   <StarRatings
-                                    rating={4}
+                                    rating={ 0 }
                                     starRatedColor="orange"
                                     numberOfStars={5}
                                     name='rating'
