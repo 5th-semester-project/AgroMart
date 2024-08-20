@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 
 
 
-const FrontFullProducts = ({ initialProduct }) => {
+const FrontFullProducts = ({ initialProduct,topSelling }) => {
   const [isMounted, setIsMounted] = useState(false);
   const [searchResultDisplay, setSearchResultDisplay] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
@@ -65,11 +65,11 @@ const FrontFullProducts = ({ initialProduct }) => {
             className="text-center"
             />
         </div>
-        <HighestDesProductList products={initialProduct} />
+        <HighestDesProductList products={topSelling} />
         <div className="flex my-5 w-full items-center justify-center">
             <Heading
-            title="Top selling Stores"
-            description="Explore more products from the top selling stores"
+            title="Top Performing Stores"
+            description="Explore more products from the top performing stores"
             className="text-center"
             />
         </div>

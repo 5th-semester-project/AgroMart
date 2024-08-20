@@ -30,7 +30,7 @@ const CustomerReviews = ({ reviews }) => {
                 <h1 className="font-bold text-xl text-gray-900 py-10">Customer Reviews ({totalReviews})</h1>
                 <h1 className="font-bold text-6xl text-gray-900">{averageRating}</h1>
                 <StarRatings
-                    rating={parseFloat(averageRating)}
+                    rating={averageRating | 0}
                     starRatedColor="orange"
                     numberOfStars={5}
                     name='rating'

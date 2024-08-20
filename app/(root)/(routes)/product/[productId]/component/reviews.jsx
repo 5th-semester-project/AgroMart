@@ -4,7 +4,7 @@
 import React from 'react';
 import ReviewCart from './reviewCard';
 
-const ReviewsList = ({reviews}) => {
+const ReviewsList = ({reviews=[]}) => {
 
     return ( 
         <>

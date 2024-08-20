@@ -10,6 +10,9 @@ export async function GET(req,{params}){
         const products = await prismadb.product.findMany({
             where:{
                 categoryId:subCategoryId
+            },
+            include:{
+                reviews:true
             }
         });
         return NextResponse.json(products);

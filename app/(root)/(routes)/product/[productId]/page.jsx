@@ -40,7 +40,7 @@ const ProductPage = async({params}) => {
           <Tabs defaultValue="products" className="w-full mt-6">
             <TabsList>
               <TabsTrigger value="products">RelatedProducts</TabsTrigger>
-              <TabsTrigger value="reviews">Reviews(500)</TabsTrigger>
+              <TabsTrigger value="reviews">Reviews({reviews.length})</TabsTrigger>
             </TabsList>
               <TabsContent value="products" >
                 <SubCatProducts plist={combinedProducts} />

@@ -82,7 +82,7 @@ const Info = ({product}) => {
                                     />
 
                                     {/* have to update after create the orders schema */}
-                                  <p className="text-sm text-muted-foreground">5000+ sold</p>
+                                  <p className="text-sm text-muted-foreground">{product.orderIds.length}+ sold</p>
                               </div>
                               <div className="flex items-baseline gap-x-3 gap-y-0 my-3">
                                 <p className={cn("text-2xl font-bold text-black  ", (product.discount >0) && "line-through text-muted-foreground text-lg font-semibold italic")}>{formatter.format(product.price)}</p> 
