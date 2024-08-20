@@ -12,7 +12,8 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useUser } from "@clerk/clerk-react";
+import { useAuth } from '@clerk/clerk-react'
+import payCart from "@/hooks/addtoPayCart";
 
 
 
@@ -20,8 +21,9 @@ const Info = ({product}) => {
     
     const [loading,setLoading] = useState(false);
     const cart = useCart();
+    const paycart= payCart();
     const router = useRouter();
-    const {user} = useUser();
+    const {userId} = useAuth();
     
     const onAddToCard =(event)=>{
         setLoading(true)
@@ -34,14 +36,42 @@ const Info = ({product}) => {
     if(!product) return null;
 
     const discountPrice = product.price - (product.price * (product.discount / 100));
+    
+
+    const calculateRating = () => {
+      const reviews = product.reviews;
+  
+      if (!reviews || reviews.length === 0) {
+          return 0; 
+      }
+  
+      
+      const totalRating = reviews.reduce((sum, review) => {
+          return sum + review.rating;
+      }, 0);
+  
+      
+      const averageRating = totalRating / reviews.length;
+  
+      return averageRating;
+  }
+
+    //buy now handler
+    const onBuyNow = ()=>{
+      setLoading(true);
+      cart.addItem(product);
+      paycart.addItemToPay(product);
+      router.push(`/cart/${userId}`)
+      setLoading(false);
+    }
 
     //create conversation 
-    const CreateConversation = async () => {
+    const CreateConversation = async() => {
       setLoading(true);
       
       try {
         const res = await axios.post("/api/conversation/create", { storeId: product.storeId });
-        router.push(`/conversation/${user.id}/${res.data.id}`);
+        router.push(`/conversation/${userId}/${res.data.id}`);
       } catch (error) {
         console.error("Failed to create conversation:", error);
       } finally {
@@ -62,7 +92,7 @@ const Info = ({product}) => {
                               <div className="flex gap-4 my-1">
                                   {/* have to update after creating the rating schema */}
                                   <StarRatings
-                                    rating={4}
+                                    rating={calculateRating()}
                                     starRatedColor="orange"
                                     numberOfStars={5}
                                     name='rating'
@@ -71,7 +101,7 @@ const Info = ({product}) => {
                                     />
 
                                     {/* have to update after create the orders schema */}
-                                  <p className="text-sm text-muted-foreground">5000+ sold</p>
+                                  <p className="text-sm text-muted-foreground">{product.orderIds.length}+ sold</p>
                               </div>
                               <div className="flex items-baseline gap-x-3 gap-y-0 my-3">
                                 <p className={cn("text-2xl font-bold text-black  ", (product.discount >0) && "line-through text-muted-foreground text-lg font-semibold italic")}>{formatter.format(product.price)}</p> 
@@ -86,7 +116,7 @@ const Info = ({product}) => {
                                     disabled={loading}
                                 />
                                 <CustomButton
-                                    onClick={()=>{}}
+                                    onClick={onBuyNow}
                                     icon={<CreditCard size={20} className="text-gray-600"/>}
                                     name="Buy now"
                                     disabled={loading}

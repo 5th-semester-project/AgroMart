@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from "react";
 import {
     AlertDialog,
     AlertDialogContent,
@@ -19,14 +20,21 @@ import { formatter } from "@/lib/utils";
 import { ShoppingCart, Bookmark, CreditCard } from "lucide-react";
 import { Separator } from "../ui/separator";
 import useCart from "@/hooks/addtocardStore";
+import payCart from "@/hooks/addtoPayCart";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
+import { useAuth } from '@clerk/clerk-react'
 
 
   export function ProductPreview() {
 
+    const [loading, setLoading] = useState(false);
+    const {userId} = useAuth();
     const {isOpen,close} = usePreviewModal();
     const cart = useCart();
+    const paycart = payCart();
     const product = usePreviewModal((state) => state.product);
+    const router = useRouter();
 
     if (!product) {
       return null;
@@ -38,8 +46,16 @@ import { cn } from "@/lib/utils";
 
       cart.addItem(product);
     }
-
-
+   
+    //buy now handler
+    const onBuyNow = ()=>{
+      setLoading(true);
+      cart.addItem(product);
+      paycart.addItemToPay(product);
+      setLoading(false);
+      close();
+      router.push(`/cart/${userId}`)
+    }
 
     //calculate the discount price
     const discountPrice = product.price - (product.price * product.discount / 100);
@@ -82,11 +98,13 @@ import { cn } from "@/lib/utils";
                                     onClick={onAddToCard}
                                     icon={<ShoppingCart size={20} className="text-gray-600"/>}
                                     name="Add to cart"
+                                    disabled={loading}
                                 />
                                 <CustomButton
-                                    onClick={()=>{}}
+                                    onClick={onBuyNow}
                                     icon={<CreditCard size={20} className="text-gray-600"/>}
                                     name="Buy now"
+                                    disabled={loading}
                                 />
                               </div>
                               <div className="mt-3">

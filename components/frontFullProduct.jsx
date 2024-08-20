@@ -8,14 +8,14 @@ import HighestDesProductList from "@/components/buyer-components/highest-descoun
 import getSearchProducts from "@/actions/get-searchProduct";
 import FilterComponents from "./filterComponents";
 import { Button } from "@/components/ui/button";
+import StoreCardlist from "./buyer-components/store-list";
 
 
 
-const FrontFullProducts = ({ initialProduct }) => {
+const FrontFullProducts = ({ initialProduct,topSelling,stores }) => {
   const [isMounted, setIsMounted] = useState(false);
   const [searchResultDisplay, setSearchResultDisplay] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -25,8 +25,6 @@ const FrontFullProducts = ({ initialProduct }) => {
 
 
   const handleSearch = async (location, category) => {
-    setLoading(true);
-
     try {
         const result = await getSearchProducts(location, category);
         setSearchResult(result);
@@ -34,7 +32,6 @@ const FrontFullProducts = ({ initialProduct }) => {
       console.log(error);
     }
 
-    setLoading(false);
     setSearchResultDisplay(true);
   }
 
@@ -69,15 +66,17 @@ const FrontFullProducts = ({ initialProduct }) => {
             className="text-center"
             />
         </div>
-        <HighestDesProductList products={initialProduct} />
+
+        {/* best selling products  name change but no issue.*/}
+        <HighestDesProductList products={topSelling} /> 
         <div className="flex my-5 w-full items-center justify-center">
             <Heading
-            title="Top selling Stores"
-            description="Explore more products from the top selling stores"
+            title="Top Performing Stores"
+            description="Explore more products from the top performing stores"
             className="text-center"
             />
         </div>
-        <HighestDesProductList products={initialProduct} />
+        <StoreCardlist plist={stores} />
       </>
       )}
 

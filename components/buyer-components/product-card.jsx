@@ -113,7 +113,7 @@ export function ProductCard({product}) {
                   </div>
               </div>
         </CardHeader>
-      <CardTitle className="px-3 overflow-hidden mr-3">{product.name}</CardTitle>
+      <CardTitle className="px-3 py-2 overflow-hidden mr-3 font-medium truncate">{product.name}</CardTitle>
       <CardDescription className="ml-3 flex gap-4 my-1">
 
         {/* have to update after creating the rating schema */}

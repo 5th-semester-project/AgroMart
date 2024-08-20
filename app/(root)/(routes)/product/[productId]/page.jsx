@@ -12,6 +12,8 @@ import getSubCatProducts from "@/actions/get-subCatProducts";
 import SubCatProducts from "@/components/buyer-components/subCatList";
 import getMainCatProduct from "@/actions/get-mainCatProducts";
 import getSeller from "@/actions/get-seller";
+import getReviews from "@/actions/get-reviews";
+import ReviewsList from "./component/reviews";
 
 
 
@@ -19,6 +21,8 @@ const ProductPage = async({params}) => {
 
 
     const data = await getProduct(params.productId);  
+
+    const reviews = await getReviews(params.productId);
 
 
     const subproducts = await getSubCatProducts(data.categoryId);
@@ -32,16 +36,17 @@ const ProductPage = async({params}) => {
     return ( 
         <div className="px-4">
           <Info product={data}/>
-          <CustomerReviews />
+          <CustomerReviews reviews={reviews}/>
           <Tabs defaultValue="products" className="w-full mt-6">
             <TabsList>
               <TabsTrigger value="products">RelatedProducts</TabsTrigger>
-              <TabsTrigger value="reviews">Reviews(500)</TabsTrigger>
+              <TabsTrigger value="reviews">Reviews({reviews.length})</TabsTrigger>
             </TabsList>
               <TabsContent value="products" >
                 <SubCatProducts plist={combinedProducts} />
               </TabsContent>
               <TabsContent value="reviews">
+                <ReviewsList reviews={reviews}/>
               </TabsContent>
           </Tabs>
         </div>

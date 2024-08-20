@@ -63,8 +63,8 @@ const mainCategories = [
 const SearchBar = ({onSearch}) => {
 
     const [isMounted, setIsMounted] = useState(false);
-    const [location, setLocation] = useState('all');
-    const [category, setCategory] = useState('all');
+    const [location, setLocation] = useState();
+    const [category, setCategory] = useState();
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {

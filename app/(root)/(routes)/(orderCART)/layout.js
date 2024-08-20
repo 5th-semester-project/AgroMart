@@ -3,16 +3,13 @@ import prismadb from "@/lib/prismadb";
 import { NavigationMenubar } from "@/components/mainNav-fontpage";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from 'next/navigation';
-import toast from "react-hot-toast";
 
 const cartLayout = async({children}) => {
 
     const {userId} = auth();
-
-   console.log("userId in the layout: ", userId)
    
     if(!userId){
-        redirect("/sign-in")
+        return redirect("/sign-in");
     }
 
     const buyerExist = await prismadb.buyer.findFirst({
@@ -22,7 +19,7 @@ const cartLayout = async({children}) => {
     });
 
     if(!buyerExist){
-        redirect("/sign-in")
+        return redirect("/sign-in");
     }
 
     return (
