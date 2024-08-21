@@ -4,7 +4,7 @@ import { useMemo,useState,useEffect} from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import BadgeAvatars from "./avatar";
-import {  ChevronLeft, MoreHorizontal, Trash2 } from "lucide-react";
+import {  ArrowLeft , ChevronLeft, MoreHorizontal, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ConvItem from "./convItem";
 import MessageBody from "./messageBody";
@@ -21,6 +21,7 @@ import toast from "react-hot-toast";
 import { useParams, useRouter } from "next/navigation";
 import { format } from "date-fns";
 import {pusherClient} from "@/lib/pusher";
+import { Button } from "@/components/ui/button";
 
 
 const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) => {
@@ -146,9 +147,14 @@ const Conversation = ({convList,isDisplayMessages,currentConversation,Select}) =
                     open ? "flex w-3/4": "hidden"
                 )}>
                     <div className="p-5">
-                        <div className="absolute w-full bg-gray-200">
-                            <h4 className="mb-4 text-2xl font-bold leading-none flex">Chats (<p className="font-semibold text-xl">{convList.length}</p>)</h4>
-                            <Separator className="bg-gray-400"/>
+                        <div>
+                            <div className="absolute w-full bg-gray-200">
+                                <div className="flex flex-row items-center gap-2 mb-3">
+                                    <ArrowLeft  className="w-10 h-7  hover:bg-gray-300 text-bold rounded-lg cursor-pointer" onClick={() => router.back()}/>
+                                    <h4 className="text-2xl font-bold leading-none flex">Chats (<p className="font-semibold text-xl">{convList.length}</p>)</h4>
+                                </div>
+                                <Separator className="bg-gray-400"/>
+                            </div>
                         </div>
                         <div className="mt-10">  </div>
                         {converList.map((conv, index) => (
