@@ -1,30 +1,25 @@
 "use client";
 
-import React, { useState, ChangeEvent, KeyboardEvent, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Bot } from 'lucide-react';
 
-interface Message {
-  sender: string;
-  text: string;
-}
-
-const Chat: React.FC = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [userInput, setUserInput] = useState<string>('');
-  const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const chatboxRef = useRef<HTMLDivElement>(null);
+const Chat = () => {
+  const [messages, setMessages] = useState([]);
+  const [userInput, setUserInput] = useState('');
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const messagesEndRef = useRef(null);
+  const chatboxRef = useRef(null);
 
   const sendMessage = async () => {
     if (userInput.trim() === '') return;
 
-    const userMessage: Message = { sender: 'User', text: userInput };
+    const userMessage = { sender: 'User', text: userInput };
     setMessages(prevMessages => [...prevMessages, userMessage]);
 
     try {
       const response = await axios.post('/api/chat', { userInput });
-      const botMessage: Message = { sender: 'AgroMart Bot', text: response.data.response };
+      const botMessage = { sender: 'AgroMart Bot', text: response.data.response };
       setMessages(prevMessages => [...prevMessages, botMessage]);
     } catch (error) {
       console.error('Error sending message:', error);
@@ -33,11 +28,11 @@ const Chat: React.FC = () => {
     setUserInput('');
   };
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e) => {
     setUserInput(e.target.value);
   };
 
-  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       sendMessage();
     }
@@ -54,8 +49,8 @@ const Chat: React.FC = () => {
   }, [messages]);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (chatboxRef.current && !chatboxRef.current.contains(event.target as Node)) {
+    const handleClickOutside = (event) => {
+      if (chatboxRef.current && !chatboxRef.current.contains(event.target)) {
         setIsChatOpen(false);
       }
     };
@@ -69,7 +64,7 @@ const Chat: React.FC = () => {
   return (
     <div className="fixed bottom-5 right-5 w-[350px] z-[123456]">
       {isChatOpen && (
-        <div className="fixed bottom-[60px] right-5 flex flex-col bg-gray-100 w-full max-w-[350px] h-[450px] shadow-lg rounded-t-2xl transition-all ease-in-out duration-500 z-[123456]" ref={chatboxRef}>
+        <div className="fixed bottom-[60px] right-5 flex flex-col bg-gray-100 w-full max-w-[350px] h-[450px] shadow-lg rounded-t-2xl transition-all ease-in-out duration-500 z-[123456] rounded-b-2xl" ref={chatboxRef}>
           <div className="flex items-center bg-gradient-to-r from-green-700 to-green-500 p-4 rounded-t-2xl text-white shadow-md">
             <div className="mr-2">
               <img src="https://img.icons8.com/color/48/000000/tractor.png" alt="AgroMart Support" />

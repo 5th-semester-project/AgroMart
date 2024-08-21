@@ -19,12 +19,12 @@ const HomePage = async() => {
   return ( 
     <>
  
-      <Chat/> 
+      
       <div className="px-4 flex justify-between items-center">
           <h1>Logo</h1>  
           <NavigationMenubar/>
       </div>
-      
+      <Chat/> 
       <CarouselPlugin />
       <FrontFullProducts initialProduct={disProducts}topSelling={topSelling} stores={stores}/>
       <Footer/>

@@ -1,4 +1,3 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // Initialize Google Generative AI
@@ -18,7 +17,7 @@ const generationConfig = {
   responseMimeType: 'text/plain',
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
       const userInput = req.body?.userInput;
