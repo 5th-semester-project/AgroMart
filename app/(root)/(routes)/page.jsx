@@ -30,6 +30,7 @@ const HomePage = async() => {
           products={disProducts}
         />
       <Footer/>
+      
     </div>
    );
 }
