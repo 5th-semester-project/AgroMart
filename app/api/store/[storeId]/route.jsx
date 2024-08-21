@@ -5,17 +5,14 @@ import { NextResponse } from "next/server";
 
 // in here params should be as a second argument.if it first argument it will not works 
 export async function PATCH(req, { params }) {
-    
-   
-  
-    
+
   
     try {
       const { userId } = auth();
       const { storeId } = params;
       const body = await req.json();
   
-      
+
       const { 
         StoreName,
         disLabel,

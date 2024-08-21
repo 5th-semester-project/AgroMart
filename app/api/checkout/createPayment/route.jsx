@@ -79,6 +79,20 @@ export async function POST(req){
             }
         })
 
+        await prismadb.product.updateMany({
+            where:{
+                id:{
+                    in:productIds
+                }
+            },
+            data:{
+                orderIds:{
+                    push:orderId
+                }
+            }
+        
+        })
+
         return NextResponse.json(payment);
 
 

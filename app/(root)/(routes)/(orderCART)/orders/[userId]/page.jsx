@@ -23,6 +23,7 @@ const OrderPage = async({params}) => {
                 products:{
                     include:{
                         category:true,
+                        reviews: true
                     }
                 }
             },
@@ -34,19 +35,28 @@ const OrderPage = async({params}) => {
 
     
     const mappedOrders = orders.flatMap(order =>
-        order.products.map(product => ({
-          image: product.imageUrls[0].url,
-          storeId: product.storeId,
-          name: product.name,
-          status: order.status,
-          category: product.category.name,
-          price: product.price - (product.discount / 100 * product.price),
-          orderId: order.payId,
-          createdAt:format(order.createdAt,"MMMM do,yyyy"),
-          buyer: order.buyer,
-        }))
+        order.products.map(product => {
+            
+          const userReview = product.reviews.find(review => review.buyerId === params.userId && review.payId === order.payId);
+      
+          return {
+            image: product.imageUrls[0].url,
+            productId: product.id,
+            storeId: product.storeId,
+            name: product.name,
+            status: order.status,
+            category: product.category.name,
+            price: product.price - (product.discount / 100 * product.price),
+            orderId: order.payId,
+            createdAt: format(order.createdAt, "MMMM do, yyyy"),
+            buyer: order.buyer,
+            rating: userReview ? userReview.rating : undefined,
+            comment: userReview ? userReview.comment : undefined,
+          };
+        })
       );
       
+
     return ( 
         <div className="px-4">
             <h1 className="font-bold text-xl mt-3">Orders Info</h1>

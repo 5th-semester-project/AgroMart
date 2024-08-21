@@ -35,6 +35,26 @@ export function ProductCard({product}) {
     const discountPrice = product.price - (product.price * product.discount / 100);
 
 
+    //calculate rating
+    const calculateRating = () => {
+      const reviews = product.reviews;
+  
+      if (!reviews || reviews.length === 0) {
+          return 0; 
+      }
+  
+      
+      const totalRating = reviews.reduce((sum, review) => {
+          return sum + review.rating;
+      }, 0);
+  
+      
+      const averageRating = totalRating / reviews.length;
+  
+      return averageRating;
+  }
+
+
     //add product to cart
     const onAddToCard =(event)=>{
       event.stopPropagation();
@@ -65,15 +85,15 @@ export function ProductCard({product}) {
     }
 
   return (
-    <Card className="w-[270px] hover:scale-105 transition hover:shadow-md cursor-pointer" onClick={productRouting}>
+    <Card className="w-[220px] hover:scale-105 transition hover:shadow-md cursor-pointer" onClick={productRouting}>
         <CardHeader className="relative">
           { (product.discount > 0) && <div className="absolute inset-y-4 ">
-                <p className="bg-green-600 text-white text-xl font-semibold p-3 rounded-full italic">{product.discount}% </p>
+                <p className="bg-green-600 text-white text-xl font-semibold p-2 rounded-full italic">{product.discount}% </p>
             </div>}
             <img 
                 src={product.imageUrls[0].url}
                 alt="product" 
-                className="w-full h-[280px] object-cover rounded-lg" 
+                className="w-full h-[200px] object-cover rounded-lg" 
             />
             <div className="opacity-40  hover:opacity-100 transition absolute w-full bottom-5 ">
                   <div className="flex gap-x-5 justify-center items-center">
@@ -93,12 +113,12 @@ export function ProductCard({product}) {
                   </div>
               </div>
         </CardHeader>
-      <CardTitle className="px-3 overflow-hidden mr-3">{product.name}</CardTitle>
+      <CardTitle className="px-3 py-2 overflow-hidden mr-3 font-medium truncate">{product.name}</CardTitle>
       <CardDescription className="ml-3 flex gap-4 my-1">
 
         {/* have to update after creating the rating schema */}
         <StarRatings
-          rating={4}
+          rating={calculateRating()}
           starRatedColor="orange"
           numberOfStars={5}
           name='rating'
@@ -107,7 +127,7 @@ export function ProductCard({product}) {
           />
 
           {/* have to update after create the orders schema */}
-        <p className="text-sm text-muted-foreground">5000+ sold</p>
+        <p className="text-sm text-muted-foreground">{product.orderIds.length}+ sold</p>
 
       </CardDescription>
       <div className="flex items-baseline gap-x-3 gap-y-0 ml-3 my-4">

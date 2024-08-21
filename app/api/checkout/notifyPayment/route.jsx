@@ -62,6 +62,8 @@ export async function POST(req) {
             }
         });
 
+       
+
         return new NextResponse("Payment status updated", { status: 200 });
 
     } catch (error) {
