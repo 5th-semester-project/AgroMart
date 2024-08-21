@@ -85,7 +85,7 @@ export function ProductCard({product}) {
     }
 
   return (
-    <Card className="w-[220px] hover:scale-105 transition hover:shadow-md cursor-pointer" onClick={productRouting}>
+    <Card className="w-[220px] hover:scale-105 transition hover:shadow-md cursor-pointer bg-green-100" onClick={productRouting}>
         <CardHeader className="relative">
           { (product.discount > 0) && <div className="absolute inset-y-4 ">
                 <p className="bg-green-600 text-white text-xl font-semibold p-2 rounded-full italic">{product.discount}% </p>

@@ -29,7 +29,7 @@ export function StoreCard({store}) {
     }
 
   return (
-    <Card className="w-[220px] hover:scale-105 transition hover:shadow-md cursor-pointer" onClick={storeRouting}>
+    <Card className="w-[220px] hover:scale-105 transition hover:shadow-md cursor-pointer bg-green-100" onClick={storeRouting}>
         <CardHeader className="relative">
           <div className="absolute inset-y-1">
             <img 

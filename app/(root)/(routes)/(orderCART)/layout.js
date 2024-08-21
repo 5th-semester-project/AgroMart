@@ -3,6 +3,7 @@ import prismadb from "@/lib/prismadb";
 import { NavigationMenubar } from "@/components/mainNav-fontpage";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from 'next/navigation';
+import Link from 'next/link';
 
 const cartLayout = async({children}) => {
 
@@ -24,11 +25,19 @@ const cartLayout = async({children}) => {
 
     return (
         <>
-         <div className="px-4 flex justify-between items-center">
-            <h1>Logo</h1>
+         <div className="px-4 flex justify-between items-center bg-gray-200">
+            <Link href="/">
+                <img
+                    src="/logo.png"
+                    alt="Logo"
+                    className="w-20 h-13 cursor-pointer" 
+                />
+            </Link>
             <NavigationMenubar/>
         </div>
+        <div className="px-10">
             {children}
+        </div>
         </>
       );
 }

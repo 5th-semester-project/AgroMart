@@ -50,8 +50,8 @@ const SmallCard = ({product,type}) => {
 
 
     return ( 
-        <div>
-            <div className="flex flex-row items-center justify-between py-4 px-5">
+        <div className="bg-gray-300 hover:bg-gray-400 my-1 py-2 px-5 mx-1 rounded-2xl">
+            <div className="flex flex-row items-center justify-between ">
                 <div className="flex flex-row items-center cursor-pointer" onClick={()=>handleRout(product.id)}>
                     <img src={product.imageUrls[0].url} alt="" className="w-12 h-12 rounded-md"/>
                     <div className="flex flex-col ml-2">

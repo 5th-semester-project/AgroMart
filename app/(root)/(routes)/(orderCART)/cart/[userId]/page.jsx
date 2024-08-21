@@ -15,7 +15,7 @@ const CartPage = async({params}) => {
     const buyer = await getBuyerData(params.userId);
 
     return ( 
-        <div className="flex flex-col items-center md:items-start md:flex-row pr-4">
+        <div className="flex flex-col items-center md:items-start md:flex-row pr-14 px-12">
             <div className="w-full md:w-3/5">
                 <BuyerRegModal initialdata={buyer}/>
                 <DelivaryDetails

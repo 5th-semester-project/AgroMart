@@ -37,7 +37,7 @@ const ProductPage = async({params}) => {
         <div className="px-4">
           <Info product={data}/>
           <CustomerReviews reviews={reviews}/>
-          <Tabs defaultValue="products" className="w-full mt-6">
+          <Tabs defaultValue="products" className="w-full mt-6 px-12">
             <TabsList>
               <TabsTrigger value="products">RelatedProducts</TabsTrigger>
               <TabsTrigger value="reviews">Reviews({reviews.length})</TabsTrigger>
