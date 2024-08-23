@@ -7,6 +7,7 @@ import CarouselPlugin from "@/components/ImageScrolling";
 import FrontFullProducts from "@/components/frontFullProduct";
 import getTopSellingProducts from "@/actions/get-topSellings";
 import getTopPerformStore from "@/actions/get-topStores";
+import Chat from "@/components/chatBot";
 
 
 
@@ -32,6 +33,7 @@ const HomePage = async() => {
       </div>
       <CarouselPlugin />
       <FrontFullProducts initialProduct={disProducts}topSelling={topSelling} stores={stores}/>
+      <Chat/>
       <Footer/>
     </div>
    );

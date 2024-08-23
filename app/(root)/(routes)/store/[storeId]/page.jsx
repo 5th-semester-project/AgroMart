@@ -24,8 +24,8 @@ const StorePage = async({params}) => {
 
     
     return ( 
-        <div className="px-4">
-            <h1 className="text-3xl font-bold py-4">{store?.name}</h1>
+        <div className="px-12">
+            <h1 className="md:text-3xl sm:text-lg font-bold py-4">{store?.name}</h1>
             <BannerPreview
                     disLabel={store?.disLabel}
                     imagUrl={store?.imageUrl}

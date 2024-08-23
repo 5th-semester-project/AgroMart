@@ -3,7 +3,7 @@ import prismadb from '@/lib/prismadb';
 import { redirect } from 'next/navigation';
 import React from 'react'
 import ToastCall from "@/components/toastCall"
-import toast from 'react-hot-toast';
+import Chat from "@/components/chatBot"
 
 
 export default async function BuyerPageLayout({children}) {
@@ -47,6 +47,7 @@ export default async function BuyerPageLayout({children}) {
 
   return (
     <>
+        <Chat/>
       {children}
     </>
   )

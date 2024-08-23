@@ -4,6 +4,7 @@ import { NavigationMenubar } from "@/components/mainNav-fontpage";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
+import Chat from "@/components/chatBot";
 
 const cartLayout = async({children}) => {
 
@@ -36,6 +37,7 @@ const cartLayout = async({children}) => {
             <NavigationMenubar/>
         </div>
         <div className="px-10">
+            <Chat/>
             {children}
         </div>
         </>

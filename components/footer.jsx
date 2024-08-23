@@ -51,7 +51,7 @@ const Footer = () => {
             <p className="absolute top-10 right-12 text-gray-600">
               <a
                 href="mailto:contact@agromart.com"
-                className="text-gray-600 underline"
+                className="flex text-gray-600 underline"
               >
                 contact@agromart.com
               </a>

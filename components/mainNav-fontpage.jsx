@@ -75,6 +75,7 @@ export function NavigationMenubar() {
               {wishlist.map((item) => (
                 <SmallCard key={item.id} product={item} type="watchlist" />
               ))}
+              <div className="my-5"/>
             </ScrollArea>
           </NavigationMenuContent>
         </NavigationMenuItem>
@@ -89,6 +90,7 @@ export function NavigationMenubar() {
               {cartlist.map((item) => (
                 <SmallCard key={item.id} product={item} type="cart" />
               ))}
+              <div className="my-5"/>
             </ScrollArea>
           </NavigationMenuContent>
         </NavigationMenuItem>}
@@ -120,6 +122,7 @@ export function NavigationMenubar() {
               {wishlist.map((item) => (
                 <SmallCard key={item.id} product={item} type="watchlist" />
               ))}
+              <div className="my-5"/>
             </ScrollArea>
           </NavigationMenuContent>
         </NavigationMenuItem>

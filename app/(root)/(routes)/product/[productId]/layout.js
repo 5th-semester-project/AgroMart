@@ -1,5 +1,6 @@
 import { NavigationMenubar } from "@/components/mainNav-fontpage";
 import Link from 'next/link';
+import Chat from "@/components/chatBot";
 
 
 const ProductLayout = ({children}) => {
@@ -18,6 +19,7 @@ const ProductLayout = ({children}) => {
             </div>
             <NavigationMenubar/>
         </div>
+        <Chat/>
         {children}
         </>
      );
