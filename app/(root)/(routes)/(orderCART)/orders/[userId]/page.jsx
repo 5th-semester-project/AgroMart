@@ -63,7 +63,7 @@ const OrderPage = async({params}) => {
             <Tabs defaultValue="Processing" className="w-full py-10">
                 <TabsList>
                     <TabsTrigger value="Processing">
-                        Processing ({5})
+                        Processing ({mappedOrders.length})
                     </TabsTrigger>
                     <TabsTrigger value="Shipped">
                         Shipped ({5})

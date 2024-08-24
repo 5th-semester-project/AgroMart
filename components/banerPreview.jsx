@@ -19,8 +19,8 @@ const BannerPreview = ({
 
     return ( 
         <div className="flex justify-center items-center">
-            <div className={cn("relative w-full md:w-4/5 ",className)}>
-                <AspectRatio ratio={16 / 9}>
+            <div className={cn("relative w-full",className)}>
+                <AspectRatio ratio={20 / 9}>
                     {imagUrl ? (
                         <Image src={imagUrl} layout="fill" alt="Image" className="flex rounded-md object-cover z-0" />
                     ) : (

@@ -88,7 +88,7 @@ const SearchBar = ({onSearch}) => {
       };
 
     return ( 
-        <div className='flex flex-row text-center justify-center items-center bg-white rounded-lg'>
+        <div className='flex flex-row text-center justify-center items-center bg-gray-50 bg-opacity-55 rounded-lg '>
             <Box sx={{ minWidth: 200, margin:2 }}>
                 <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">Location</InputLabel>

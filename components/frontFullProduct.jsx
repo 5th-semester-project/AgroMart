@@ -12,7 +12,7 @@ import StoreCardlist from "./buyer-components/store-list";
 
 
 
-const FrontFullProducts = ({ initialProduct,topSelling,stores }) => {
+const FrontFullProducts = ({ initialProduct,topSelling,stores}) => {
   const [isMounted, setIsMounted] = useState(false);
   const [searchResultDisplay, setSearchResultDisplay] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
@@ -41,17 +41,18 @@ const FrontFullProducts = ({ initialProduct,topSelling,stores }) => {
 
   return (
     <>
-      <div className="flex absolute inset-0 justify-center items-center z-30">
-      <SearchBar onSearch={handleSearch} />
-      {
-       searchResultDisplay && <Button type="destructive" className="mx-3 bg-red-600" onClick={handleClear}>Clear</Button>
+      <div className="flex absolute inset-0 justify-center items-center">
+        <SearchBar onSearch={handleSearch} />
+        {
 
-      }
+        searchResultDisplay && <Button type="destructive" className="mx-3 bg-red-600" onClick={handleClear}>Clear</Button>
+
+        }
       </div>
       
       {!searchResultDisplay && (
         <>
-        <div className="flex my-5 w-full items-center justify-center">
+        <div className="flex my-7 w-full items-center justify-center">
             <Heading
             title="Top Discounted Products"
             description="Get the best deals on the top discounted products.Only for today!"
@@ -59,7 +60,7 @@ const FrontFullProducts = ({ initialProduct,topSelling,stores }) => {
             />
         </div>
         <HighestDesProductList products={initialProduct} />
-        <div className="flex my-5 w-full items-center justify-center">
+        <div className="flex my-7 w-full items-center justify-center">
             <Heading
             title="Top selling Products"
             description="Top selling products of the week"
@@ -69,7 +70,7 @@ const FrontFullProducts = ({ initialProduct,topSelling,stores }) => {
 
         {/* best selling products  name change but no issue.*/}
         <HighestDesProductList products={topSelling} /> 
-        <div className="flex my-5 w-full items-center justify-center">
+        <div className="flex my-7 w-full items-center justify-center">
             <Heading
             title="Top Performing Stores"
             description="Explore more products from the top performing stores"

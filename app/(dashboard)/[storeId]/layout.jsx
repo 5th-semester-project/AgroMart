@@ -2,6 +2,7 @@
 import prismadb from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import Chat from "@/components/chatBot";
 
 import NavBar from "@/components/navbar";
 
@@ -26,6 +27,7 @@ const DashBoardLayout= async({children,params}) =>{
     return (
         <>
             <NavBar/>
+            <Chat/>
             {children}
         </>
     )

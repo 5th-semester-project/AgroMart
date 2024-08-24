@@ -107,7 +107,7 @@ const Summery = ({buyer}) => {
                 </div>
             </div>
             <Button
-                disabled={items.length === 0 || isLoading}
+                disabled={paycartItems.length === 0 || isLoading}
                 className="w-full mt-6"
                 onClick={handlePayment}
             >
