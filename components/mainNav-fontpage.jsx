@@ -1,6 +1,6 @@
 "use client"
 
-import * as React from "react"
+import  React ,{useState,useEffect}from "react"
 import Link from "next/link"
 import { forwardRef } from "react"
 import { cn } from "@/lib/utils"
@@ -24,24 +24,31 @@ import { ArrowRight } from 'lucide-react';
 
 export function NavigationMenubar() {
 
+  const [isMounted,setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  },[])
+
+  
   const { userId } = useAuth();
   const router = useRouter()
-
+  
   const routeOrders = () => {
     router.push(`/orders/${userId}`)
   }
-
+  
   const routeCart = () => {
     router.push(`/cart/${userId}`)
   }
-
+  
   const routeConversation = () => {
     router.push(`/conversation/${userId}`)
   }
-
+  
   const wishlist = watchCart((state) => state.items)
   const cartlist = useCart((state) => state.items)
-
+  
   const components = [
     {
       title: userId ? "Login to Seller Account" : "Create Seller Account",
@@ -52,7 +59,9 @@ export function NavigationMenubar() {
       href: "/buyer"
     },
   ]
-
+  
+  if(!isMounted) return null
+  
   return (
     <NavigationMenu className="">
       <NavigationMenuList>
