@@ -5,6 +5,7 @@ import DelivaryDetails from "./components/delivary-details";
 import BuyerRegModal from "@/components/modals/delivary-modal";
 import ItemList from "./components/itemlist";
 import Summery from "./components/summery";
+import Footer from "@/components/footer";
 
 
 
@@ -15,6 +16,7 @@ const CartPage = async({params}) => {
     const buyer = await getBuyerData(params.userId);
 
     return ( 
+        <>
         <div className="flex flex-col items-center md:items-start md:flex-row pr-14 px-12">
             <div className="w-full md:w-3/5">
                 <BuyerRegModal initialdata={buyer}/>
@@ -27,8 +29,9 @@ const CartPage = async({params}) => {
             <div className="w-full md:w-2/5">
                 <Summery buyer={buyer}/>
             </div>
-
         </div>
+        <Footer/>
+        </>
      );
 }
  

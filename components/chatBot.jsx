@@ -71,7 +71,7 @@ const Chat = () => {
             </div>
             <div>
               <h4 className="text-lg">AgroMart Support</h4>
-              <p className="text-sm">Hello! Ask anything that you want</p>
+              <p className="text-sm">How can we assist you today?</p>
             </div>
           </div>
           <div className="mt-auto flex-1 p-2.5 overflow-y-auto bg-white">

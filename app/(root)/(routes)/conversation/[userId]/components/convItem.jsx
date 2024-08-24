@@ -76,10 +76,10 @@ const ConvItem =({conversation,currentCovId}) => {
 
     return ( 
         <div className={cn("flex items-center max-w-72 gap-2 p-3 cursor-pointer hover:bg-gray-300",(conversation.id === currentCovId ) && "bg-gray-300")} onClick= {handleRouting}>
-            <BadgeAvatars user ={conversation.users[0].name}/>
+            <BadgeAvatars user ={conversation.users[0]?.name || 'User'}/>
             <div className="overflow-hidden px-2 p-1 w-full">
                 <div className="flex justify-between items-center w-full">
-                    <h4 className="text-lg font-semibold leading-none overflow-hidden text-ellipsis whitespace-nowrap">{conversation.users[0].name.split(' ')[0]}</h4>
+                    <h4 className="text-lg font-semibold leading-none overflow-hidden text-ellipsis whitespace-nowrap">{conversation.users[0]?.name.split(' ')[0] || 'User'}</h4>
                     <p className="text-gray-500 text-xs leading-none overflow-hidden text-ellipsis whitespace-nowrap">{ format(new Date(lastMessageTime), 'h:mm a')}</p>
                 </div>
                 <div className="flex mt-1 justify-between items-center w-full">
