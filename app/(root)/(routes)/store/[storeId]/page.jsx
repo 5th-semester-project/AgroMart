@@ -11,6 +11,7 @@ import getStore from "@/actions/get-store";
 import getSeller from "@/actions/get-seller";
 import BannerPreview from "@/components/banerPreview";
 import getCategories from "@/actions/get-categories";
+import Footer from "@/components/footer";
 
 //ensure page fully reload
 export const revalidate = 0;
@@ -24,6 +25,7 @@ const StorePage = async({params}) => {
 
     
     return ( 
+        <>
         <div className="px-12">
             <h1 className="md:text-3xl sm:text-lg font-bold py-4">{store?.name}</h1>
             <BannerPreview
@@ -48,6 +50,8 @@ const StorePage = async({params}) => {
                 ))}
           </Tabs>
         </div>
+      <Footer/>
+      </>
      );
 }
  

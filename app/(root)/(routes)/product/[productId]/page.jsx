@@ -14,6 +14,7 @@ import getMainCatProduct from "@/actions/get-mainCatProducts";
 import getSeller from "@/actions/get-seller";
 import getReviews from "@/actions/get-reviews";
 import ReviewsList from "./component/reviews";
+import Footer from "@/components/footer";
 
 
 
@@ -34,6 +35,7 @@ const ProductPage = async({params}) => {
 
 
     return ( 
+      <>
         <div className="px-4">
           <Info product={data}/>
           <CustomerReviews reviews={reviews}/>
@@ -50,6 +52,8 @@ const ProductPage = async({params}) => {
               </TabsContent>
           </Tabs>
         </div>
+        <Footer/>
+        </>
      );
 }
  
