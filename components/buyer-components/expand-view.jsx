@@ -25,8 +25,7 @@ import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useAuth } from '@clerk/clerk-react'
 
-
-  export function ProductPreview() {
+export function ProductPreview() {
 
     const [loading, setLoading] = useState(false);
     const {userId} = useAuth();

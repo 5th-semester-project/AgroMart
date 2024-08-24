@@ -67,11 +67,11 @@ const Chat = () => {
         <div className="fixed bottom-[60px] right-5 flex flex-col bg-gray-100 w-full max-w-[350px] h-[450px] shadow-lg rounded-t-2xl transition-all ease-in-out duration-500 z-[123456] rounded-b-2xl" ref={chatboxRef}>
           <div className="flex items-center bg-gradient-to-r from-green-700 to-green-500 p-4 rounded-t-2xl text-white shadow-md">
             <div className="mr-2">
-              <img src="/logo.png" className='w-15 h-10' alt="AgroMart Support" />
+              <img src="https://img.icons8.com/color/48/000000/tractor.png" alt="AgroMart Support" />
             </div>
             <div>
               <h4 className="text-lg">AgroMart Support</h4>
-              <p className="text-sm">Hello! Ask anything that you want</p>
+              <p className="text-sm">Hello! How can we assist you today?</p>
             </div>
           </div>
           <div className="mt-auto flex-1 p-2.5 overflow-y-auto bg-white">
