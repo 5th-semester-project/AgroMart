@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // Initialize Google Generative AI
-const apiKey = process.env.REACT_APP_GEMINI_API_KEY;
+const apiKey = process.env.REACT_APP_GEMINI_API_KEY; // Make sure this is set in your .env.local
 const genAI = new GoogleGenerativeAI(apiKey);
 const model = genAI.getGenerativeModel({
   model: 'gemini-1.5-flash',
@@ -17,18 +17,18 @@ const generationConfig = {
   responseMimeType: 'text/plain',
 };
 
-export async function POST(req) {
+export async function POST(request) {
   try {
-    const {userInput} = await req.body;
-
-    console.log("response",userInput)
-
+    const { userInput } = await request.json();
     if (!userInput) {
-      return res.status(400).json({ error: 'Invalid request body' });
+      return new Response(
+        JSON.stringify({ error: 'Invalid request body' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
     }
 
-    // Start chat session
-    const chatSession = model.startChat({
+    // Start a chat session
+    const chatSession = await model.startChat({
       generationConfig,
       history: [
         {
@@ -37,33 +37,38 @@ export async function POST(req) {
         },
         {
           role: 'model',
-          parts: [{ text: 'Hello! 👋  How can I help you today? 😊 \n' }],
+          parts: [{ text: 'Hello! 👋 How can I help you today? 😊 \n' }],
         },
         {
           role: 'user',
-          parts: [{ text: 'what are the quession i can ask' }],
+          parts: [{ text: 'what are the questions I can ask?' }],
         },
         {
           role: 'model',
-          parts: [{ text: 'only agriculture related questions \n\n' }],
+          parts: [{ text: 'Only agriculture-related questions.\n\n' }],
         },
         {
           role: 'user',
-          parts: [{ text: 'how u can help me' }],
+          parts: [{ text: 'how can you help me?' }],
         },
         {
           role: 'model',
-          parts: [{ text: 'I can help you with a wide range of agriculture-related questions. Here are some examples:\n\n**General Agriculture:**\n\n* **Crop Information:**  I can provide details about different crops like their growing conditions, planting methods, pest control, and harvesting techniques. \n* **Soil Management:** I can help you understand soil types, soil testing, fertilization, and other soil management practices.\n* **Irrigation:** I can explain different irrigation methods, water conservation techniques, and water management strategies.\n* **Pest and Disease Control:** I can provide information on common pests and diseases affecting crops, their identification, and control measures. \n* **Farm Management:** I can offer insights into farm planning, financial management, and record-keeping.\n\n**Specific Topics:**\n\n* **Sustainable Agriculture:** I can discuss sustainable farming practices, organic farming, and environmentally friendly agricultural methods.\n* **Precision Agriculture:** I can explain the use of technology in agriculture, such as GPS, drones, and sensors.\n* **Livestock Management:** I can provide information on animal care, breeding, feeding, and disease prevention for livestock.\n\n**How to ask me questions:**\n\n* Be specific and clear in your questions.\n* Use keywords related to agriculture. \n* Provide context if necessary.\n\n**Example Questions:**\n\n* What are the best fertilizer recommendations for growing tomatoes?\n* How do I control aphids on my rose bushes?\n* What are the benefits of using drip irrigation?\n* What are some sustainable farming practices I can implement?\n\nI\'m here to assist you with your agricultural needs. Feel free to ask me anything! 🌾 \n' }],
+          parts: [{ text: 'I can help you with a wide range of agriculture-related questions... 🌾' }],
         },
       ],
     });
 
+    // Send user message and receive response
     const result = await chatSession.sendMessage(userInput);
-    console.log('Result:', result);
+    return new Response(
+      JSON.stringify({ response: result.response.text() }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
+    );
   } catch (error) {
     console.error('Error in chat endpoint:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    return new Response(
+      JSON.stringify({ error: 'Internal Server Error' }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } }
+    );
   }
 }
-
-// Optionally, you can export other methods like GET, PUT, DELETE, etc., if needed
