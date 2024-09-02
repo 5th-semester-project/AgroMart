@@ -1,4 +1,4 @@
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
@@ -19,7 +19,7 @@ export async function GET( req, {params} ) {
         return NextResponse.json({ error: "storeId Id Is Required" }, { status: 400 });
       }
 
-     const product = await prismadb.Product.findUnique({
+     const product = await prisma.Product.findUnique({
       where:{
           id:productId,
       },
@@ -87,7 +87,7 @@ export async function PATCH(req, { params }) {
         return NextResponse.json({ error: "storeId Id Is Required" }, { status: 400 });
       }
       
-      const storebyuserId = await prismadb.store.findFirst({
+      const storebyuserId = await prisma.store.findFirst({
         where:{
           id:storeId,
           ownerId:userId
@@ -99,7 +99,7 @@ export async function PATCH(req, { params }) {
       }
   
   
-      const product = await prismadb.Product.update({
+      const product = await prisma.Product.update({
           where: {
             id: productId,
           },
@@ -144,7 +144,7 @@ export async function DELETE( req, {params} ) {
          
           return NextResponse.json({ error: "storeId Id Is Required" }, { status: 400 });
         }
-        const storebyuserId = await prismadb.store.findFirst({
+        const storebyuserId = await prisma.store.findFirst({
           where:{
             id:storeId,
             ownerId:userId
@@ -154,7 +154,7 @@ export async function DELETE( req, {params} ) {
         if(!storebyuserId){
           return new NextResponse("Unauthorized", { status: 403 });
         }
-       const product = await prismadb.Product.deleteMany({
+       const product = await prisma.Product.deleteMany({
         where:{
             id:productId,
         },

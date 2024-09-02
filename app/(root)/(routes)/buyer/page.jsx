@@ -132,8 +132,6 @@ const BuyerRegModal = () => {
 
 
   const onSubmit = async(values) => {
-
-    console.log("value",values);
     
     //TODO :Create buyer
     try {

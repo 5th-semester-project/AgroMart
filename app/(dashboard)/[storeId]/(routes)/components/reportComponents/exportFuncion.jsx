@@ -5,7 +5,7 @@ import * as XLSX from 'xlsx';
 
 export default function ExportReport(salesData =[]){
 
-    console.log("Exporting report");
+
     // Convert sales data to worksheet
     const ws = XLSX.utils.json_to_sheet(salesData);
 

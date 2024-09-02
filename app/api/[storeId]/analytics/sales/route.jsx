@@ -1,4 +1,4 @@
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
@@ -38,7 +38,7 @@ export async function GET(req, { params }) {
 
         endDate = currentDate;
 
-        const orders = await prismadb.order.findMany({
+        const orders = await prisma.order.findMany({
             where: {
                 status: "SUCCESS",
                 storeIds: {
@@ -84,7 +84,6 @@ export async function GET(req, { params }) {
         return NextResponse.json(formattedSalesData);
 
     } catch (error) {
-        console.log("Error fetching sales data", error);
         return new NextResponse("Error fetching sales data", { status: 500 });
     }
 }

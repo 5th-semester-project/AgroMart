@@ -1,6 +1,6 @@
 
 import { auth } from '@clerk/nextjs/server'
-import prismadb from '@/lib/prismadb';
+import prisma from '@/lib/prismadb';
 import { redirect } from 'next/navigation';
 import React from 'react'
 import ModalProvider from "@/providers/modal-provider";
@@ -14,7 +14,7 @@ export default async function SetupPageLayout({children}) {
         redirect("/sign-in")
     }
 
-    const buyerExist = await prismadb.buyer.findFirst({
+    const buyerExist = await prisma.buyer.findFirst({
       where:{
           userId
       }
@@ -27,7 +27,7 @@ export default async function SetupPageLayout({children}) {
         redirect("/")
     }
 
-    const store = await prismadb.store.findFirst({
+    const store = await prisma.store.findFirst({
         where:{
             ownerId:userId
         }

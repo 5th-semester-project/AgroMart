@@ -44,8 +44,6 @@ export default function BadgeAvatars({user}) {
   const {members} = useActiveList();
   const isActive = members.indexOf(userId) !== -1;
 
-  console.log("isActive",isActive);
-  console.log("members",members);
   
 
   return (

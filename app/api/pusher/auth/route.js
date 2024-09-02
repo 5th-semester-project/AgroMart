@@ -14,9 +14,6 @@ export async function POST(request) {
     
     const { socket_id, channel_name } = body;
 
-    console.log("socket_id:", socket_id);
-    console.log("channel_name:", channel_name);
-    console.log("userId:", userId);
 
     const authResponse = pusherServer.authorizeChannel(socket_id, channel_name, { user_id: userId });
 

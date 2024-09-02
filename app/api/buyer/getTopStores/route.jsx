@@ -1,10 +1,10 @@
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
 
-    const products = await prismadb.product.findMany();
+    const products = await prisma.product.findMany();
 
 
     const sortedProducts = products
@@ -19,7 +19,7 @@ export async function GET() {
 
     const ids = topProducts.map((item)=>item.storeId)
 
-    const stores = await prismadb.store.findMany({
+    const stores = await prisma.store.findMany({
       where:{
         id:{
           in:ids

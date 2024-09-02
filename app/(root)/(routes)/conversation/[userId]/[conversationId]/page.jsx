@@ -1,4 +1,4 @@
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import Conversation from "../components/conversation";
 
 
@@ -7,7 +7,7 @@ const ConversationPage = async({params}) => {
     const {userId,conversationId} = params;
 
 
-    const convList = await prismadb.conversation.findMany({
+    const convList = await prisma.conversation.findMany({
         where:{
             userIds:{
                 has:userId
@@ -26,7 +26,7 @@ const ConversationPage = async({params}) => {
         }
     })
 
-    const currentConversation = await prismadb.conversation.findUnique({
+    const currentConversation = await prisma.conversation.findUnique({
         where:{
             id:conversationId
         },
@@ -38,7 +38,7 @@ const ConversationPage = async({params}) => {
 
 
     const formattedConversations = await Promise.all(convList.map(async (conversation) => {
-        const buyers = await prismadb.buyer.findMany({
+        const buyers = await prisma.buyer.findMany({
             where: {
                 userId: {
                     in: conversation.userIds,
@@ -53,7 +53,7 @@ const ConversationPage = async({params}) => {
             }
         });
 
-        const sellers = await prismadb.seller.findMany({
+        const sellers = await prisma.seller.findMany({
             where: {
                 sellerid: {
                     in: conversation.userIds,

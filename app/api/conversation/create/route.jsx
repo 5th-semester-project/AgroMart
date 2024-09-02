@@ -1,4 +1,4 @@
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { pusherServer } from "@/lib/pusher";
@@ -15,7 +15,7 @@ export async function POST(req){
             return new NextResponse("storeId or userId is missing",{status:400})
         }
 
-        const seller = await prismadb.seller.findFirst({
+        const seller = await prisma.seller.findFirst({
             where:{
                 storeId
             }
@@ -25,7 +25,7 @@ export async function POST(req){
             return new NextResponse("seller not found",{status:404})
         }
 
-        const convExist = await prismadb.conversation.findFirst({
+        const convExist = await prisma.conversation.findFirst({
             where:{
                 userIds:{
                     hasEvery:[userId,seller.sellerid]
@@ -37,7 +37,7 @@ export async function POST(req){
             return NextResponse.json(convExist);
         }
 
-        const conversation = await prismadb.conversation.create({
+        const conversation = await prisma.conversation.create({
             data:{
                 userIds:[userId,seller.sellerid]
             }
@@ -48,7 +48,6 @@ export async function POST(req){
         return NextResponse.json(conversation);
         
     } catch (error) {
-        console.log("error in the create the conversation",error)
         return new NextResponse("error in the create the conversation",{status:500})
     }
 }

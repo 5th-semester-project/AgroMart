@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 
 
 
@@ -20,7 +20,7 @@ export async function GET(req,{params}) {
     }
 
 
-    const products = await prismadb.Product.findMany({
+    const products = await prisma.Product.findMany({
       where: {
         storeId:params.storeId,
         categoryId,
@@ -45,7 +45,6 @@ export async function GET(req,{params}) {
 
     return NextResponse.json(products);
   } catch (error) {
-    console.log("error in the products GET request", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
@@ -59,7 +58,6 @@ export async function POST(req,{params}) {
 
     const body = await req.json();
 
-    console.log("body inside the product POST",body);
     const {
         name,
         imageUrls,
@@ -96,7 +94,7 @@ export async function POST(req,{params}) {
       return new NextResponse("storeId is required", { status: 400 });
     }
 
-    const storebyuserId = await prismadb.store.findFirst({
+    const storebyuserId = await prisma.store.findFirst({
       where:{
         id:params.storeId,
         ownerId:userId
@@ -107,7 +105,7 @@ export async function POST(req,{params}) {
       return new NextResponse("Unauthorized", { status: 403 });
     }
 
-    const product = await prismadb.Product.create({
+    const product = await prisma.Product.create({
       data: {
         name,
         imageUrls,
@@ -123,12 +121,10 @@ export async function POST(req,{params}) {
 
     });
 
-    console.log("product creation in post method",product);
 
 
     return NextResponse.json(product);
   } catch (error) {
-    console.log("error in the product POST request", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

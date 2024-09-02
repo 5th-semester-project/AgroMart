@@ -1,10 +1,10 @@
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
 
-    const products = await prismadb.product.findMany(
+    const products = await prisma.product.findMany(
       {
         include:{
           reviews:true

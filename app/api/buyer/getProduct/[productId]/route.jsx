@@ -1,11 +1,11 @@
 
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { NextResponse } from "next/server";
 
 export async function GET(req, { params }){
 
   try {
-    const product = await prismadb.product.findUnique({
+    const product = await prisma.product.findUnique({
       where: {
         id:params.productId
       },
@@ -15,10 +15,8 @@ export async function GET(req, { params }){
       }
     });
 
-    console.log("product",product)
     return NextResponse.json(product);
   } catch (error) {
-    console.error("Error fetching product", error);
     return new NextResponse("Error fetching product", { status: 500 });
   }
 };

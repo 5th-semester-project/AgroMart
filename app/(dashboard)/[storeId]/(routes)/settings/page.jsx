@@ -1,5 +1,5 @@
 import { auth } from "@clerk/nextjs/server";
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { redirect } from "next/navigation";
 import SettingForm from "./components/settingForm";
 
@@ -11,14 +11,14 @@ const SettingPage = async({params}) => {
         return null;
     }
 
-    const store = await prismadb.store.findFirst({
+    const store = await prisma.store.findFirst({
         where: {
             id: params.storeId,
             ownerId: userId
         }
     });
 
-    const seller = await prismadb.seller.findFirst({
+    const seller = await prisma.seller.findFirst({
         where: {
             storeId: params.storeId,
             sellerid: userId        //sellerid is the clerk user id

@@ -22,22 +22,18 @@ const Sales = ({ categories = [], products = [] ,storeId}) => {
 
   const handleCategoryChange = (value) => {
     setCategory(value);
-    console.log(value);
   };
 
   const handleProductChange = (value) => {
     setProduct(value);
-    console.log(value);
   };
 
   const handleDurationChange = (value) => {
     setDuration(value);
-    console.log(value);
   };
 
   const handleDateRangeChange = (range) => {
     setCustomDateRange(range);
-    console.log(range);
   };
 
 
@@ -47,7 +43,6 @@ const Sales = ({ categories = [], products = [] ,storeId}) => {
     const response = await axios.get(`/api/${storeId}/analytics/reports/sales`,{
       params:{category,product,duration,customDateRange}
     })
-    console.log(response.data);
     // export function call here 
     ExportReport(response.data);
     setLoading(false);

@@ -29,7 +29,6 @@ const FrontFullProducts = ({ initialProduct,topSelling,stores}) => {
         const result = await getSearchProducts(location, category);
         setSearchResult(result);
     } catch (error) {
-      console.log(error);
     }
 
     setSearchResultDisplay(true);

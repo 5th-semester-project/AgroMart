@@ -1,4 +1,4 @@
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { NextResponse } from "next/server";
 
 export async function GET(req){
@@ -8,7 +8,7 @@ export async function GET(req){
         const productId = searchParams.get("productId");
 
 
-        const reviews = await prismadb.review.findMany({
+        const reviews = await prisma.review.findMany({
             where:{
                 productId
             }
@@ -18,7 +18,6 @@ export async function GET(req){
         return NextResponse.json(reviews)
 
     } catch (error) {
-        console.log("error in reviews fetching")
         return new NextResponse("error in the reviews fetching",{status:500})
     }
 }

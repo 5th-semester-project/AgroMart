@@ -1,11 +1,11 @@
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import OrderBoardClient  from "./components/client";
 import {format} from "date-fns";
 
 
 const ProductPage = async({params}) => {
     
-    const orders =await prismadb.order.findMany({
+    const orders =await prisma.order.findMany({
         where:{
             storeIds:{
                 has:params.storeId

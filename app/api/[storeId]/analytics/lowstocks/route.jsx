@@ -1,5 +1,5 @@
 
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs/server"
 import { NextResponse } from "next/server";
 
@@ -16,7 +16,7 @@ export async function GET(req,{ params }){
         const url = new URL(req.url);
         const count = parseInt(url.searchParams.get('count'), 10) || 10;
 
-        const products = await prismadb.product.findMany({
+        const products = await prisma.product.findMany({
             where:{
                 storeId,
                 availableCount: {
