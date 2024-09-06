@@ -20,6 +20,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import  useBuyerModal  from "@/hooks/useBuyerModal";
+import CircularUnderLoad from "../loadingRing";
 
 
 const provincesOfSriLanka = [
@@ -175,8 +176,7 @@ const BuyerRegModal = ({initialdata}) => {
     <>
         {dataLoading ?
             <div>
-                //TODO: Add loader
-                Loading...
+                <CircularUnderLoad/>
             </div>
 
         

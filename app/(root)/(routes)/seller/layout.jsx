@@ -4,7 +4,7 @@ import prisma from '@/lib/prismadb';
 import { redirect } from 'next/navigation';
 import React from 'react'
 import ModalProvider from "@/providers/modal-provider";
-import ToastCall from '@/components/toastCall';
+import ClientToastWithRedirect from '@/components/toastCall';
 
 export default async function SetupPageLayout({children}) {
 
@@ -21,10 +21,13 @@ export default async function SetupPageLayout({children}) {
     });
 
     if(buyerExist){
-      <ToastCall
-          message ="You are not allowed to create seller account.because you have already buyer account."
-      />
-        redirect("/")
+
+      return (
+        <ClientToastWithRedirect
+          message="You are not allowed to create a seller account because you already have a buyer account."
+          redirectTo="/"
+        />
+      )
     }
 
     const store = await prisma.store.findFirst({

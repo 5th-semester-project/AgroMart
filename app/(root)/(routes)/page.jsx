@@ -10,13 +10,12 @@ import getTopPerformStore from "@/actions/get-topStores";
 import Chat from "@/components/chatBot";
 
 
-
 const HomePage = async() => {
 
   const disProducts = await getTopDiscountedProducts();
   const topSelling  = await getTopSellingProducts();
   const stores = await getTopPerformStore();
-
+   
   return ( 
     <div >
       <div className="px-4 flex justify-between items-center bg-gray-200">

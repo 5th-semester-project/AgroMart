@@ -2,7 +2,7 @@ import { auth } from '@clerk/nextjs/server'
 import prisma from '@/lib/prismadb';
 import { redirect } from 'next/navigation';
 import React from 'react'
-import ToastCall from "@/components/toastCall"
+import ClientToastWithRedirect from "@/components/toastCall"
 import Chat from "@/components/chatBot"
 
 
@@ -33,11 +33,12 @@ export default async function BuyerPageLayout({children}) {
 
 
     if(sellerExist){
-            <ToastCall
-                message ="You are not allowed to create buyer account.because you have already seller account."
+        return (
+            <ClientToastWithRedirect
+              message="You are not allowed to create buyer account.because you have already seller account."
+              redirectTo="/"
             />
-        
-            redirect("/")
+          )
     }
 
 
