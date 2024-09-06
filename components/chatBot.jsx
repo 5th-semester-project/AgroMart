@@ -8,7 +8,7 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState('');
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const messagesEndRef = useRef(null);
+
   const chatboxRef = useRef(null);
 
   const sendMessage = async () => {
@@ -41,6 +41,7 @@ const Chat = () => {
   const toggleChat = () => {
     setIsChatOpen(!isChatOpen);
   };
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -71,7 +72,7 @@ const Chat = () => {
             </div>
             <div>
               <h4 className="text-lg">AgroMart Support</h4>
-              <p className="text-sm">Hello! How can we assist you today?</p>
+              <p className="text-sm">How can we assist you today?</p>
             </div>
           </div>
           <div className="mt-auto flex-1 p-2.5 overflow-y-auto bg-white">

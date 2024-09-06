@@ -8,6 +8,7 @@ import {
 import OrderItem from "./components/orderItem";
 import prismadb from "@/lib/prismadb";
 import {format} from "date-fns";
+import Footer from "@/components/footer";
 
 export const revalidate = 0;
 
@@ -58,6 +59,7 @@ const OrderPage = async({params}) => {
       
 
     return ( 
+        <>
         <div className="px-4">
             <h1 className="font-bold text-xl mt-3">Orders Info</h1>
             <Tabs defaultValue="Processing" className="w-full py-10">
@@ -86,6 +88,8 @@ const OrderPage = async({params}) => {
             
           </Tabs>
         </div>
+        <Footer/>
+        </>
      );
 }
  

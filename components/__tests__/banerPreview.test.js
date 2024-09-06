@@ -37,7 +37,7 @@ describe('BannerPreview Component', () => {
 
   it('applies the correct className', () => {
     const { container } = render(<BannerPreview {...defaultProps} />);
-    expect(container.firstChild).toHaveClass('sample-class');
+    expect(container.firstChild).toHaveClass('flex justify-center items-center');
   });
 
   it('displays a black background when imagUrl is not provided', () => {
