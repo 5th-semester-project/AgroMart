@@ -250,7 +250,7 @@ const BuyerRegModal = () => {
                      name="district"
                      render={({ field }) => (
                      <FormItem>
-                         <FormLabel>District"</FormLabel>
+                         <FormLabel>District</FormLabel>
                          <Select
                             disabled={loading}
                             onValueChange={(value) => field.onChange(value)}

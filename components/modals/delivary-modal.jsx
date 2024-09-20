@@ -164,7 +164,6 @@ const BuyerRegModal = ({initialdata}) => {
 
 
     } catch (error) {
-        console.error(error);
        toast.error("Something went wrong");
     }finally{
       setLoading(false);
@@ -269,7 +268,7 @@ const BuyerRegModal = ({initialdata}) => {
                      name="district"
                      render={({ field }) => (
                      <FormItem>
-                         <FormLabel>District"</FormLabel>
+                         <FormLabel>District</FormLabel>
                          <Select
                             disabled={loading}
                             onValueChange={(value) => field.onChange(value)}

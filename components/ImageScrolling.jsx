@@ -25,7 +25,7 @@ export function CarouselPlugin() {
     <Carousel
       loop={true}
       plugins={[plugin.current]}
-      className="w-full "
+      className="w-full"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >

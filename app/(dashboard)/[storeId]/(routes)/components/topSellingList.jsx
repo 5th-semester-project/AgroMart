@@ -20,7 +20,7 @@ const TopSellingList = ({list =[]}) => {
     return ( 
         <>
         {list.map((item,index) => (
-            <div className='flex justify-between items-center items-base my-3 py-2 px-3 w-full rounded-lg border-2 hover:scale-105'>
+            <div key={index} className='flex justify-between items-center items-base my-3 py-2 px-3 w-full rounded-lg border-2 hover:scale-105'>
                 <div>
                     <img src={item.imageUrl} alt="image" className="w-12 h-12 rounded-lg object-cover"/>
                 </div>
