@@ -5,8 +5,6 @@ import DelivaryDetails from "./components/delivary-details";
 import BuyerRegModal from "@/components/modals/delivary-modal";
 import ItemList from "./components/itemlist";
 import Summery from "./components/summery";
-import Footer from "@/components/footer";
-
 
 
 export const revalidate =0;
@@ -30,7 +28,6 @@ const CartPage = async({params}) => {
                 <Summery buyer={buyer}/>
             </div>
         </div>
-        <Footer/>
         </>
      );
 }

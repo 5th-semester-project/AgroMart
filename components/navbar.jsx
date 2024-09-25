@@ -3,7 +3,7 @@ import MainNavbar from "./mainNavbar";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { ModeToggle } from "@/components/ui/themeToggle";
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { StoreIcon } from "lucide-react";
 import MobileMenu from "@/components/mobile-menubar";
 
@@ -15,7 +15,7 @@ const NavBar =async() => {
         redirect("/sign-in");
     }
 
-    const store = await prismadb.Store.findFirst({
+    const store = await prisma.Store.findFirst({
         where:{
             ownerId:userId
         }

@@ -1,4 +1,4 @@
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { NextResponse } from "next/server";
 
 
@@ -7,7 +7,7 @@ export async function GET(req,{params}){
     try {
         const {mainCategory,subCategoryId} = params;
 
-        const products = await prismadb.product.findMany({
+        const products = await prisma.product.findMany({
             where:{
                 mainCategory,
                 NOT:{
@@ -17,7 +17,6 @@ export async function GET(req,{params}){
         });
         return NextResponse.json(products);
     } catch (error) {
-        console.log("error in the getSameMainCategoryProducts",error);
         return new NextResponse("error in the getSameMainCategoryProducts ",{status:500});
     }
 }

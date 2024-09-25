@@ -20,6 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import CircularUnderLoad from "../loadingRing";
 
 const districtsOfSriLanka = [
   "Ampara",
@@ -121,8 +122,7 @@ const StoreModal = () => {
     <>
         {dataLoading ?
             <div>
-                //TODO: Add loader
-                Loading...
+              <CircularUnderLoad/>
             </div>
 
         

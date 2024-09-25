@@ -1,4 +1,4 @@
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
@@ -41,7 +41,7 @@ export async function PATCH(req, { params }) {
         return NextResponse.json({ error: "Store Id Is Required" }, { status: 400 });
       }
   
-      const store = await prismadb.store.update({
+      const store = await prisma.store.update({
         where: {
           id: storeId,
           ownerId:userId
@@ -53,7 +53,7 @@ export async function PATCH(req, { params }) {
         }
       });
 
-      const seller = await prismadb.seller.update({
+      const seller = await prisma.seller.update({
         where:{
           storeId,
           sellerid:userId
@@ -91,7 +91,7 @@ export async function DELETE( req, {params} ) {
             return new NextResponse({ status: 400 },"Store Id Is Required");
         }
 
-       const store = await prismadb.store.deleteMany({
+       const store = await prisma.store.deleteMany({
         where:{
             id:params.storeId,
             ownerId:userId
@@ -99,7 +99,7 @@ export async function DELETE( req, {params} ) {
        })   
        
        
-      await prismadb.seller.delete({
+      await prisma.seller.delete({
         where:{
           storeId:params.storeId,
           sellerid:userId

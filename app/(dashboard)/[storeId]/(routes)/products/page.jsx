@@ -1,4 +1,4 @@
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import ProductBoardClient  from "./components/client";
 import {format} from "date-fns";
 import { formatter } from "@/lib/utils";
@@ -6,7 +6,7 @@ import { formatter } from "@/lib/utils";
 
 const ProductPage = async({params}) => {
     
-    const products =await prismadb.Product.findMany({
+    const products =await prisma.Product.findMany({
         where:{
             storeId:params.storeId
         },

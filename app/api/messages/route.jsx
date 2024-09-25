@@ -1,4 +1,4 @@
-import prismadb from '@/lib/prismadb';
+import prisma from '@/lib/prismadb';
 import { NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
 import { pusherServer } from "@/lib/pusher";
@@ -21,7 +21,7 @@ export async function POST(req){
         }
 
         // Check if the conversation exists
-        const conversation = await prismadb.conversation.findUnique({
+        const conversation = await prisma.conversation.findUnique({
             where: { id: conversationId }
         });
 
@@ -29,7 +29,7 @@ export async function POST(req){
             return new NextResponse("Conversation not found", { status: 404 });
         }
 
-        const newMessage = await prismadb.Message.create({
+        const newMessage = await prisma.Message.create({
             data:{
                 senderId: userId,
                 receiverId,
@@ -40,7 +40,7 @@ export async function POST(req){
         });
 
 
-        const updatedConversation = await prismadb.conversation.update({
+        const updatedConversation = await prisma.conversation.update({
             where:{
                 id: conversationId
             },
@@ -64,7 +64,6 @@ export async function POST(req){
         return new NextResponse(newMessage);
         
     } catch (error) {
-        console.log("error in the POST request of message", error);
         return new NextResponse("Internal Error", { status: 500 });
     }
 }

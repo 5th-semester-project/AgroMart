@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 
 export async function POST(req) {
   try {
@@ -19,7 +19,7 @@ export async function POST(req) {
     }
 
     //checking if the user already has a store
-    const storeCheck = await prismadb.Seller.findFirst({
+    const storeCheck = await prisma.Seller.findFirst({
       where: {
         sellerid: userId,
       },
@@ -32,7 +32,7 @@ export async function POST(req) {
     
 
     // Create a new store
-    const store = await prismadb.Store.create({
+    const store = await prisma.Store.create({
       data: {
         name: StoreName,
         ownerId:userId,
@@ -42,7 +42,7 @@ export async function POST(req) {
 
 
     // Create a new seller
-    await prismadb.Seller.create({
+    await prisma.Seller.create({
         data:{
             sellerid    : userId,
             name  : UserFullName,   
@@ -55,7 +55,6 @@ export async function POST(req) {
     return NextResponse.json(store);
 
   } catch (error) {
-    console.log("error in the POST request", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

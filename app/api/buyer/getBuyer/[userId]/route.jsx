@@ -1,5 +1,5 @@
 
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { NextResponse } from "next/server";
 
 
@@ -7,7 +7,7 @@ export async function GET(req,{params}){
 
     try {
 
-        const sellerExist = await prismadb.seller.findUnique({
+        const sellerExist = await prisma.seller.findUnique({
             where: {
                 sellerid:params.userId
             }
@@ -17,7 +17,7 @@ export async function GET(req,{params}){
             return new NextResponse("Seller exist", {status: 400})
         }
 
-        const buyer = await prismadb.buyer.findUnique({
+        const buyer = await prisma.buyer.findUnique({
             where: {
                 userId:params.userId
             }
@@ -26,7 +26,6 @@ export async function GET(req,{params}){
         return NextResponse.json(buyer)
 
     } catch (error) {
-        console.log("Error inside the getBuyer route: ", error)
         return new NextResponse("Error inside the getBuyer route: ", {status: 500})
     }
 }

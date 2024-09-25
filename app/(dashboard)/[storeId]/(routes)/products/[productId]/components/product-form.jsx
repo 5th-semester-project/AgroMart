@@ -116,7 +116,6 @@ const ProductBoardForm = ({categories, initialData }) => {
 
 
   const onSubmit = async (values) => {
-    console.log("values inside the ProductBoardForm ", values);
 
     try {
       setLoading(true);

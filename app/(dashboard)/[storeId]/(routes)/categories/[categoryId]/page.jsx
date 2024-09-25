@@ -1,4 +1,4 @@
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 
 import CategoryForm from "./component/category-form";
 
@@ -6,13 +6,11 @@ import CategoryForm from "./component/category-form";
 const Category= async({params}) => {
     
     
-    const category = await prismadb.Category.findUnique({
+    const category = await prisma.Category.findUnique({
         where:{
             id: params.categoryId
         }
     })
-
-    console.log("category insdie the category", category)
 
     return ( 
         <div className="flex-col">

@@ -1,9 +1,9 @@
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 
 const getTotalOrderCount = async (storeId) => {
   try {
     
-    const orders = await prismadb.order.findMany({
+    const orders = await prisma.order.findMany({
       where: {
         status:"SUCCESS",
         storeIds: {

@@ -1,7 +1,7 @@
 "use client"
 
 import  React ,{useState,useEffect}from "react"
-import Link from "next/link"
+import { Badge } from "@/components/ui/badge"
 import { forwardRef } from "react"
 import { cn } from "@/lib/utils"
 import {
@@ -16,14 +16,16 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import SmallCard from "./buyer-components/small-card"
 import watchCart from "@/hooks/watchlistStore"
 import useCart from "@/hooks/addtocardStore"
+import { usePathname } from "next/navigation";
 import { UserButton } from "@clerk/nextjs"
 import { useAuth } from "@clerk/clerk-react";
 import { useRouter } from "next/navigation"
 import { CircleChevronDown } from 'lucide-react';
 import { ArrowRight } from 'lucide-react';
 
-export function NavigationMenubar() {
 
+export function NavigationMenubar() {
+  const pathname = usePathname();
   const [isMounted,setIsMounted] = useState(false)
 
   useEffect(() => {
@@ -66,15 +68,17 @@ export function NavigationMenubar() {
     <NavigationMenu className="">
       <NavigationMenuList>
 
-        {userId && <NavigationMenuItem className="bg-transparent hover:bg-gray-400 rounded-2xl" >
+        {userId && <NavigationMenuItem className={cn("bg-transparent hover:bg-gray-400 rounded-2xl relative",pathname.startsWith("/conversation")&& "bg-gray-400" )} >
+          <Badge className=" absolute right-0 bg-green-500 hover:bg-green-300 cursor-pointer">5</Badge>
           <NavigationMenuTrigger className="bg-transparent" onClick={routeConversation} >Messages</NavigationMenuTrigger>
         </NavigationMenuItem>}
 
-        {userId && <NavigationMenuItem className="bg-transparent hover:bg-gray-400 rounded-2xl" >
+        {userId && <NavigationMenuItem className={cn("bg-transparent hover:bg-gray-400 rounded-2xl relative",pathname.startsWith("/orders" )&& "bg-gray-400" )} >
           <NavigationMenuTrigger onClick={routeOrders} className="bg-transparent cursor-pointer">Orders</NavigationMenuTrigger>
         </NavigationMenuItem>}
 
-        <NavigationMenuItem className="bg-transparent hover:bg-gray-400 rounded-2xl" >
+        <NavigationMenuItem className="bg-transparent hover:bg-gray-400 rounded-2xl relative" >
+          <Badge className=" absolute right-0 bg-green-500 hover:bg-green-300 cursor-pointer">{wishlist.length}</Badge>
           <NavigationMenuTrigger className="bg-transparent">Watch List</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ScrollArea className="h-72 w-[300px] rounded-md bg-gray-200">
@@ -89,7 +93,8 @@ export function NavigationMenubar() {
           </NavigationMenuContent>
         </NavigationMenuItem>
 
-        {userId && <NavigationMenuItem className="bg-transparent hover:bg-gray-400 rounded-2xl" >
+        {userId && <NavigationMenuItem className={cn("bg-transparent hover:bg-gray-400 rounded-2xl relative",pathname.startsWith("/cart" )&& "bg-gray-400" )} >
+          <Badge className=" absolute right-0 bg-green-500 hover:bg-green-300 cursor-pointer">{cartlist.length}</Badge>
           <NavigationMenuTrigger onClick={routeCart} className="bg-transparent cursor-pointer">Cart</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ScrollArea className="h-72 w-[300px] rounded-md bg-gray-200">
@@ -104,7 +109,7 @@ export function NavigationMenubar() {
           </NavigationMenuContent>
         </NavigationMenuItem>}
 
-        <NavigationMenuItem className="bg-transparent hover:bg-gray-400 rounded-2xl" >
+        <NavigationMenuItem className="bg-transparent hover:bg-gray-400 rounded-2xl relative" >
           <NavigationMenuTrigger className="bg-transparent cursor-pointer">Account</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="flex flex-col space-y-2 w-[200px] bg-gray-200">
@@ -121,7 +126,8 @@ export function NavigationMenubar() {
           </NavigationMenuContent>
         </NavigationMenuItem>
 
-        <NavigationMenuItem className="bg-transparent hover:bg-gray-400 rounded-2xl" >
+        <NavigationMenuItem className="bg-transparent hover:bg-gray-400 rounded-2xl relative" >
+          <Badge variant="destructive" className=" absolute right-0 hover:bg-red-400 cursor-pointer">5</Badge>
           <NavigationMenuTrigger className="bg-transparent">Notifications</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ScrollArea className="h-72 w-[300px] rounded-md bg-gray-200">

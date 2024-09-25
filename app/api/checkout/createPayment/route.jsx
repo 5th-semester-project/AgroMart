@@ -1,4 +1,4 @@
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs/server";
 import axios from "axios";
 import { NextResponse } from "next/server";
@@ -68,7 +68,7 @@ export async function POST(req){
             hash:hashVal
         }
 
-        await prismadb.order.create({
+        await prisma.order.create({
             data:{
                 payId    : orderId,
                 storeIds   :storeIds,
@@ -79,7 +79,7 @@ export async function POST(req){
             }
         })
 
-        await prismadb.product.updateMany({
+        await prisma.product.updateMany({
             where:{
                 id:{
                     in:productIds
@@ -97,7 +97,6 @@ export async function POST(req){
 
 
     } catch (error) {
-        console.log("error occured",error )
         return new NextResponse("error in the post create payment",{status:500})
     }
 }

@@ -1,11 +1,11 @@
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { NextResponse } from "next/server";
 
 
 export async function GET(req,{params}){
 
     try {
-        const categories = await prismadb.category.findMany({
+        const categories = await prisma.category.findMany({
             where:{
                 storeId:params.storeId
             },
@@ -21,7 +21,6 @@ export async function GET(req,{params}){
         return NextResponse.json(categories)
         
     } catch (error) {
-        console.log("error inside the categories GET",error)
         return new NextResponse("error inside the categories GET",{status:500})
     }
 

@@ -1,4 +1,4 @@
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { NextResponse } from "next/server";
 import md5 from 'crypto-js/md5';
 import qs from 'querystring';
@@ -55,7 +55,7 @@ export async function POST(req) {
         }
 
         // Update the order status in the database
-        await prismadb.order.update({
+        await prisma.order.update({
             where: { payId: order_id },
             data: {
                 status: newStatus

@@ -8,8 +8,6 @@ import { CldUploadWidget } from "next-cloudinary";
 
 const ImageUpload = ({ disabled, onChange, onRemove, value }) => {
 
-  console.log("value inside the ImageUpload ",value)
-
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {

@@ -1,11 +1,11 @@
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { NextResponse } from "next/server";
 
 
 export async function GET(req,{params}){
 
     try {
-        const seller = await prismadb.seller.findUnique({
+        const seller = await prisma.seller.findUnique({
             where:{
                 storeId:params.storeId
             },
@@ -18,7 +18,6 @@ export async function GET(req,{params}){
         return NextResponse.json(seller)
         
     } catch (error) {
-        console.log("error inside the seller GET",error)
         return new NextResponse("error inside the seller GET",{status:500})
     }
 

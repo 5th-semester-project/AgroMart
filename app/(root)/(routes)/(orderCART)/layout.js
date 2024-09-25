@@ -1,10 +1,11 @@
 
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { NavigationMenubar } from "@/components/mainNav-fontpage";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import Chat from "@/components/chatBot";
+import Footer from "@/components/footer";
 
 const cartLayout = async({children}) => {
 
@@ -14,7 +15,7 @@ const cartLayout = async({children}) => {
         return redirect("/sign-in");
     }
 
-    const buyerExist = await prismadb.buyer.findFirst({
+    const buyerExist = await prisma.buyer.findFirst({
       where:{
           userId
       }
@@ -40,6 +41,7 @@ const cartLayout = async({children}) => {
             <Chat/>
             {children}
         </div>
+        <Footer/>
         </>
       );
 }

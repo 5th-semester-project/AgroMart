@@ -1,4 +1,4 @@
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { NextResponse } from "next/server";
 
 export async function GET(req) {
@@ -10,14 +10,14 @@ export async function GET(req) {
     let products = [];
 
     if (location === "all" && category === "all") {
-      products = await prismadb.product.findMany({
+      products = await prisma.product.findMany({
         include: {
           category: true,
           reviews:true
         },
       });
     } else if (location === "all" && category !== "all") {
-      products = await prismadb.product.findMany({
+      products = await prisma.product.findMany({
         where: {
           mainCategory: category,
         },
@@ -27,7 +27,7 @@ export async function GET(req) {
         },
       });
     } else if (location !== "all" && category === "all") {
-      const stores = await prismadb.store.findMany({
+      const stores = await prisma.store.findMany({
         where: {
           district: location,
         },
@@ -35,7 +35,7 @@ export async function GET(req) {
 
       const storeIds = stores.map((store) => store.id);
 
-      products = await prismadb.product.findMany({
+      products = await prisma.product.findMany({
         where: {
           storeId: {
             in: storeIds,
@@ -47,7 +47,7 @@ export async function GET(req) {
         },
       });
     } else if (location !== "all" && category !== "all") {
-      const stores = await prismadb.store.findMany({
+      const stores = await prisma.store.findMany({
         where: {
           district: location,
         },
@@ -55,7 +55,7 @@ export async function GET(req) {
 
       const storeIds = stores.map((store) => store.id);
 
-      products = await prismadb.product.findMany({
+      products = await prisma.product.findMany({
         where: {
           storeId: {
             in: storeIds,
@@ -70,7 +70,6 @@ export async function GET(req) {
     }
     return NextResponse.json(products);
   } catch (error) {
-    console.log("error inside the getsearchproduct GET", error);
     return new NextResponse("error inside the getsearchproduct GET", { status: 500 });
   }
 }

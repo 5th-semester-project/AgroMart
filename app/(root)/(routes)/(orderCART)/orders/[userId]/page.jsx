@@ -6,15 +6,14 @@ import {
     TabsTrigger,
   } from "@/components/ui/tabs";
 import OrderItem from "./components/orderItem";
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import {format} from "date-fns";
-import Footer from "@/components/footer";
 
 export const revalidate = 0;
 
 const OrderPage = async({params}) => {
 
-    const orders = await prismadb.order.findMany({
+    const orders = await prisma.order.findMany({
             where:{
                 buyerId: params.userId,
                 status:'SUCCESS'
@@ -88,7 +87,6 @@ const OrderPage = async({params}) => {
             
           </Tabs>
         </div>
-        <Footer/>
         </>
      );
 }

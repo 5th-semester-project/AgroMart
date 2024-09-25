@@ -1,4 +1,4 @@
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { pusherServer } from "@/lib/pusher";
@@ -9,8 +9,6 @@ export async function DELETE(req,{params}){
         const {userId} = auth();
         const { conversationId } = params;
 
-        console.log("userId",userId)
-        console.log("conversationId",conversationId)
 
         if(!userId){
             return new NextResponse("Unauthorized")
@@ -21,7 +19,7 @@ export async function DELETE(req,{params}){
         }
 
         // Delete the messages related to the conversation
-        const deleteMessages = await prismadb.message.deleteMany({
+        const deleteMessages = await prisma.message.deleteMany({
             where: {
                 conversationId: conversationId,
             },
@@ -30,7 +28,7 @@ export async function DELETE(req,{params}){
         
 
         // Delete the conversation itself
-        const delconversation = await prismadb.conversation.delete({
+        const delconversation = await prisma.conversation.delete({
             where: {
                 id: conversationId,
             },
@@ -41,7 +39,6 @@ export async function DELETE(req,{params}){
         return NextResponse.json(delconversation)
 
     } catch (error) {
-        console.log("error in the delete the conversation",error)
         return new NextResponse("error in the delete the conversation",{status:500})
     }
 }

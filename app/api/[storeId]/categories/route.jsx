@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 
 
 export async function GET(req,{params}) {
@@ -13,7 +13,7 @@ export async function GET(req,{params}) {
     }
 
 
-    const categories = await prismadb.Category.findMany({
+    const categories = await prisma.Category.findMany({
       where: {
         storeId:params.storeId
       },
@@ -24,7 +24,6 @@ export async function GET(req,{params}) {
 
     return NextResponse.json(categories);
   } catch (error) {
-    console.log("error in the category GET request", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
@@ -52,7 +51,7 @@ export async function POST(req,{params}) {
       return new NextResponse("storeId is required", { status: 400 });
     }
 
-    const storebyuserId = await prismadb.store.findFirst({
+    const storebyuserId = await prisma.store.findFirst({
       where:{
         id:params.storeId,
         ownerId:userId
@@ -63,7 +62,7 @@ export async function POST(req,{params}) {
       return new NextResponse("Unauthorized", { status: 403 });
     }
 
-    const category = await prismadb.Category.create({
+    const category = await prisma.Category.create({
       data: {
         name,
         storeId:params.storeId
@@ -72,7 +71,6 @@ export async function POST(req,{params}) {
 
     return NextResponse.json(category);
   } catch (error) {
-    console.log("error in the category POST request", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

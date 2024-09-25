@@ -1,11 +1,11 @@
 
 
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 
 
 const getTopDiscountedProducts = async(storeId) => {
 
-    const products = await prismadb.product.findMany({
+    const products = await prisma.product.findMany({
         where:{
             storeId: storeId,
             discount:{

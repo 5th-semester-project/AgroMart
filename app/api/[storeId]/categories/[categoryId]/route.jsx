@@ -1,4 +1,4 @@
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
@@ -15,7 +15,7 @@ export async function GET(req, { params }) {
       );
     }
 
-    const category = await prismadb.Category.findUnique({
+    const category = await prisma.Category.findUnique({
       where: {
         id: categoryId,
       }
@@ -64,7 +64,7 @@ export async function PATCH(req, { params }) {
       );
     }
 
-    const storebyuserId = await prismadb.store.findFirst({
+    const storebyuserId = await prisma.store.findFirst({
       where: {
         id: storeId,
         ownerId:userId,
@@ -75,7 +75,7 @@ export async function PATCH(req, { params }) {
       return new NextResponse("Unauthorized", { status: 403 });
     }
 
-    const category = await prismadb.Category.updateMany({
+    const category = await prisma.Category.updateMany({
       where: {
         id: categoryId,
       },
@@ -117,7 +117,7 @@ export async function DELETE(req, { params }) {
         { status: 400 }
       );
     }
-    const storebyuserId = await prismadb.store.findFirst({
+    const storebyuserId = await prisma.store.findFirst({
       where: {
         id: storeId,
         ownerId:userId,
@@ -127,7 +127,7 @@ export async function DELETE(req, { params }) {
     if (!storebyuserId) {
       return new NextResponse("Unauthorized", { status: 403 });
     }
-    const category = await prismadb.Category.deleteMany({
+    const category = await prisma.Category.deleteMany({
       where: {
         id: categoryId,
       }

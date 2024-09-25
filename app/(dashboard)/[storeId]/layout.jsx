@@ -1,5 +1,5 @@
 
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import Chat from "@/components/chatBot";
@@ -13,7 +13,7 @@ const DashBoardLayout= async({children,params}) =>{
         redirect("/sign-in")
     }
     
-    const store = await prismadb.Store.findFirst({
+    const store = await prisma.Store.findFirst({
         where:{
             id: params.storeId,
             ownerId:userId

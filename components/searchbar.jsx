@@ -101,7 +101,7 @@ const SearchBar = ({onSearch}) => {
                     >
                         <MenuItem value={'all'}>All</MenuItem>
                         {districtsOfSriLanka.map((district,index)=>(
-                            <MenuItem value={district}>{district}</MenuItem>
+                            <MenuItem key={index} value={district}>{district}</MenuItem>
                         ))}
                         
                     </Select>
@@ -119,7 +119,7 @@ const SearchBar = ({onSearch}) => {
                     >
                         <MenuItem value={'all'}>All</MenuItem>
                         {mainCategories.map((category,index)=>(
-                            <MenuItem value={category}>{category}</MenuItem>)
+                            <MenuItem key={index} value={category}>{category}</MenuItem>)
                         )}
                     </Select>
                 </FormControl>

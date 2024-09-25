@@ -20,6 +20,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import  useBuyerModal  from "@/hooks/useBuyerModal";
+import CircularUnderLoad from "@/components/loadingRing";
 
 
 const provincesOfSriLanka = [
@@ -132,8 +133,6 @@ const BuyerRegModal = () => {
 
 
   const onSubmit = async(values) => {
-
-    console.log("value",values);
     
     //TODO :Create buyer
     try {
@@ -158,8 +157,7 @@ const BuyerRegModal = () => {
     <>
         {dataLoading ?
             <div>
-                //TODO: Add loader
-                Loading...
+                <CircularUnderLoad/>
             </div>
 
         
@@ -252,7 +250,7 @@ const BuyerRegModal = () => {
                      name="district"
                      render={({ field }) => (
                      <FormItem>
-                         <FormLabel>District"</FormLabel>
+                         <FormLabel>District</FormLabel>
                          <Select
                             disabled={loading}
                             onValueChange={(value) => field.onChange(value)}

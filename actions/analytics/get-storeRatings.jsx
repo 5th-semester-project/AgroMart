@@ -1,11 +1,11 @@
 
 
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 
 
 const getStoreRating = async(storeId) => {
 
-    const reviews = await prismadb.review.findMany({
+    const reviews = await prisma.review.findMany({
         where:{
             storeId: storeId
         }

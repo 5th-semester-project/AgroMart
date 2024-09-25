@@ -1,4 +1,4 @@
-import prismadb from "@/lib/prismadb";
+import prisma from "@/lib/prismadb";
 import { NextResponse } from "next/server";
 
 export async function PATCH(req,{params}) {
@@ -13,7 +13,7 @@ export async function PATCH(req,{params}) {
                 return new NextResponse("conversationId or userId is missing",{status:400})
             }
     
-            const updatedConversation = await prismadb.conversation.update({
+            const updatedConversation = await prisma.conversation.update({
                 where:{
                     id:conversationId
                 },
@@ -31,7 +31,6 @@ export async function PATCH(req,{params}) {
             return new NextResponse(updatedConversation);
         
     } catch (error) {
-        console.log("error in the Seen the conversation",error)
         return new NextResponse("error in the Seen the conversation",{status:500})
     }
 }
