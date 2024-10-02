@@ -23,7 +23,7 @@ const useCart = create(
             toast.success("Item removed from the cart")
             axios.delete(`/api/buyer/cart/${id}`)
         },
-        removeAll:()=>{
+        removeAllCart:()=>{
             set({items:[]})
             toast.success("Cart cleared")
             axios.delete(`/api/buyer/cart/${"all"}`)
