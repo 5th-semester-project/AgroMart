@@ -22,7 +22,7 @@ import { usePathname } from "next/navigation";
 import { UserButton } from "@clerk/nextjs"
 import { useAuth } from "@clerk/clerk-react";
 import { useRouter } from "next/navigation"
-import { ArrowRight,Trash ,CircleChevronDown } from 'lucide-react';
+import {Trash ,CircleChevronDown } from 'lucide-react';
 import toast from "react-hot-toast"
 import payCart from "@/hooks/addtoPayCart"
 
@@ -56,7 +56,6 @@ export function NavigationMenubar() {
     const notifyHandler = (message) => {
       addItem(message);
       if(message.status === "SUCCESS"){
-        toast.success("Your order is successful.")
         removeAllToPay();
       }else{
         toast.error("Your order is not successful.")
@@ -133,6 +132,7 @@ export function NavigationMenubar() {
               {wishlist.map((item) => (
                 <SmallCard key={item.id} product={item} type="watchlist" />
               ))}
+              {wishlist.length === 0 && <div className="text-center text-gray-500 my-10" >No items in the watchlist</div>}
               <div className="my-5"/>
             </ScrollArea>
           </NavigationMenuContent>
@@ -155,6 +155,7 @@ export function NavigationMenubar() {
               {cartlist.map((item) => (
                 <SmallCard key={item.id} product={item} type="cart" />
               ))}
+              {cartlist.length === 0 && <div className="text-center text-gray-500 my-10" >No items in the cart</div>}
               <div className="my-5"/>
             </ScrollArea>
           </NavigationMenuContent>
@@ -193,6 +194,7 @@ export function NavigationMenubar() {
               {notifications.map((item) => (
                 <SmallCard key={item.id} product={item} type="notification" />
               ))}
+              {notifications.length === 0 && <div className="text-center text-gray-500 my-10" >No notifications</div>}
               <div className="my-5"/>
             </ScrollArea>
           </NavigationMenuContent>

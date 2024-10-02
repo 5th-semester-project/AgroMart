@@ -73,8 +73,7 @@ export async function POST(req) {
             time: new Date()
         };
 
-
-        await pusherServer.trigger('1','payment:new',notification)
+        await pusherServer.trigger("1",'payment:new',notification)
 
         return new NextResponse("Payment status updated", { status: 200 });
 
