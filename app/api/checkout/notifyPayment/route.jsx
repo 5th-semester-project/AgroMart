@@ -1,5 +1,6 @@
 import prisma from "@/lib/prismadb";
 import { NextResponse } from "next/server";
+import { pusherServer } from "@/lib/pusher";
 import md5 from 'crypto-js/md5';
 import qs from 'querystring';
 
@@ -13,7 +14,7 @@ export async function POST(req) {
             merchant_id,
             order_id,
             payhere_amount,
-            payhere_currency,
+            payhere_currency, 
             status_code,
             md5sig
         } = params;
@@ -62,7 +63,17 @@ export async function POST(req) {
             }
         });
 
-       
+
+        const msg = newStatus === "SUCCESS" ? "successful" : "unsuccessful";
+
+        const notification = {
+            id: order_id,
+            message: `Your payment is ${msg}`,
+            status: newStatus,
+            time: new Date()
+        };
+
+        await pusherServer.trigger("1",'payment:new',notification)
 
         return new NextResponse("Payment status updated", { status: 200 });
 

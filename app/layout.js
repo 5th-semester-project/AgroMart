@@ -12,7 +12,7 @@ import  ToasterProvider  from "@/providers/toast-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Agriculture Marketplace",
+  title: "AgroMart",
   description: "Advanced Engineering Project Group 15",
 };
 

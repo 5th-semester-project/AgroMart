@@ -68,7 +68,7 @@ const Summery = ({buyer}) => {
           console.error("Error initiating payment:", error);
       } finally {
           setIsLoading(false);
-        //   cart.removeAll();
+        //   cart.removeAllCart();
 
       }
   };

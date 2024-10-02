@@ -13,8 +13,9 @@ import {
 export function CarouselPlugin() {
   // Array of image paths
   const images = [
-    "/bg-images/brownField.jpg",
-    "/bg-images/greenField.jpg",
+    "/bg-images/brownField.webp",
+    "/bg-images/image-bg-2.webp",
+    "/bg-images/image-bg-3.webp",
   ];
 
   const plugin = React.useRef(
