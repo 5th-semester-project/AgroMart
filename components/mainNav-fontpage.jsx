@@ -123,7 +123,12 @@ export function NavigationMenubar() {
             <ScrollArea className="h-72 w-[300px] rounded-md bg-gray-200">
             <div className="flex justify-between px-4">
                 <CircleChevronDown className="m-2" />
-                <Trash onClick={removeAllWatch} className="m-2 cursor-pointer text-red-600 p-1 bg-rose-300 rounded-xl" />
+                <div className="flex items-center cursor-pointer font-medium" onClick={removeAllWatch} >
+                  <h4>
+                    Clear
+                  </h4>
+                <Trash className="m-2 cursor-pointer text-red-600 p-1 bg-rose-300 rounded-xl" />
+                </div>
               </div>
               {wishlist.map((item) => (
                 <SmallCard key={item.id} product={item} type="watchlist" />
@@ -140,7 +145,12 @@ export function NavigationMenubar() {
             <ScrollArea className="h-72 w-[300px] rounded-md bg-gray-200">
             <div className="flex justify-between px-4">
                 <CircleChevronDown className="m-2" />
-                <Trash onClick={removeAllCart} className="m-2 cursor-pointer text-red-600 p-1 bg-rose-300 rounded-xl" />
+                <div className="flex items-center cursor-pointer font-medium" onClick={removeAllCart} >
+                  <h4>
+                    Clear
+                  </h4>
+                <Trash className="m-2 cursor-pointer text-red-600 p-1 bg-rose-300 rounded-xl" />
+                </div>
               </div>
               {cartlist.map((item) => (
                 <SmallCard key={item.id} product={item} type="cart" />
@@ -160,7 +170,6 @@ export function NavigationMenubar() {
                     title={component.title}
                     href={component.href}
                   />
-                  <ArrowRight />
                 </div>
               ))}
             </ul>
@@ -174,7 +183,12 @@ export function NavigationMenubar() {
             <ScrollArea className="h-72 w-[300px] rounded-md bg-gray-200">
               <div className="flex justify-between px-4">
                 <CircleChevronDown className="m-2" />
-                <Trash onClick={removeAll} className="m-2 cursor-pointer text-red-600 p-1 bg-rose-300 rounded-xl" />
+                <div className="flex items-center cursor-pointer font-medium" onClick={removeAll} >
+                  <h4 >
+                    Clear
+                  </h4>
+                  <Trash className="m-2 cursor-pointer text-red-600 p-1 bg-rose-300 rounded-xl" />
+                </div>
               </div>
               {notifications.map((item) => (
                 <SmallCard key={item.id} product={item} type="notification" />
