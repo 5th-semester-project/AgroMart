@@ -181,7 +181,7 @@ const formSchema = z.object({
                             Order Amount : <h3 className="font-light">{formatter.format(data.price)}</h3> 
                     </h2>
                     <h2 className="flex gap-4 p-2 px-4 font-semibold">
-                            Order Completed on : <h3 className="font-light">15/08/2024</h3> 
+                            Order Completed on : <h3 className="font-light">Processing</h3> 
                     </h2>
                     <h2 className="flex gap-4 p-2 px-4 font-semibold">
                             Payment Method : <h3 className="font-light">Credit/Debit Card</h3> 
