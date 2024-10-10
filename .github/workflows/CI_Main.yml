@@ -29,7 +29,13 @@ jobs:
 
       - name: Run tests
         id: test-step
-        run: npm run test
+        run: |
+          npm run test
+          if [ $? -eq 0 ]; then
+            echo "::set-output name=result::success"
+          else
+            echo "::set-output name=result::failure"
+          fi
 
   second-job:
     needs: Unit-Testing
