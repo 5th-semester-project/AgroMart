@@ -10,39 +10,38 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Unit-Testing:
-  #   runs-on: ubuntu-latest
-  #   outputs:
-  #     test-passed: ${{ steps.test-step.outputs.result }}
-
-  #   steps:
-  #     - name: Checkout Main Branch
-  #       uses: actions/checkout@v4
-  #       with:
-  #         ref: main
-
-  #     - name: Setup Node environment
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: 20
-  #         cache: 'npm'
-      
-  #     - name: Install dependencies
-  #       run: npm install
-
-  #     - name: Run tests
-  #       id: test-step
-  #       run: |
-  #         npm run test
-  #         if [ $? -eq 0 ]; then
-  #           echo "::set-output name=result::success"
-  #         else
-  #           echo "::set-output name=result::failure"
-  #         fi
-
-  trivy-scan-for-vulnerabilities-of-file-system:
+  Unit-Testing:
     runs-on: ubuntu-latest
+    outputs:
+      test-passed: ${{ steps.test-step.outputs.result }}
 
+    steps:
+      - name: Checkout Main Branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Node environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        id: test-step
+        run: |
+          npm run test
+          if [ $? -eq 0 ]; then
+            echo "::set-output name=result::success"
+          else
+            echo "::set-output name=result::failure"
+          fi
+
+  trivy-scan-for-vulnerabilities-of-fs:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -57,7 +56,7 @@ jobs:
       - name: Run Trivy scanner
         uses: aquasecurity/trivy-action@0.20.0
         with:
-          scan-type: fs
+          scan-type: rootfs
           hide-progress: true
           output: trivy.txt
 
@@ -72,12 +71,12 @@ jobs:
           echo "</details>" >> $GITHUB_STEP_SUMMARY
 
 
-  # second-job:
-  #   needs: Unit-Testing
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Print test result
-  #       run: echo "${{ needs.Unit-Testing.outputs.test-passed }}"
+  second-job:
+    needs: Unit-Testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print test result
+        run: echo "${{ needs.Unit-Testing.outputs.test-passed }}"
 
   # Sonarqube-Code-analysis:
   #   runs-on: ubuntu-latest
