@@ -1,0 +1,39 @@
+name: Continuous Integration 
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Unit-Testing:
+    runs-on: ubuntu-latest
+    outputs:
+      test-passed: ${{ steps.test-step.outputs.result }}
+
+    steps:
+      - name: Checkout Main Branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Node environment
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        id: test-step
+        run: npm run test
+
+  second-job:
+    needs: Unit-Testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print test result
+        run: echo "Test result: ${{ needs.Unit-Testing.outputs.test-passed }}"
+
