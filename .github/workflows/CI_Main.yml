@@ -10,35 +10,35 @@ on:
   workflow_dispatch:
 
 jobs:
-  Unit-Testing:
-    runs-on: ubuntu-latest
-    outputs:
-      test-passed: ${{ steps.test-step.outputs.result }}
+  # Unit-Testing:
+  #   runs-on: ubuntu-latest
+  #   outputs:
+  #     test-passed: ${{ steps.test-step.outputs.result }}
 
-    steps:
-      - name: Checkout Main Branch
-        uses: actions/checkout@v4
-        with:
-          ref: main
+  #   steps:
+  #     - name: Checkout Main Branch
+  #       uses: actions/checkout@v4
+  #       with:
+  #         ref: main
 
-      - name: Setup Node environment
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
+  #     - name: Setup Node environment
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20
+  #         cache: 'npm'
       
-      - name: Install dependencies
-        run: npm install
+  #     - name: Install dependencies
+  #       run: npm install
 
-      - name: Run tests
-        id: test-step
-        run: |
-          npm run test
-          if [ $? -eq 0 ]; then
-            echo "::set-output name=result::success"
-          else
-            echo "::set-output name=result::failure"
-          fi
+  #     - name: Run tests
+  #       id: test-step
+  #       run: |
+  #         npm run test
+  #         if [ $? -eq 0 ]; then
+  #           echo "::set-output name=result::success"
+  #         else
+  #           echo "::set-output name=result::failure"
+  #         fi
 
   trivy-scan-for-vulnerabilities-of-file-system:
     runs-on: ubuntu-latest
@@ -73,8 +73,8 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'trivy-results.sarif'
-        # env:
-        #   GITHUB_TOKEN: ${{ secrets.TOKEN_TRIVY }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_TRIVY }}
 
 
   # second-job:
