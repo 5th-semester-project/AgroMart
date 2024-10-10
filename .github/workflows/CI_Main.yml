@@ -63,23 +63,19 @@ jobs:
       - name: Run Trivy scanner
         uses: aquasecurity/trivy-action@0.20.0
         with:
-          scan-type: config
+          scan-type: fs
           hide-progress: true
           output: trivy.txt
 
       - name: Publish Trivy Output to Summary
         run: |
-          if [[ -s trivy.txt ]]; then
-            {
-              echo "### Security Output"
-              echo "<details><summary>Click to expand</summary>"
-              echo ""
-              echo '```terraform'
-              cat trivy.txt
-              echo '```'
-              echo "</details>"
-            } >> $GITHUB_STEP_SUMMARY
-          fi
+          echo "### Security Output" >> $GITHUB_STEP_SUMMARY
+          echo "<details><summary>Click to expand</summary>" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo '```terraform' >> $GITHUB_STEP_SUMMARY
+          cat trivy.txt >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "</details>" >> $GITHUB_STEP_SUMMARY
 
 
   # second-job:
