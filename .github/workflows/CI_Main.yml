@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  workflow-dispatch:
+    branches:
+      - main
 
 jobs:
   Unit-Testing:
@@ -35,5 +38,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print test result
-        run: echo "Test result: ${{ needs.Unit-Testing.outputs.test-passed }}"
+        run: echo "${{ needs.Unit-Testing.outputs.test-passed }}"
 
