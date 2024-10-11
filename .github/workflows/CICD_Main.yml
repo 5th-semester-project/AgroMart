@@ -38,7 +38,7 @@ jobs:
             echo "Unit testing failed!" >> $GITHUB_STEP_SUMMARY
           fi
 
-  trivy-scan-for-vulnerabilities-of-fs:
+  trivy-scan-for-vulnerabilities:
     runs-on: ubuntu-latest
     outputs:
       trivy-result: ${{ steps.trivy-result-step.outputs.result }}
@@ -46,7 +46,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       
@@ -99,7 +99,7 @@ jobs:
         run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality_gate_status }}" >> $GITHUB_STEP_SUMMARY
 
   docker-image-build-and-push:
-    needs: [Unit-Testing, trivy-scan-for-vulnerabilities-of-fs, Sonarqube-Code-analysis]
+    needs: [Unit-Testing-Main, trivy-scan-for-vulnerabilities, Sonarqube-Code-analysis]
     # if: needs.Unit-Testing.outputs.test-passed == 'success' && needs.trivy-scan-for-vulnerabilities-of-fs.outputs.trivy-result == 'success' && needs.Sonarqube-Code-analysis.outputs.quality-gate-status == 'passed'
     runs-on: ubuntu-latest
 

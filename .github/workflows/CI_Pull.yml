@@ -36,7 +36,7 @@ jobs:
             echo "Unit testing failed!" >> $GITHUB_STEP_SUMMARY
           fi
 
-  trivy-scan-for-vulnerabilities-of-fs:
+  trivy-scan-for-vulnerabilities:
     runs-on: ubuntu-latest
     outputs:
       trivy-result: ${{ steps.trivy-result-step.outputs.result }}
