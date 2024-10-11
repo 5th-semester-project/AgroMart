@@ -1,5 +1,5 @@
 # Stage 1: Build the Next.js app
-FROM node:20-alpine AS builder
+FROM node:20-alpine
 
 # Set working directory inside the container
 WORKDIR /app
@@ -15,18 +15,6 @@ COPY . .
 
 # Build the Next.js app
 RUN npm run build
-
-# Stage 2: Serve the Next.js app
-FROM node:20-alpine
-
-# Set working directory inside the container
-WORKDIR /app
-
-# Copy the build files from the first stage
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/package.json ./package.json
 
 # Expose the port the app will run on
 EXPOSE 3000
