@@ -10,9 +10,6 @@ jobs:
 
   Unit-Testing:
     runs-on: ubuntu-latest
-    outputs:
-      test-passed: ${{ steps.test-step.outputs.result }}
-
     steps:
       - name: Checkout Main Branch
         uses: actions/checkout@v4
@@ -92,5 +89,3 @@ jobs:
 
       - name: "Show SonarQube Quality Gate Status"
         run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}" >> $GITHUB_STEP_SUMMARY
-
-
