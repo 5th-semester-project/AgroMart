@@ -10,6 +10,9 @@ jobs:
 
   Unit-Testing:
     runs-on: ubuntu-latest
+    outputs:
+      test-passed: ${{ steps.test-step.outputs.result }}
+
     steps:
       - name: Checkout Main Branch
         uses: actions/checkout@v4
@@ -66,28 +69,26 @@ jobs:
           echo '```' >> $GITHUB_STEP_SUMMARY
           echo "</details>" >> $GITHUB_STEP_SUMMARY
 
-  # Sonarqube-Code-analysis:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout Main Branch
-  #       uses: actions/checkout@v4
-  #       with:
-  #         fetch-depth: 0
+  Sonarqube-Code-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Main Branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-  #     - name: SonarQube Scan
-  #       uses: sonarsource/sonarqube-scan-action@v3.0.0
-  #       env:
-  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  #         SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@v3.0.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
 
-  #     - name: SonarQube Quality Gate check
-  #       id: sonarqube-quality-gate-check
-  #       uses: sonarsource/sonarqube-quality-gate-action@master
-  #       env:
-  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  #         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      - name: SonarQube Quality Gate check
+        id: sonarqube-quality-gate-check
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
-  #     - name: "Show SonarQube Quality Gate Status"
-  #       run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}" >> $GITHUB_STEP_SUMMARY
-
-
+      - name: "Show SonarQube Quality Gate Status"
+        run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}" >> $GITHUB_STEP_SUMMARY
