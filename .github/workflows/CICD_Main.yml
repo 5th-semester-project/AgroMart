@@ -139,8 +139,10 @@ jobs:
         run: docker pull neranjanhub/agromart:latest
 
       - name: Delete Old docker container
-        run: docker rm -f agromart || true
+        run: (docker rm -f agromart 2>/dev/null) || true
+
 
       - name: Run Docker Container
-        run: docker run --env-file .env -p 3000:3000 neranjanhub/agromart:latest
+        run: docker run --env-file /home/ubuntu/.env -p 3000:3000 neranjanhub/agromart:latest
+
 
