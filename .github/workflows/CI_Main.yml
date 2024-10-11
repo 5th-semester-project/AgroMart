@@ -63,6 +63,8 @@ jobs:
           scan-type: fs
           hide-progress: true
           output: trivy.txt
+
+      - name: Display Trivy scan result
         run: |
           if [ $? -eq 0 ]; then
             echo "result=success" >> $GITHUB_OUTPUT
