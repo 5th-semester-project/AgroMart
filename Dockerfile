@@ -13,6 +13,9 @@ RUN npm install
 # Copy the rest of the Next.js application files
 COPY . .
 
+# Open an interactive shell to inspect the container's filesystem
+RUN ls -la /app && /bin/sh
+
 # Build the Next.js app
 RUN npm run build
 
