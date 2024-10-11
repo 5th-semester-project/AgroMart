@@ -39,7 +39,7 @@ jobs:
             echo "result=success" >> $GITHUB_OUTPUT
           else
             echo "result=failure" >> $GITHUB_OUTPUT
-
+          fi
 
   trivy-scan-for-vulnerabilities-of-fs:
     runs-on: ubuntu-latest
@@ -66,10 +66,14 @@ jobs:
 
       - name: Display Trivy scan result
         run: |
-          if [ $? -eq 0 ]; then
-            echo "result=success" >> $GITHUB_OUTPUT
+          # Check if any critical vulnerabilities were found
+          if grep -q "CRITICAL" trivy.txt; then
+            echo "Critical vulnerabilities found!"
+            exit 1
           else
-            echo "result=failure" >> $GITHUB_OUTPUT
+            echo "No critical vulnerabilities found."
+            echo "result=success" >> $GITHUB_OUTPUT
+          fi
 
       - name: Publish Trivy Output to Summary
         run: |
