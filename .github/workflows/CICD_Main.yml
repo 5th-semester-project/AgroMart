@@ -109,9 +109,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: build the app
-        run: npm run build
-
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
