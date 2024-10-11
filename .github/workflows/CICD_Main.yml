@@ -108,8 +108,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: main
+
+      - name: build the app
+        run: npm run build
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -128,4 +129,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: neranjanhub/agromart:latest
+          tags: neranjanhub/agromart:latest ,neranjanhub/agromart:${{github.run_number}}
