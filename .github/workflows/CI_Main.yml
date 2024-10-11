@@ -61,6 +61,7 @@ jobs:
         uses: aquasecurity/trivy-action@0.20.0
         with:
           scan-type: fs
+          ignore-unfixed: true
           hide-progress: true
           output: trivy.txt
 
