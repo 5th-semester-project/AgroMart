@@ -36,9 +36,9 @@ jobs:
         run: |
           npm run test
           if [ $? -eq 0 ]; then
-            echo "result=success" >> $GITHUB_OUTPUT
+            echo "result=success" >> $GITHUB_STEP_SUMMARY
           else
-            echo "result=failure" >> $GITHUB_OUTPUT
+            echo "result=failure" >> $GITHUB_STEP_SUMMARY
           fi
 
   trivy-scan-for-vulnerabilities-of-fs:
@@ -93,13 +93,13 @@ jobs:
 
       - name: SonarQube Quality Gate check
         id: sonarqube-quality-gate-check
-        uses: sonarsource/sonarqube-quality-gate-action@v3.0.0
+        uses: sonarsource/sonarqube-quality-gate-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
       - name: "Show SonarQube Quality Gate Status"
-        run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality_gate_status }}"
+        run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality_gate_status }}" >> $GITHUB_STEP_SUMMARY
 
   docker-image-build-and-push:
     needs: [Unit-Testing, trivy-scan-for-vulnerabilities-of-fs, Sonarqube-Code-analysis]
