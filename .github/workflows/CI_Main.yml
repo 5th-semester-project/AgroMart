@@ -35,12 +35,11 @@ jobs:
         id: test-step
         run: |
           npm run test
-        continue-on-error: false
-      - name: Set test result output
-        if: success()
-        run: echo "result=success" >> $GITHUB_OUTPUT
-        if: failure()
-        run: echo "result=failure" >> $GITHUB_OUTPUT
+          if [ $? -eq 0 ]; then
+            echo "result=success" >> $GITHUB_OUTPUT
+          else
+            echo "result=failure" >> $GITHUB_OUTPUT
+
 
   trivy-scan-for-vulnerabilities-of-fs:
     runs-on: ubuntu-latest
@@ -50,8 +49,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: main
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -66,13 +63,11 @@ jobs:
           scan-type: fs
           hide-progress: true
           output: trivy.txt
-        continue-on-error: false
-      
-      - name: Set Trivy output
-        if: success()
-        run: echo "result=success" >> $GITHUB_OUTPUT
-        if: failure()
-        run: echo "result=failure" >> $GITHUB_OUTPUT
+        run: |
+          if [ $? -eq 0 ]; then
+            echo "result=success" >> $GITHUB_OUTPUT
+          else
+            echo "result=failure" >> $GITHUB_OUTPUT
 
       - name: Publish Trivy Output to Summary
         run: |
@@ -119,8 +114,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: main
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
