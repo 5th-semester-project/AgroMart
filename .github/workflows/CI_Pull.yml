@@ -1,9 +1,6 @@
 name: Continuous Integration
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
@@ -19,8 +16,6 @@ jobs:
     steps:
       - name: Checkout Main Branch
         uses: actions/checkout@v4
-        with:
-          ref: main
 
       - name: Setup Node environment
         uses: actions/setup-node@v4
@@ -36,9 +31,9 @@ jobs:
         run: |
           npm run test
           if [ $? -eq 0 ]; then
-            echo "result=success" >> $GITHUB_STEP_SUMMARY
+            echo "All unit testing Passed!" >> $GITHUB_STEP_SUMMARY
           else
-            echo "result=failure" >> $GITHUB_STEP_SUMMARY
+            echo "Unit testing failed!" >> $GITHUB_STEP_SUMMARY
           fi
 
   trivy-scan-for-vulnerabilities-of-fs:
@@ -101,30 +96,4 @@ jobs:
       - name: "Show SonarQube Quality Gate Status"
         run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality_gate_status }}" >> $GITHUB_STEP_SUMMARY
 
-  docker-image-build-and-push:
-    needs: [Unit-Testing, trivy-scan-for-vulnerabilities-of-fs, Sonarqube-Code-analysis]
-    if: needs.Unit-Testing.outputs.test-passed == 'success' && needs.trivy-scan-for-vulnerabilities-of-fs.outputs.trivy-result == 'success' && needs.Sonarqube-Code-analysis.outputs.quality-gate-status == 'passed'
-    runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: true
-          tags: neranjanhub/agromart:latest
