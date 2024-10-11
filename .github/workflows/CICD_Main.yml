@@ -1,4 +1,4 @@
-name: Continuous Deployment
+name: Continuous Integration and Continuous Deployment
 
 on:
   push:
@@ -11,7 +11,7 @@ jobs:
   Unit-Testing-Main:
     runs-on: ubuntu-latest
     outputs:
-      test-passed: ${{ steps.test-step.outputs.result }}
+      test-passed: ${{ steps.test-step.outputs }}
 
     steps:
       - name: Checkout Main Branch
@@ -73,6 +73,8 @@ jobs:
 
   Sonarqube-Code-analysis:
     runs-on: ubuntu-latest
+    outputs:
+      quality-gate-status: ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}
     steps:
       - name: Checkout Main Branch
         uses: actions/checkout@v4
@@ -97,7 +99,7 @@ jobs:
 
   docker-image-build-and-push:
     needs: [Unit-Testing-Main, trivy-scan-for-vulnerabilities, Sonarqube-Code-analysis]
-    # if: needs.Unit-Testing.outputs.test-passed == 'success' && needs.trivy-scan-for-vulnerabilities-of-fs.outputs.trivy-result == 'success' && needs.Sonarqube-Code-analysis.outputs.quality-gate-status == 'passed'
+    if: needs.Unit-Testing-Main.outputs == 0 && needs.Sonarqube-Code-analysis.outputs.quality-gate-status == 'PASSED'
     runs-on: ubuntu-latest
 
     steps:
