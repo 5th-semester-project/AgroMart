@@ -129,18 +129,17 @@ jobs:
           push: true
           tags: neranjanhub/agromart:latest ,neranjanhub/agromart:${{github.run_number}}
 
-
   deploy-to-ec2:
 
-    needs: docker-image-build-and-push
-    runs-on: self-hosted
+      needs: docker-image-build-and-push
+      runs-on: self-hosted
 
-    steps:
-    - name: Pull Docker image
-      run: docker pull neranjanhub/agromart:latest
+      steps:
+      - name: Pull Docker image
+        run: docker pull neranjanhub/agromart:latest
 
-    - name: Delete Old docker container
-      run: docker rm -f agromart || true
+      - name: Delete Old docker container
+        run: docker rm -f agromart || true
 
-    - name: Run Docker Container
-      run: docker run --env-file .env -p 8080:8080 neranjanhub/agromart:latest
+      - name: Run Docker Container
+        run: docker run --env-file .env -p 3000:3000 neranjanhub/agromart:latest
