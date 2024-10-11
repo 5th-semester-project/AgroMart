@@ -10,9 +10,6 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-# Generate Prisma Client
-RUN npx prisma generate
-
 # Copy the rest of the Next.js application files
 COPY . .
 
