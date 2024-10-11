@@ -8,7 +8,9 @@ COPY package*.json ./
 RUN npm install
 
 # Copy the rest of the app
-COPY . /app
+COPY . .
+
+RUN npx prisma generate
 
 # Build your application (if applicable)
 RUN npm run build
