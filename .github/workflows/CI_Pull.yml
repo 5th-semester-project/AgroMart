@@ -71,9 +71,6 @@ jobs:
 
   Sonarqube-Code-analysis:
     runs-on: ubuntu-latest
-    outputs:
-      quality-gate-status: ${{ steps.sonarqube-quality-gate-check.outputs }}
-    
     steps:
       - name: Checkout Main Branch
         uses: actions/checkout@v4
@@ -94,6 +91,6 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
       - name: "Show SonarQube Quality Gate Status"
-        run: echo "${{ steps.sonarqube-quality-gate-check.outputs }}" >> $GITHUB_STEP_SUMMARY
+        run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}" >> $GITHUB_STEP_SUMMARY
 
 
