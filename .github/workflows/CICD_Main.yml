@@ -11,7 +11,7 @@ jobs:
   Unit-Testing-Main:
     runs-on: ubuntu-latest
     outputs:
-      test-passed: ${{ steps.test-step.outputs }}
+      test-passed: ${{ steps.test-step.outputs.test-passed }}
 
     steps:
       - name: Checkout Main Branch
@@ -33,8 +33,10 @@ jobs:
         run: |
           npm run test
           if [ $? -eq 0 ]; then
+            echo "test-passed=success" >> "$GITHUB_OUTPUT"
             echo "All unit testing Passed!" >> $GITHUB_STEP_SUMMARY
           else
+            echo "test-passed=failure" >> "$GITHUB_OUTPUT"
             echo "Unit testing failed!" >> $GITHUB_STEP_SUMMARY
           fi
 
@@ -99,7 +101,7 @@ jobs:
 
   docker-image-build-and-push:
     needs: [Unit-Testing-Main, trivy-scan-for-vulnerabilities, Sonarqube-Code-analysis]
-    if: needs.Unit-Testing-Main.outputs == 0 && needs.Sonarqube-Code-analysis.outputs.quality-gate-status == 'PASSED'
+    if: needs.Unit-Testing-Main.outputs.test-passed == 'success' && needs.Sonarqube-Code-analysis.outputs.quality-gate-status == 'PASSED'
     runs-on: ubuntu-latest
 
     steps:
