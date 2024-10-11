@@ -64,16 +64,6 @@ jobs:
           hide-progress: true
           output: trivy.txt
 
-      - name: Display Trivy scan result
-        run: |
-          # Check if any critical vulnerabilities were found
-          if grep -q "CRITICAL" trivy.txt; then
-            echo "Critical vulnerabilities found!"
-          else
-            echo "No critical vulnerabilities found."
-            echo "result=success" >> $GITHUB_OUTPUT
-          fi
-
       - name: Publish Trivy Output to Summary
         run: |
           echo "### Security Output" >> $GITHUB_STEP_SUMMARY
@@ -96,14 +86,14 @@ jobs:
           ref: main
 
       - name: SonarQube Scan
-        uses: sonarsource/sonarqube-scan-action@master
+        uses: sonarsource/sonarqube-scan-action@v3.0.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
 
       # - name: SonarQube Quality Gate check
       #   id: sonarqube-quality-gate-check
-      #   uses: sonarsource/sonarqube-quality-gate-action@master
+      #   uses: sonarsource/sonarqube-quality-gate-action@v3.0.0
       #   env:
       #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       #     SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
