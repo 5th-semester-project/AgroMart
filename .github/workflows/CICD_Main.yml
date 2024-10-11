@@ -127,3 +127,4 @@ jobs:
           context: .
           push: true
           tags: neranjanhub/agromart:latest ,neranjanhub/agromart:${{github.run_number}}
+
