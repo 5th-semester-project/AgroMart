@@ -1,4 +1,4 @@
-name: Continuous Deployment
+name: Continuous Integration and Continuous Deployment
 
 on:
   push:
@@ -11,7 +11,7 @@ jobs:
   Unit-Testing-Main:
     runs-on: ubuntu-latest
     outputs:
-      test-passed: ${{ steps.test-step.outputs.result }}
+      test-passed: ${{ steps.test-step.outputs }}
 
     steps:
       - name: Checkout Main Branch
@@ -38,7 +38,7 @@ jobs:
             echo "Unit testing failed!" >> $GITHUB_STEP_SUMMARY
           fi
 
-  trivy-scan-for-vulnerabilities-of-fs:
+  trivy-scan-for-vulnerabilities:
     runs-on: ubuntu-latest
     outputs:
       trivy-result: ${{ steps.trivy-result-step.outputs.result }}
@@ -46,7 +46,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       
@@ -74,8 +74,7 @@ jobs:
   Sonarqube-Code-analysis:
     runs-on: ubuntu-latest
     outputs:
-      quality-gate-status: ${{ steps.sonarqube-quality-gate-check.outputs.quality_gate_status }}
-    
+      quality-gate-status: ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}
     steps:
       - name: Checkout Main Branch
         uses: actions/checkout@v4
@@ -96,11 +95,11 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
       - name: "Show SonarQube Quality Gate Status"
-        run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality_gate_status }}" >> $GITHUB_STEP_SUMMARY
+        run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}" >> $GITHUB_STEP_SUMMARY
 
   docker-image-build-and-push:
-    needs: [Unit-Testing, trivy-scan-for-vulnerabilities-of-fs, Sonarqube-Code-analysis]
-    # if: needs.Unit-Testing.outputs.test-passed == 'success' && needs.trivy-scan-for-vulnerabilities-of-fs.outputs.trivy-result == 'success' && needs.Sonarqube-Code-analysis.outputs.quality-gate-status == 'passed'
+    needs: [Unit-Testing-Main, trivy-scan-for-vulnerabilities, Sonarqube-Code-analysis]
+    if: needs.Unit-Testing-Main.outputs == 0 && needs.Sonarqube-Code-analysis.outputs.quality-gate-status == 'PASSED'
     runs-on: ubuntu-latest
 
     steps:
