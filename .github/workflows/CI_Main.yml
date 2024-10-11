@@ -1,4 +1,4 @@
-name: Continuous Integration 
+name: Continuous Integration
 
 on:
   push:
@@ -10,6 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
+
   Unit-Testing:
     runs-on: ubuntu-latest
     outputs:
@@ -34,18 +35,23 @@ jobs:
         id: test-step
         run: |
           npm run test
-          if [ $? -eq 0 ]; then
-            echo "::set-output name=result::success"
-          else
-            echo "::set-output name=result::failure"
-          fi
+        continue-on-error: false
+      - name: Set test result output
+        if: success()
+        run: echo "result=success" >> $GITHUB_OUTPUT
+        if: failure()
+        run: echo "result=failure" >> $GITHUB_OUTPUT
 
   trivy-scan-for-vulnerabilities-of-fs:
     runs-on: ubuntu-latest
-
+    outputs:
+      trivy-result: ${{ steps.trivy-result-step.outputs.result }}
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -54,11 +60,19 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Run Trivy scanner
+        id: trivy-result-step
         uses: aquasecurity/trivy-action@0.20.0
         with:
-          scan-type: rootfs
+          scan-type: fs
           hide-progress: true
           output: trivy.txt
+        continue-on-error: false
+      
+      - name: Set Trivy output
+        if: success()
+        run: echo "result=success" >> $GITHUB_OUTPUT
+        if: failure()
+        run: echo "result=failure" >> $GITHUB_OUTPUT
 
       - name: Publish Trivy Output to Summary
         run: |
@@ -70,27 +84,59 @@ jobs:
           echo '```' >> $GITHUB_STEP_SUMMARY
           echo "</details>" >> $GITHUB_STEP_SUMMARY
 
-
-  second-job:
-    needs: Unit-Testing
+  Sonarqube-Code-analysis:
     runs-on: ubuntu-latest
-    steps:
-      - name: Print test result
-        run: echo "${{ needs.Unit-Testing.outputs.test-passed }}"
-
-  # Sonarqube-Code-analysis:
-  #   runs-on: ubuntu-latest
+    outputs:
+      quality-gate-status: ${{ steps.sonarqube-quality-gate-check.outputs.quality_gate_status }}
     
-  #   steps:
-  #     - name: Checkout Main Branch
-  #       uses: actions/checkout@v4
-  #       with:
-  #         ref: main
+    steps:
+      - name: Checkout Main Branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
 
-  #     - name: SonarQube Scan
-  #       uses: sonarsource/sonarqube-scan-action@v3.0.0
-  #       env:
-  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  #         SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
 
+      - name: SonarQube Quality Gate check
+        id: sonarqube-quality-gate-check
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
+      - name: "Show SonarQube Quality Gate Status"
+        run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality_gate_status }}"
+
+  docker-image-build-and-push:
+    needs: [Unit-Testing, trivy-scan-for-vulnerabilities-of-fs, Sonarqube-Code-analysis]
+    if: needs.Unit-Testing.outputs.test-passed == 'success' && needs.trivy-scan-for-vulnerabilities-of-fs.outputs.trivy-result == 'success' && needs.Sonarqube-Code-analysis.outputs.quality-gate-status == 'passed'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: neranjanhub/agromart:latest
