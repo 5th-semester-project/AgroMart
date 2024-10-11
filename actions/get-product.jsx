@@ -9,3 +9,5 @@ const getProduct = async(productId) => {
 }
  
 export default getProduct;
+
+

@@ -42,7 +42,8 @@ export async function POST(req){
         const merchantSecret = process.env.MERCHANT_SECRET;
         const merchantId = process.env.MERCHANT_ID;
         const domainUrl = process.env.DOMAIN_URL;
-        const notify = process.env.NOTIFY_URL;
+        // const notify = process.env.NOTIFY_URL;
+        const notify = process.env.DOMAIN_URL;
 
         let hashedSecret = md5(merchantSecret).toString().toUpperCase();
         let amountFormatted = parseFloat(amount).toLocaleString('en-US', { minimumFractionDigits: 2 }).replaceAll(',', '');
