@@ -143,6 +143,6 @@ jobs:
 
 
       - name: Run Docker Container
-        run: docker run --env-file /home/ubuntu/.env -p 3000:3000 --name agromart neranjanhub/agromart:latest
+        run: docker run -d --env-file /home/ubuntu/.env -p 3000:3000 --name agromart neranjanhub/agromart:latest
 
 
