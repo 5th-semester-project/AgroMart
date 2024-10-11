@@ -1,10 +1,10 @@
 # Stage 1: Build the Next.js app
-FROM node:20-alpine AS builder
+FROM node:20-alpine
 
 # Set working directory inside the container
 WORKDIR /app
 
-# Copy the package.json and package-lock.json files to install dependencies
+# Copy the package.json and package-lock.json files (or yarn.lock) to install dependencies
 COPY package*.json ./
 
 # Install dependencies
@@ -13,23 +13,8 @@ RUN npm install
 # Copy the rest of the Next.js application files
 COPY . .
 
-# Open an interactive shell to inspect the container's filesystem
-RUN ls -la /app && /bin/sh
-
 # Build the Next.js app
 RUN npm run build
-
-# Stage 2: Serve the Next.js app
-FROM node:20-alpine
-
-# Set working directory inside the container
-WORKDIR /app
-
-# Copy the build files from the first stage
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/package.json ./package.json
 
 # Expose the port the app will run on
 EXPOSE 3000
