@@ -56,7 +56,7 @@ const ImageUpload = ({ disabled, onChange, onRemove, value }) => {
             <Image fill className="object-cover" alt={url} src={url} />
           </div>
         ))}
-        <CldUploadWidget onSuccess={onUpload} uploadPreset="o8jakbfq" options={{cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}}>
+        <CldUploadWidget onSuccess={onUpload} uploadPreset="o8jakbfq" options={{cloudName: "dw91kt0po"}}>
           {({ open }) => {
             const onClick = () => {
               open();
