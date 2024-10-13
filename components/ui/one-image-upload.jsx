@@ -5,6 +5,9 @@ import { Button } from "./button";
 import { ImagePlus, Trash } from "lucide-react";
 import Image from "next/image";
 import { CldUploadWidget } from "next-cloudinary";
+import { env } from 'next-runtime-env';
+
+const cloudName = env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME; 
 
 const ImageUpload = ({ disabled, onChange, onRemove, value }) => {
 
@@ -42,7 +45,7 @@ const ImageUpload = ({ disabled, onChange, onRemove, value }) => {
             <Image fill className="object-cover" alt={url} src={url} />
           </div>
         ))}
-        <CldUploadWidget onSuccess={onUpload} uploadPreset="o8jakbfq"  options={{cloudName: "dw91kt0po"}}>
+        <CldUploadWidget onSuccess={onUpload} uploadPreset="o8jakbfq"  options={{cloudName}}>
           {({ open }) => {
             const onClick = () => {
               open();
