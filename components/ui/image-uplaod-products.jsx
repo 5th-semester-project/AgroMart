@@ -11,7 +11,7 @@ import { useStoreImages } from "@/hooks/useStoreModal";
 const ImageUpload = ({ disabled, onChange, onRemove, value }) => {
   const storeImages = useStoreImages();
   const images = storeImages.images || value ;
-  console.log("cloudName",cloudName);
+
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
