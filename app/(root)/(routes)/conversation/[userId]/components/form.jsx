@@ -66,6 +66,12 @@ const FormMessage = ({conversationId,receiverId}) => {
                     options = {{maxFiles :1}}
                     onSuccess={handleUplaod}
                     uploadPreset="o8jakbfq"
+                    config={{
+                        cloud: {
+                          cloudName: 'dw91kt0po',
+                          apiKey: '112996984751268'
+                        }
+                    }}
                 >
                     <ImageUp 
                         size={40} 
