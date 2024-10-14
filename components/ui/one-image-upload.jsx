@@ -45,7 +45,14 @@ const ImageUpload = ({ disabled, onChange, onRemove, value }) => {
             <Image fill className="object-cover" alt={url} src={url} />
           </div>
         ))}
-        <CldUploadWidget onSuccess={onUpload} uploadPreset="o8jakbfq"  options={{cloudName}}>
+        <CldUploadWidget onSuccess={onUpload} uploadPreset="o8jakbfq"  
+          config={{
+            cloud: {
+              cloudName: 'dw91kt0po',
+              apiKey: '112996984751268'
+            }
+          }}
+        >
           {({ open }) => {
             const onClick = () => {
               open();
