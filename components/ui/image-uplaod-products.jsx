@@ -8,12 +8,12 @@ import { CldUploadWidget } from "next-cloudinary";
 import { useStoreImages } from "@/hooks/useStoreModal";
 import { env } from 'next-runtime-env';
 
-const cloudName = env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME; 
+const cloudName = env("NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME"); 
 
 const ImageUpload = ({ disabled, onChange, onRemove, value }) => {
   const storeImages = useStoreImages();
   const images = storeImages.images || value ;
-
+  console.log("cloudName",cloudName);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {

@@ -11,27 +11,29 @@ import CustomerReviews from "./component/reviewTab";
 import getSubCatProducts from "@/actions/get-subCatProducts";
 import SubCatProducts from "@/components/buyer-components/subCatList";
 import getMainCatProduct from "@/actions/get-mainCatProducts";
-import getSeller from "@/actions/get-seller";
 import getReviews from "@/actions/get-reviews";
 import ReviewsList from "./component/reviews";
 import Footer from "@/components/footer";
 
 
 
+
 const ProductPage = async({params}) => {
 
+  
+  const data = await getProduct(params.productId);  
+  
+  const reviews = await getReviews(params.productId);
+  
+  
+  const subproducts = await getSubCatProducts(data.categoryId);
+  
+  const subFilteredProduct = subproducts.filter((product)=>product.id !== data.id);
 
-    const data = await getProduct(params.productId);  
-
-    const reviews = await getReviews(params.productId);
-
-
-    const subproducts = await getSubCatProducts(data.categoryId);
-    const mainCat = await getMainCatProduct(data.categoryId,data.mainCategory);
-
-    const subFilteredProduct = subproducts.filter((product)=>product.id !== data.id);
-    const combinedProducts = subFilteredProduct.concat(mainCat);
-    
+  const mainCat = await getMainCatProduct(data.categoryId,data.mainCategory);
+  
+  const combinedProducts = subFilteredProduct.concat(mainCat);
+  
 
 
     return ( 
