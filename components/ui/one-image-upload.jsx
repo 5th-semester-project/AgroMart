@@ -5,9 +5,7 @@ import { Button } from "./button";
 import { ImagePlus, Trash } from "lucide-react";
 import Image from "next/image";
 import { CldUploadWidget } from "next-cloudinary";
-import { env } from 'next-runtime-env';
 
-const cloudName = env("NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME"); 
 
 const ImageUpload = ({ disabled, onChange, onRemove, value }) => {
 
