@@ -5,10 +5,10 @@ import Heading from "@/components/ui/heading";
 
 import SearchBar from "@/components/searchbar";
 import HighestDesProductList from "@/components/buyer-components/highest-descounted-products";
-import getSearchProducts from "@/actions/get-searchProduct";
 import FilterComponents from "./filterComponents";
 import { Button } from "@/components/ui/button";
 import StoreCardlist from "./buyer-components/store-list";
+import axios from "axios";
 
 
 
@@ -26,8 +26,9 @@ const FrontFullProducts = ({ initialProduct,topSelling,stores}) => {
 
   const handleSearch = async (location, category) => {
     try {
-        const result = await getSearchProducts(location, category);
-        setSearchResult(result);
+        const result = await axios.get(`/api/buyer/getSearchProducts?location=${location}&category=${category}`);
+        
+        setSearchResult(result.data);
     } catch (error) {
     }
 

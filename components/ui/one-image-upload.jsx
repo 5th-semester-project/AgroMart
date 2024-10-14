@@ -7,7 +7,7 @@ import Image from "next/image";
 import { CldUploadWidget } from "next-cloudinary";
 import { env } from 'next-runtime-env';
 
-const cloudName = env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME; 
+const cloudName = env("NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME"); 
 
 const ImageUpload = ({ disabled, onChange, onRemove, value }) => {
 
