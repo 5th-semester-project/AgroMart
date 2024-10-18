@@ -1,95 +1,95 @@
-# name: Continuous Integration
+name: Continuous Integration
 
-# on:
-#   pull_request:
-#     branches:
-#       - main
-#   workflow_dispatch:
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
 
-# jobs:
+jobs:
 
-#   Unit-Testing:
-#     runs-on: ubuntu-latest
-#     outputs:
-#       test-passed: ${{ steps.test-step.outputs.result }}
+  Unit-Testing:
+    runs-on: ubuntu-latest
+    outputs:
+      test-passed: ${{ steps.test-step.outputs.result }}
 
-#     steps:
-#       - name: Checkout Main Branch
-#         uses: actions/checkout@v4
+    steps:
+      - name: Checkout Main Branch
+        uses: actions/checkout@v4
 
-#       - name: Setup Node environment
-#         uses: actions/setup-node@v4
-#         with:
-#           node-version: 20
-#           cache: 'npm'
+      - name: Setup Node environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
       
-#       - name: Install dependencies
-#         run: npm install
+      - name: Install dependencies
+        run: npm install
 
-#       - name: Run tests
-#         id: test-step
-#         run: |
-#           npm run test
-#           if [ $? -eq 0 ]; then
-#             echo "All unit testing Passed!" >> $GITHUB_STEP_SUMMARY
-#           else
-#             echo "Unit testing failed!" >> $GITHUB_STEP_SUMMARY
-#           fi
+      - name: Run tests
+        id: test-step
+        run: |
+          npm run test
+          if [ $? -eq 0 ]; then
+            echo "All unit testing Passed!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "Unit testing failed!" >> $GITHUB_STEP_SUMMARY
+          fi
 
-#   trivy-scan-for-vulnerabilities:
-#     runs-on: ubuntu-latest
-#     outputs:
-#       trivy-result: ${{ steps.trivy-result-step.outputs.result }}
+  trivy-scan-for-vulnerabilities:
+    runs-on: ubuntu-latest
+    outputs:
+      trivy-result: ${{ steps.trivy-result-step.outputs.result }}
     
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v4
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-#       - name: Set up QEMU
-#         uses: docker/setup-qemu-action@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
       
-#       - name: Set up Docker Buildx
-#         uses: docker/setup-buildx-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-#       - name: Run Trivy scanner
-#         id: trivy-result-step
-#         uses: aquasecurity/trivy-action@0.20.0
-#         with:
-#           scan-type: fs
-#           hide-progress: true
-#           output: trivy.txt
+      - name: Run Trivy scanner
+        id: trivy-result-step
+        uses: aquasecurity/trivy-action@0.20.0
+        with:
+          scan-type: fs
+          hide-progress: true
+          output: trivy.txt
 
-#       - name: Publish Trivy Output to Summary
-#         run: |
-#           echo "### Security Output" >> $GITHUB_STEP_SUMMARY
-#           echo "<details><summary>Click to expand</summary>" >> $GITHUB_STEP_SUMMARY
-#           echo "" >> $GITHUB_STEP_SUMMARY
-#           echo '```terraform' >> $GITHUB_STEP_SUMMARY
-#           cat trivy.txt >> $GITHUB_STEP_SUMMARY
-#           echo '```' >> $GITHUB_STEP_SUMMARY
-#           echo "</details>" >> $GITHUB_STEP_SUMMARY
+      - name: Publish Trivy Output to Summary
+        run: |
+          echo "### Security Output" >> $GITHUB_STEP_SUMMARY
+          echo "<details><summary>Click to expand</summary>" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo '```terraform' >> $GITHUB_STEP_SUMMARY
+          cat trivy.txt >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "</details>" >> $GITHUB_STEP_SUMMARY
 
-#   Sonarqube-Code-analysis:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout Main Branch
-#         uses: actions/checkout@v4
-#         with:
-#           fetch-depth: 0
+  Sonarqube-Code-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Main Branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-#       - name: SonarQube Scan
-#         uses: sonarsource/sonarqube-scan-action@v3.0.0
-#         env:
-#           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-#           SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@v3.0.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
 
-#       - name: SonarQube Quality Gate check
-#         id: sonarqube-quality-gate-check
-#         uses: sonarsource/sonarqube-quality-gate-action@master
-#         env:
-#           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-#           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      - name: SonarQube Quality Gate check
+        id: sonarqube-quality-gate-check
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
-#       - name: "Show SonarQube Quality Gate Status"
-#         run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}" >> $GITHUB_STEP_SUMMARY
+      - name: "Show SonarQube Quality Gate Status"
+        run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}" >> $GITHUB_STEP_SUMMARY
 
