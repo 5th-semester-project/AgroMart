@@ -100,11 +100,11 @@ jobs:
         run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}" >> $GITHUB_STEP_SUMMARY
 
   docker-image-build-and-push:
-    needs: [Unit-Testing-Main, trivy-scan-for-vulnerabilities]
+    needs: [Unit-Testing-Main, trivy-scan-for-vulnerabilities,Sonarqube-Code-analysis]
 
     # , Sonarqube-Code-analysis
-    
-    if: needs.Unit-Testing-Main.outputs.test-passed == 'success'
+
+    if: needs.Unit-Testing-Main.outputs.test-passed == 'success' && needs.Sonarqube-Code-analysis.outputs.quality-gate-status == 'PASSED'
 
     #  && needs.Sonarqube-Code-analysis.outputs.quality-gate-status == 'PASSED'
     runs-on: ubuntu-latest
