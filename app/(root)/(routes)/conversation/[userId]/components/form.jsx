@@ -3,7 +3,7 @@
 import axios from "axios"
 import { ImageUp ,SendHorizontal } from "lucide-react";
 import { useForm,SubmitHandler,FieldValues } from "react-hook-form"
-import {CldUploadButton,CldUploadWidget} from "next-cloudinary";
+import {CldUploadWidget} from "next-cloudinary";
 import {useRouter,useParams } from 'next/navigation';
 
 
@@ -64,22 +64,6 @@ const FormMessage = ({conversationId,receiverId}) => {
 
         <div>
             <form onSubmit={handleSubmit(onSubmit)} className="flex items-center w-full gap-4">
-                {/* <CldUploadButton
-                    options = {{maxFiles :1}}
-                    onSuccess={handleUplaod}
-                    uploadPreset="o8jakbfq"
-                    config={{
-                        cloud: {
-                          cloudName: 'dw91kt0po',
-                          apiKey: '112996984751268'
-                        }
-                    }}
-                >
-                    <ImageUp 
-                        size={40} 
-                        className="text-muted-foreground p-2 ml-2 cursor-pointer hover:bg-gray-100 rounded-lg hover:text-blue-500"
-                    />
-                </CldUploadButton> */}
                  <CldUploadWidget onSuccess={handleUplaod} uploadPreset="o8jakbfq" 
                     config={{
                         cloud: {
