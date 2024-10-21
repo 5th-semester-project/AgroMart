@@ -13,21 +13,6 @@ AgroMart is an agriculture marketplace system designed to connect farmers (selle
 - **Dashboard Analytics**: Sellers can view insights and metrics to monitor sales and order trends.
 - **Review and Rating**: Buyers can review products and rate sellers to help other users make informed purchasing decisions.
 
-## AgroMart 
-
-## Agriculture Marketplace System Project Overview
-AgroMart is an agriculture marketplace system designed to connect farmers (sellers) and buyers, facilitating seamless transactions for agricultural products. The platform allows sellers to list their products, buyers to place orders, and both parties to communicate via in-app chat. The application leverages Next.js and React for the frontend, with MongoDB serving as the database.
-
-## Features
-
-- **User Authentication**: Sellers and buyers can register, log in, and manage their profiles.
-- **Product Listings**: Sellers can add, update, and manage their agricultural products, including setting prices and quantities.
-- **Order Management**: Buyers can place orders for products, view order details, and cancel orders if needed.
-- **Notifications**: Receive real-time notifications for order updates and chat messages.
-- **Chat Integration**: In-app chat allows direct communication between buyers and sellers for negotiation or order clarification.
-- **Dashboard Analytics**: Sellers can view insights and metrics to monitor sales and order trends.
-- **Review and Rating**: Buyers can review products and rate sellers to help other users make informed purchasing decisions.
-
 
 ## Technologies Used
 
