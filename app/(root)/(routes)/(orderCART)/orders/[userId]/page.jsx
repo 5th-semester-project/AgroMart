@@ -67,10 +67,10 @@ const OrderPage = async({params}) => {
                         Processing ({mappedOrders.length})
                     </TabsTrigger>
                     <TabsTrigger value="Shipped">
-                        Shipped ({5})
+                        Shipped ({0})
                     </TabsTrigger>
                     <TabsTrigger value="Completed">
-                        Completed ({5})
+                        Completed ({0})
                     </TabsTrigger>
                 </TabsList>
                     <TabsContent value="Processing">
@@ -79,10 +79,10 @@ const OrderPage = async({params}) => {
                         ))}
                     </TabsContent>
                     <TabsContent value="Shipped">
-                        shipped
+                        <div className="text-center text-gray-500 my-20" >No items shipped yet</div>
                     </TabsContent>
                     <TabsContent value="Completed">
-                        completed
+                        <div className="text-center text-gray-500 my-20" >No items completed yet</div>
                     </TabsContent>
             
           </Tabs>
