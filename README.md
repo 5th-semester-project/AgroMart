@@ -34,15 +34,15 @@ AgroMart is an agriculture marketplace system designed to connect farmers (selle
   - Docker & Docker Hub for managing application images and containerized deployments
 
 - **CI/CD Pipeline**: 
-  - **GitHub Actions**: Automated workflows for testing, deployment, and monitoring
+  - **GitHub Actions**: Automated workflows for testing, deployment
   - **Infrastructure Management**: 
     - Terraform for creating and managing AWS resources
   - **Static Analysis**: 
-    - Trivy for container vulnerability scanning
+    - Trivy for vulnerability scanning
     - SonarQube for code quality analysis
   - **Testing**: 
     - Jest for unit testing
-    - SuperTest and Postman for API testing
+    - SuperTest and Isomnia for API testing
     - React Testing Library for React component testing
     - Selenium IDE for end-to-end testing
 
