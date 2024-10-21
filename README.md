@@ -61,34 +61,51 @@ Ensure you have the following installed:
 
 - Node.js (v14 or higher) for development
 - MongoDB (v4 or higher) for the database
+- Docker for containerized deployments
 
-1.  **Clone the repository**:
+### Option 1: Manual Setup
 
-```bash
-git clone https://github.com/5th-semester-project/AgroMart/tree/main
-cd AgroMart
-```
+1. **Clone the repository**:
+
+    ```bash
+    git clone https://github.com/5th-semester-project/AgroMart.git
+    cd AgroMart
+    ```
 
 2. **Install dependencies**:
 
-```bash
-npm install
-```
+    ```bash
+    npm install
+    ```
 
-3. **Set up environment variables**:
-Create a .env file in the root folder with the necessary configurations 
+3. **Set up environment variables**:  
+   Create a `.env` file in the root folder with the necessary configurations.
+   [Example `.env` file](https://drive.google.com/drive/folders/1CjEDlb3stcoEpZ6C9nMxkjBKr5o7ciXc?usp=sharing)
 
-4. **Start the development server**:
+5. **Start the development server**:
 
-```bash
-npm run dev
-```
+    ```bash
+    npm run dev
+    ```
 
-4. **Run Tests**:
+6. **Run Tests**:
 
-```bash
-npm test
-```
+    ```bash
+    npm test
+    ```
+
+### Option 2: Using the Pre-Built Docker Image
+
+1. **Set up environment variables**:  
+   Create a `.env` file in the root folder with the necessary configurations.  
+   [Example `.env` file](https://drive.google.com/drive/folders/1CjEDlb3stcoEpZ6C9nMxkjBKr5o7ciXc?usp=sharing)
+
+2. **Run the Docker container**:
+
+    ```bash
+    docker run -d --env-file .env -p 3000:3000 --name agromart neranjanhub/agromart:latest
+    ```
+
 
 ## Live Demo
 [AgroMart] (https://youtu.be/zHPNeduzoPI?si=cdi9X8xI55mYs2Sq) 
