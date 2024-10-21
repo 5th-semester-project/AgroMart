@@ -80,25 +80,31 @@ Ensure you have the following installed:
 
 3. **Set up environment variables**:
      
-   Create a `.env` file in the root folder with the necessary configurations.Ex :[`.env`](https://drive.google.com/drive/folders/1CjEDlb3stcoEpZ6C9nMxkjBKr5o7ciXc?usp=sharing)
+   Create a `.env` file in the root folder with the necessary configurations. Ex :[`.env`](https://drive.google.com/drive/folders/1CjEDlb3stcoEpZ6C9nMxkjBKr5o7ciXc?usp=sharing)
 
 5. **Start the development server**:
 
     ```bash
     npm run dev
     ```
-
-6. **Run Tests**:
+5. **Build the project**:
 
     ```bash
-    npm test
+    npm run build
+    ```
+    This command will compile and optimize application for production.
+
+6. **Start the application**:
+
+    ```bash
+    npm start
     ```
 
 ### Option 2: Using the Pre-Built Docker Image
 
 1. **Set up environment variables**:
    
-   Create a `.env` file in the root folder with the necessary configurations.Ex :[`.env`](https://drive.google.com/drive/folders/1CjEDlb3stcoEpZ6C9nMxkjBKr5o7ciXc?usp=sharing)
+   Create a `.env` file in the root folder with the necessary configurations. Ex :[`.env`](https://drive.google.com/drive/folders/1CjEDlb3stcoEpZ6C9nMxkjBKr5o7ciXc?usp=sharing)
 
 3. **Run the Docker container**:
 
