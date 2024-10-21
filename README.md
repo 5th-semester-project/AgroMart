@@ -1,4 +1,6 @@
-## AgroMart 
+
+
+![Alt text](https://github.com/5th-semester-project/AgroMart/blob/main/public/logo.png)
 
 ## Agriculture Marketplace System Project Overview
 AgroMart is an agriculture marketplace system designed to connect farmers (sellers) and buyers, facilitating seamless transactions for agricultural products. The platform allows sellers to list their products, buyers to place orders, and both parties to communicate via in-app chat. The application leverages Next.js and React for the frontend, with MongoDB serving as the database.
@@ -80,7 +82,7 @@ Ensure you have the following installed:
 
 3. **Set up environment variables**:
      
-   Create a `.env` file in the root folder with the necessary configurations. Ex :[`.env`](https://drive.google.com/drive/folders/1CjEDlb3stcoEpZ6C9nMxkjBKr5o7ciXc?usp=sharing)
+   Create a `.env` file in the root folder with the necessary configurations. Example :[`.env`](https://drive.google.com/drive/folders/1CjEDlb3stcoEpZ6C9nMxkjBKr5o7ciXc?usp=sharing)
 
 5. **Start the development server**:
 
@@ -104,7 +106,7 @@ Ensure you have the following installed:
 
 1. **Set up environment variables**:
    
-   Create a `.env` file in the root folder with the necessary configurations. Ex :[`.env`](https://drive.google.com/drive/folders/1CjEDlb3stcoEpZ6C9nMxkjBKr5o7ciXc?usp=sharing)
+   Create a `.env` file in the root folder with the necessary configurations. Example :[`.env`](https://drive.google.com/drive/folders/1CjEDlb3stcoEpZ6C9nMxkjBKr5o7ciXc?usp=sharing)
 
 3. **Run the Docker container**:
 
