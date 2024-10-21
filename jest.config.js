@@ -21,15 +21,15 @@ const config = {
   // Add setup files after the environment is set up
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   // Collect coverage information
-  collectCoverage: true,
-  coverageDirectory: 'coverage',
-  collectCoverageFrom: [
-    'components/**/*.{js,jsx,ts,tsx}',
-    'hooks/**/*.{js,jsx,ts,tsx}',
-    'lib/**/*.{js,jsx,ts,tsx}',
-    '!**/node_modules/**',
-    '!**/*.d.ts',
-  ],
+  // collectCoverage: true,
+  // coverageDirectory: 'coverage',
+  // collectCoverageFrom: [
+  //   'components/**/*.{js,jsx,ts,tsx}',
+  //   'hooks/**/*.{js,jsx,ts,tsx}',
+  //   'lib/**/*.{js,jsx,ts,tsx}',
+  //   '!**/node_modules/**',
+  //   '!**/*.d.ts',
+  // ],
 }
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

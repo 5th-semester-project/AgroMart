@@ -4,6 +4,7 @@ import { FaFacebook, FaYoutube, FaInstagram } from 'react-icons/fa';
 
 describe('BannerPreview Component', () => {
   const defaultProps = {
+    layout: "responsive",
     disLabel: 'Sample Label',
     imagUrl: '/sample-image.jpg',
     facebook: 'https://facebook.com/sample',

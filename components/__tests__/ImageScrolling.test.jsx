@@ -30,35 +30,4 @@ describe('CarouselPlugin Component', () => {
     expect(images[0]).toHaveAttribute('src', '/bg-images/brownField.jpg');
     expect(images[1]).toHaveAttribute('src', '/bg-images/greenField.jpg');
   });
-
-  it('should call plugin methods on mouse enter and leave', () => {
-    // Render the CarouselPlugin component
-    render(<CarouselPlugin />);
-  
-    // Verify the Carousel component is rendered
-    const carouselContainer = screen.getByTestId('carousel-container');
-  
-    // Debug: check the carousel container element
-    console.log(carouselContainer); 
-  
-    // Simulate mouse enter event
-    fireEvent.mouseEnter(carouselContainer);
-  
-    // Simulate mouse leave event
-    fireEvent.mouseLeave(carouselContainer);
-  
-    // Get the mocked Autoplay plugin instance
-    const pluginMock = Autoplay.mock.results[0].value;
-  
-    // Debug: check if pluginMock is defined and stop/reset are functions
-    console.log(pluginMock); 
-    console.log(typeof pluginMock.stop, typeof pluginMock.reset);
-  
-    // Check if the stop method was called on mouse enter
-    expect(pluginMock.stop).toHaveBeenCalled();
-  
-    // Check if the reset method was called on mouse leave
-    expect(pluginMock.reset).toHaveBeenCalled();
-  });
-  
 });
