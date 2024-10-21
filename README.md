@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+
+![Alt text](https://github.com/5th-semester-project/AgroMart/blob/main/public/logo.png)
+
+## Agriculture Marketplace System Project Overview
+AgroMart is an agriculture marketplace system designed to connect farmers (sellers) and buyers, facilitating seamless transactions for agricultural products. The platform allows sellers to list their products, buyers to place orders, and both parties to communicate via in-app chat. The application leverages Next.js and React for the frontend, with MongoDB serving as the database.
+
+## Features
+
+- **User Authentication**: Sellers and buyers can register, log in, and manage their profiles.
+- **Product Listings**: Sellers can add, update, and manage their agricultural products, including setting prices and quantities.
+- **Order Management**: Buyers can place orders for products, view order details, and cancel orders if needed.
+- **Notifications**: Receive real-time notifications for order updates and chat messages.
+- **Chat Integration**: In-app chat allows direct communication between buyers and sellers for negotiation or order clarification.
+- **Dashboard Analytics**: Sellers can view insights and metrics to monitor sales and order trends.
+- **Review and Rating**: Buyers can review products and rate sellers to help other users make informed purchasing decisions.
+
+
+## Technologies Used
+
+- **Frontend**: 
+  - Next.js
+  - React
+  - Tailwind CSS
+  
+- **Database**: 
+  - MongoDB
+
+- **Authentication**: 
+  - Clerk for secure user authentication and management
+
+- **Deployment**: 
+  - AWS, managed through Terraform for Infrastructure as Code (IaC)
+
+- **Containerization**: 
+  - Docker & Docker Hub for managing application images and containerized deployments
+
+- **CI/CD Pipeline**: 
+  - **GitHub Actions**: Automated workflows for testing, deployment
+  - **Infrastructure Management**: 
+    - Terraform for creating and managing AWS resources
+  - **Static Analysis**: 
+    - Trivy for vulnerability scanning
+    - SonarQube for code quality analysis
+  - **Testing**: 
+    - Jest for unit testing
+    - SuperTest and Isomnia for API testing
+    - React Testing Library for React component testing
+    - Selenium IDE for end-to-end testing
+
+- **Monitoring**: 
+  - **Grafana**: Visualization of metrics and dashboards
+  - **Prometheus**: Time-series data collection
+  - **Blackbox Exporter**: Monitoring external endpoints' availability and performance
+  - **Node Exporter**: Collecting system metrics like CPU, memory, and disk usage
+
 
 ## Getting Started
+To clone the project and set up the development environment, follow these steps:
 
-First, run the development server:
+## Prerequisites
+Ensure you have the following installed:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js (v14 or higher) for development
+- MongoDB (v4 or higher) for the database
+- Docker for containerized deployments
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Option 1: Manual Setup
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1. **Clone the repository**:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+    ```bash
+    git clone https://github.com/5th-semester-project/AgroMart.git
+    cd AgroMart
+    ```
 
-## Learn More
+2. **Install dependencies**:
 
-To learn more about Next.js, take a look at the following resources:
+    ```bash
+    npm install
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Set up environment variables**:
+     
+   Create a `.env` file in the root folder with the necessary configurations. Example :[`.env`](https://drive.google.com/drive/folders/1CjEDlb3stcoEpZ6C9nMxkjBKr5o7ciXc?usp=sharing)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+5. **Start the development server**:
 
-## Deploy on Vercel
+    ```bash
+    npm run dev
+    ```
+5. **Build the project**:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    ```bash
+    npm run build
+    ```
+    This command will compile and optimize application for production.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+6. **Start the application**:
+
+    ```bash
+    npm start
+    ```
+
+### Option 2: Using the Pre-Built Docker Image
+
+1. **Set up environment variables**:
+   
+   Create a `.env` file in the root folder with the necessary configurations. Example :[`.env`](https://drive.google.com/drive/folders/1CjEDlb3stcoEpZ6C9nMxkjBKr5o7ciXc?usp=sharing)
+
+3. **Run the Docker container**:
+
+    ```bash
+    docker run -d --env-file .env -p 3000:3000 --name agromart neranjanhub/agromart:latest
+    ```
+
+
+## Live Demo
+
+[`AgroMart Youtube`](https://youtu.be/zHPNeduzoPI?si=cdi9X8xI55mYs2Sq) 
+
+
+## Contributors
+- Nipun Viraj
+- Neranjan Puspakumara
+- Rafshan Rakeeb
+
